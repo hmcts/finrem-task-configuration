@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-initiation-contested" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-initiation-divorce-finrem-contested" name="Task initiation DMN" camunda:historyTimeToLive="P90D">
+    <decisionTable id="DecisionTable_initiation_contested" hitPolicy="COLLECT">
+      <input id="Input_1" label="Event Id" camunda:inputVariable="eventId">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="Input_2" label="Post event state" camunda:inputVariable="postEventState">
+        <inputExpression id="InputExpression_2" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
+      <output id="Output_2" label="Name" name="name" typeRef="string" />
+      <output id="Output_3" label="Task Type" name="taskType" typeRef="string" />
+      <output id="Output_4" label="Working Days Allowed" name="workingDaysAllowed" typeRef="integer" />
+      <output id="Output_5" label="Delay Duration" name="delayDuration" typeRef="integer" />
+      <output id="Output_6" label="Process Categories" name="processCategories" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="wa-task-initiation-divorce-finrem-contested">
+        <dc:Bounds height="80" width="180" x="150" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-configuration-contested" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-configuration-divorce-finrem-contested" name="Task configuration DMN" camunda:historyTimeToLive="P90D">
+    <decisionTable id="DecisionTable_configuration_contested" hitPolicy="RULE ORDER">
+      <input id="Input_1" label="CCD Case Data" camunda:inputVariable="caseData">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="Input_2" label="Task type" camunda:inputVariable="taskType">
+        <inputExpression id="InputExpression_2" typeRef="string">
+          <text>if(taskAttributes != null and taskAttributes.taskType != null) then
+            taskAttributes.taskType
+else if(taskType != null) then
+           taskType
+else
+null</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Name" name="name" typeRef="string" />
+      <output id="Output_2" label="Value" name="value" typeRef="string" />
+      <output id="Output_3" label="Can Reconfigure?" name="canReconfigure" typeRef="boolean" />
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="wa-task-configuration-divorce-finrem-contested">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,5 @@
+java:
+  applicationPort: 4558
+  image: 'hmctsprod.azurecr.io/finrem/spring-boot-template:latest'
+  ingressHost: finrem-task-configuration-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
+  environment:
