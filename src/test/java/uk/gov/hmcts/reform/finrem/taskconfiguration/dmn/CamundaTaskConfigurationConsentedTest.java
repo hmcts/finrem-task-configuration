@@ -10,29 +10,31 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class CamundaTaskPermissionContestedTest extends DmnDecisionTableBaseUnitTest {
+class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
     @BeforeAll
     static void initialization() {
-        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_PERMISSIONS_DIVORCE_FINREM_CONTESTED;
-    }
-
-    @Test
-    void givenUnknownTaskTypeShouldReturnEmptyPermissions() {
-        VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("taskAttributes", java.util.Map.of("taskType", "unknownTaskType"));
-
-        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_CONFIGURATION_DIVORCE_FINREM_CONSENTED;
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules().size(), is(0));
+    }
+
+    @Test
+    void givenNoTaskTypeShouldReturnEmptyConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("taskType", "unknownTaskType");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
     }
 }

@@ -14,17 +14,17 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class CamundaTaskCompletionContestedTest extends DmnDecisionTableBaseUnitTest {
+class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
     @BeforeAll
     static void initialization() {
-        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_COMPLETION_DIVORCE_FINREM_CONTESTED;
+        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_PERMISSIONS_DIVORCE_FINREM_CONSENTED;
     }
 
     @Test
-    void givenUnknownEventShouldReturnEmptyResult() {
+    void givenUnknownTaskTypeShouldReturnEmptyPermissions() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "unknownEvent");
+        inputVariables.putValue("taskAttributes", java.util.Map.of("taskType", "unknownTaskType"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));

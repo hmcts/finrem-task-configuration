@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-permissions-contested" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
-  <decision id="wa-task-permissions-divorce-finrem-contested" name="Permissions DMN" camunda:historyTimeToLive="P90D">
-    <decisionTable id="DecisionTable_permissions_contested" hitPolicy="RULE ORDER">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-permissions-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-permissions-divorce-finrem-consented" name="Permissions DMN" camunda:historyTimeToLive="P90D">
+    <decisionTable id="DecisionTable_permissions_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="Task Type" camunda:inputVariable="taskType">
         <inputExpression id="InputExpression_1" typeRef="string">
           <text>if(taskAttributes != null and taskAttributes.taskType != null) then
@@ -26,7 +26,7 @@ else
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="wa-task-permissions-divorce-finrem-contested">
+      <dmndi:DMNShape dmnElementRef="wa-task-permissions-divorce-finrem-consented">
         <dc:Bounds height="80" width="180" x="160" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

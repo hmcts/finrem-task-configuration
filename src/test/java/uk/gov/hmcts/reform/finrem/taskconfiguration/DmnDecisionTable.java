@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum DmnDecisionTable {
 
-    WA_TASK_ALLOWED_DAYS_DIVORCE_FINREM_CONTESTED(
-        "wa-task-allowed-days-divorce-finrem-contested",
-        "wa-task-allowed-days-divorce-finrem-contested.dmn"
+    WA_TASK_ALLOWED_DAYS_DIVORCE_FINREM_CONSENTED(
+        "wa-task-allowed-days-divorce-finrem-consented",
+        "wa-task-allowed-days-divorce-finrem-consented.dmn"
     ),
-    WA_TASK_CANCELLATION_DIVORCE_FINREM_CONTESTED(
-        "wa-task-cancellation-divorce-finrem-contested",
-        "wa-task-cancellation-divorce-finrem-contested.dmn"
+    WA_TASK_CANCELLATION_DIVORCE_FINREM_CONSENTED(
+        "wa-task-cancellation-divorce-finrem-consented",
+        "wa-task-cancellation-divorce-finrem-consented.dmn"
     ),
-    WA_TASK_COMPLETION_DIVORCE_FINREM_CONTESTED(
-        "wa-task-completion-divorce-finrem-contested",
-        "wa-task-completion-divorce-finrem-contested.dmn"
+    WA_TASK_COMPLETION_DIVORCE_FINREM_CONSENTED(
+        "wa-task-completion-divorce-finrem-consented",
+        "wa-task-completion-divorce-finrem-consented.dmn"
     ),
-    WA_TASK_CONFIGURATION_DIVORCE_FINREM_CONTESTED(
-        "wa-task-configuration-divorce-finrem-contested",
-        "wa-task-configuration-divorce-finrem-contested.dmn"
+    WA_TASK_CONFIGURATION_DIVORCE_FINREM_CONSENTED(
+        "wa-task-configuration-divorce-finrem-consented",
+        "wa-task-configuration-divorce-finrem-consented.dmn"
     ),
-    WA_TASK_INITIATION_DIVORCE_FINREM_CONTESTED(
-        "wa-task-initiation-divorce-finrem-contested",
-        "wa-task-initiation-divorce-finrem-contested.dmn"
+    WA_TASK_INITIATION_DIVORCE_FINREM_CONSENTED(
+        "wa-task-initiation-divorce-finrem-consented",
+        "wa-task-initiation-divorce-finrem-consented.dmn"
     ),
-    WA_TASK_PERMISSIONS_DIVORCE_FINREM_CONTESTED(
-        "wa-task-permissions-divorce-finrem-contested",
-        "wa-task-permissions-divorce-finrem-contested.dmn"
+    WA_TASK_PERMISSIONS_DIVORCE_FINREM_CONSENTED(
+        "wa-task-permissions-divorce-finrem-consented",
+        "wa-task-permissions-divorce-finrem-consented.dmn"
     ),
-    WA_TASK_TYPES_DIVORCE_FINREM_CONTESTED(
-        "wa-task-types-divorce-finrem-contested",
-        "wa-task-types-divorce-finrem-contested.dmn"
+    WA_TASK_TYPES_DIVORCE_FINREM_CONSENTED(
+        "wa-task-types-divorce-finrem-consented",
+        "wa-task-types-divorce-finrem-consented.dmn"
     );
 
     @JsonValue

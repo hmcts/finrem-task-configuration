@@ -14,11 +14,11 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class CamundaTaskCancellationContestedTest extends DmnDecisionTableBaseUnitTest {
+class CamundaTaskCancellationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
     @BeforeAll
     static void initialization() {
-        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_CANCELLATION_DIVORCE_FINREM_CONTESTED;
+        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_CANCELLATION_DIVORCE_FINREM_CONSENTED;
     }
 
     @Test
