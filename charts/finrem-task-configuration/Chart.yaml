@@ -8,5 +8,5 @@ maintainers:
   - name: HMCTS FinRem team
 dependencies:
   - name: java
-    version: 5.2.1
-    repository: '@hmctsprod'
+    version: 5.3.0
+    repository: 'oci://hmctsprod.azurecr.io/helm'

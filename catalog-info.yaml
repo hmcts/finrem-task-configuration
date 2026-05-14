@@ -4,7 +4,7 @@ metadata:
   name: "finrem-task-configuration"
   annotations:
     # This must match folder-name/job-name in Jenkins.
-    jenkins.io/job-full-name: cft:HMCTS_a_to_f/finrem-task-configuration
+    jenkins.io/job-full-name: cft:HMCTS_d_to_i/finrem-task-configuration
     github.com/project-slug: hmcts/finrem-task-configuration
   tags:
     - java
