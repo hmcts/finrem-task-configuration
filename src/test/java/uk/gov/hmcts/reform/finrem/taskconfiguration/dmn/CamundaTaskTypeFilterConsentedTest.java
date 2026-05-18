@@ -18,7 +18,7 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
 
     @BeforeAll
     static void initialization() {
-        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_TYPES_DIVORCE_FINREM_CONSENTED;
+        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_TYPES_DIVORCE_FINANCIALREMEDY;
     }
 
     @Test
