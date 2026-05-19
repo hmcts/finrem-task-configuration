@@ -18,7 +18,7 @@ class CamundaTaskAllowedDaysConsentedTest extends DmnDecisionTableBaseUnitTest {
 
     @BeforeAll
     static void initialization() {
-        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_ALLOWED_DAYS_DIVORCE_FINANCIALREMEDY;
+        currentDmnDecisionTable = DmnDecisionTable.WA_TASK_ALLOWED_DAYS_DIVORCE_FINANCIALREMEDYMVP2;
     }
 
     @Test
