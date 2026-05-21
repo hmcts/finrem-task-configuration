@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-cancellation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-cancellation-divorce-financialremedymvp2" name="Task cancellation DMN" camunda:historyTimeToLive="P90D">
+    <decisionTable id="DecisionTable_cancellation_consented" hitPolicy="COLLECT">
+      <input id="Input_1" label="From State">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>fromState</text>
+        </inputExpression>
+      </input>
+      <input id="Input_2" label="Event">
+        <inputExpression id="InputExpression_2" typeRef="string">
+          <text>event</text>
+        </inputExpression>
+      </input>
+      <input id="Input_3" label="State">
+        <inputExpression id="InputExpression_3" typeRef="string">
+          <text>state</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Action" name="action" typeRef="string" />
+      <output id="Output_2" label="Warning Code" name="warningCode" typeRef="string" />
+      <output id="Output_3" label="Warning Text" name="warningText" typeRef="string" />
+      <output id="Output_4" label="Process Categories" name="processCategories" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="wa-task-cancellation-divorce-financialremedymvp2">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

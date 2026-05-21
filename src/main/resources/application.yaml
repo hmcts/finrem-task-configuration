@@ -1,0 +1,16 @@
+server:
+  port: 4558
+
+management:
+  endpoint:
+    health:
+      show-details: "always"
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health, info, prometheus
+
+spring:
+  application:
+    name: finrem-task-configuration

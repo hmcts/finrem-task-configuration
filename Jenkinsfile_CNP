@@ -1,0 +1,21 @@
+#!groovy
+
+@Library('Infrastructure')
+
+def type = "java"
+def product = "finrem"
+def component = "task-configuration"
+def s2sServiceName = "finrem_camunda_pipeline_upload"
+def tenantId = "finrem"
+def branchesToSync = ['demo', 'perftest']
+
+withCamundaOnlyPipeline(type, product, component, s2sServiceName, tenantId) {
+
+  afterAlways('test') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/reports/tests/**/*'
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/reports/tests/integration/**/*'
+  }
+
+  syncBranchesWithMaster(branchesToSync)
+
+}
