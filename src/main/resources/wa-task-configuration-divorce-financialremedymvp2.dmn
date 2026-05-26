@@ -88,6 +88,57 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_config_5">
+        <inputEntry id="InputEntry_config_5_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_5_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_5_1">
+          <text>"calculatedDates"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_5_2">
+          <text>"nextHearingDate,dueDate,priorityDate"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_5_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_6">
+        <inputEntry id="InputEntry_config_6_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_6_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_6_1">
+          <text>"priorityDateOriginRef"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_6_2">
+          <text>"nextHearingDate,dueDate,priorityDate"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_6_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_7">
+        <inputEntry id="InputEntry_config_7_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_7_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_7_1">
+          <text>"nextHearingDate"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_7_2">
+          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings) > 0) then caseData.listForHearings[1].value.hearingDate else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_7_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

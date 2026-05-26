@@ -10,6 +10,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,17 +23,20 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void shouldReturnEmptyTaskTypesUntilTasksDefined() {
-        VariableMap inputVariables = new VariableMapImpl();
-        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
-    }
-
-    @Test
     void checkDmnChanged() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getInputs().size(), is(1));
         assertThat(logic.getOutputs().size(), is(2));
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules().size(), is(1));
+    }
+
+    @Test
+    void givenNoInputShouldReturnProcessScannedDocumentsTaskType() {
+        VariableMap inputVariables = new VariableMapImpl();
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of("taskTypeId", "processScannedDocuments", "taskTypeName", "Process Scanned Documents")
+        )));
     }
 }

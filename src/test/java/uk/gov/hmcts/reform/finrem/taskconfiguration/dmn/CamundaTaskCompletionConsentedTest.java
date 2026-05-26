@@ -10,6 +10,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,6 +34,17 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules().size(), is(1));
+    }
+
+    @Test
+    void givenFrAttachScannedDocsShouldAutoCompleteProcessScannedDocumentsTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_attachScannedDocs");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of("taskType", "processScannedDocuments", "completionMode", "Auto")
+        )));
     }
 }

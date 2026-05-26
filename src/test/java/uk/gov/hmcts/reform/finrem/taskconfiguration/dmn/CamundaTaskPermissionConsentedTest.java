@@ -10,6 +10,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +25,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void givenUnknownTaskTypeShouldReturnEmptyPermissions() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("taskAttributes", java.util.Map.of("taskType", "unknownTaskType"));
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "unknownTaskType"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
@@ -33,6 +34,33 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules().size(), is(2));
+    }
+
+    @Test
+    void givenProcessScannedDocumentsTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of(
+                "name", "ctsc-admin",
+                "value", "Read,Own,Claim,Unclaim,AssignAndGoToTask,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "FR_Managing_ScannedDocs",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,UnclaimAssign,"
+                    + "AssignAndGoToTask,Claim,Own,Execute,Assign,Escalate",
+                "roleCategory", "CTSC",
+                "authorisations", "FR_Managing_ScannedDocs",
+                "assignmentPriority", 2,
+                "autoAssignable", false
+            )
+        )));
     }
 }

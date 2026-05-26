@@ -10,6 +10,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -34,6 +35,25 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules().size(), is(1));
+    }
+
+    @Test
+    void givenFrAttachScannedDocsShouldCreateProcessScannedDocumentsTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_attachScannedDocs");
+        inputVariables.putValue("postEventState", "");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of(
+                "taskId", "processScannedDocuments",
+                "name", "Process Scanned Documents",
+                "taskType", "processScannedDocuments",
+                "workingDaysAllowed", 5,
+                "delayDuration", 0,
+                "processCategories", "caseManagement"
+            )
+        )));
     }
 }

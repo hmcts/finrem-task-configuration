@@ -25,16 +25,55 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules().size(), is(7));
     }
 
     @Test
-    void givenNoTaskTypeShouldReturnEmptyConfiguration() {
+    void givenUnknownTaskTypeShouldReturnEmptyConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
         inputVariables.putValue("taskType", "unknownTaskType");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+    }
+
+    @Test
+    void givenProcessScannedDocumentsTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
+            Map.of("name", "description", "value",
+                "[Attach scanned document]"
+                    + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_attachScannedDocs/FR_attachScannedDocsDocs)",
+                "canReconfigure", true),
+            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true),
+            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
+            Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate,priorityDate",
+                   "canReconfigure", true),
+            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true)
+        )));
+    }
+
+    @Test
+    void givenProcessScannedDocumentsWithHearingDateShouldReturnNextHearingDate() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", "2026-05-27")))
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+        Map<String, Object> nextHearingDateRow = results.stream()
+            .filter(r -> "nextHearingDate".equals(r.get("name")))
+            .findFirst()
+            .orElseThrow();
+        assertThat(nextHearingDateRow.get("value"), is("2026-05-27"));
     }
 }
