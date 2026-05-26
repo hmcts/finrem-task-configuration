@@ -22,6 +22,64 @@ else
       <output id="Output_5" label="Authorisations" name="authorisations" typeRef="string" />
       <output id="Output_6" label="Assignment Priority" name="assignmentPriority" typeRef="integer" />
       <output id="Output_7" label="Auto Assignable" name="autoAssignable" typeRef="boolean" />
+      <rule id="Rule_permissions_1">
+        <inputEntry id="InputEntry_permissions_1_1">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_permissions_1_2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_permissions_1_1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_1_2">
+          <text>"ctsc-admin"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_1_3">
+          <text>"Read,Own,Claim,UnclaimAssign,AssignAndGoToTask,CancelOwn,CompleteOwn,Execute"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_1_4">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_1_5">
+          <text>"FR_Managing_ScannedDocs"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_1_6">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_1_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_permissions_2">
+        <inputEntry id="InputEntry_permissions_2_1">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_permissions_2_2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_permissions_2_1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_2_2">
+          <text>"ctsc-team-leader"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_2_3">
+          <text>"Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,UnclaimAssign,AssignAndGoToTask,Claim,Own,Execute,Assign,Escalate"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_2_4">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_2_5">
+          <text>"FR_Managing_ScannedDocs"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_2_6">
+          <text>2</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_2_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

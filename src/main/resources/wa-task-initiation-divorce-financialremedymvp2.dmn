@@ -18,6 +18,32 @@
       <output id="Output_4" label="Working Days Allowed" name="workingDaysAllowed" typeRef="integer" />
       <output id="Output_5" label="Delay Duration" name="delayDuration" typeRef="integer" />
       <output id="Output_6" label="Process Categories" name="processCategories" typeRef="string" />
+      <rule id="Rule_initiation_1">
+        <inputEntry id="InputEntry_initiation_1_1">
+          <text>"FR_attachScannedDocs"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_1_1">
+          <text>"processScannedDocuments"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_2">
+          <text>"Process Scanned Documents"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_3">
+          <text>"processScannedDocuments"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_4">
+          <text>5</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_5">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_6">
+          <text>"caseManagement"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
