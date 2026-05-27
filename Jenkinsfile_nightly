@@ -1,0 +1,20 @@
+#!groovy
+
+properties([
+  // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
+  pipelineTriggers([cron('H 8 * * 1-5')])
+])
+
+@Library("Infrastructure")
+
+def type = "java"
+def product = "finrem"
+def component = "task-configuration"
+
+withNightlyPipeline(type, product, component) {
+  enableFortifyScan()
+
+  afterSuccess('fortify-scan') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
+  }
+}
