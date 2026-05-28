@@ -131,11 +131,14 @@ project.tasks['sonarqube'].dependsOn test, integration, jacocoTestReport
 
 sonarqube {
   properties {
-    property "sonar.projectName", "Reform :: finrem-task-configuration"
-    property "sonar.projectKey", "uk.gov.hmcts.reform:finrem-task-configuration"
-    property "sonar.coverage.jacoco.xmlReportPaths", "${jacocoTestReport.reports.xml.outputLocation.get().asFile.absolutePath}"
+    property "sonar.projectName", "finrem-task-configuration"
+    property "sonar.projectKey", "finrem-task-configuration"
+    property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+    property "sonar.pitest.mode", "reuseReport"
+    property "sonar.pitest.reportsDirectory", "${project.buildDir}/reports/pitest"
     property "sonar.exclusions", "src/main/java/uk/gov/hmcts/reform/finrem/taskconfiguration/config/**," +
       "src/main/java/uk/gov/hmcts/reform/finrem/taskconfiguration/Application.java"
+    property "sonar.dependencyCheck.reportPath", "${project.buildDir}/reports/dependency-check-report.xml"
   }
 }
 
