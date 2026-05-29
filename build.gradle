@@ -262,6 +262,9 @@ dependencies {
   functionalTestImplementation sourceSets.main.runtimeClasspath
 
   smokeTestImplementation sourceSets.main.runtimeClasspath
+  smokeTestImplementation libraries.junit5
+  smokeTestImplementation "org.junit.platform:junit-platform-launcher:${versions.junitPlatform}"
+  smokeTestImplementation 'io.rest-assured:rest-assured:5.3.2'
 }
 
 application {
