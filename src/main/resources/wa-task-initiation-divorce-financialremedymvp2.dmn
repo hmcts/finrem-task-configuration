@@ -15,9 +15,9 @@
       <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
       <output id="Output_2" label="Name" name="name" typeRef="string" />
       <output id="Output_3" label="Task Type" name="taskType" typeRef="string" />
-      <output id="Output_4" label="Working Days Allowed" name="workingDaysAllowed" typeRef="integer" />
-      <output id="Output_5" label="Delay Duration" name="delayDuration" typeRef="integer" />
-      <output id="Output_6" label="Process Categories" name="processCategories" typeRef="string" />
+      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
+      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
       <rule id="Rule_initiation_1">
         <inputEntry id="InputEntry_initiation_1_1">
           <text>"FR_attachScannedDocs"</text>
@@ -35,10 +35,10 @@
           <text>"processScannedDocuments"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_4">
-          <text>5</text>
+          <text>0</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_5">
-          <text>0</text>
+          <text></text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_6">
           <text>"caseManagement"</text>
