@@ -21,15 +21,6 @@ java {
 }
 
 sourceSets {
-  functionalTest {
-    java {
-      compileClasspath += main.output
-      runtimeClasspath += main.output
-      srcDir file('src/functionalTest/java')
-    }
-    resources.srcDir file('src/functionalTest/resources')
-  }
-
   integrationTest {
     java {
       compileClasspath += main.output
@@ -39,14 +30,7 @@ sourceSets {
     resources.srcDir file('src/integrationTest/resources')
   }
 
-  smokeTest {
-    java {
-      compileClasspath += main.output
-      runtimeClasspath += main.output
-      srcDir file('src/smokeTest/java')
-    }
-    resources.srcDir file('src/smokeTest/resources')
-  }
+
 }
 
 tasks.withType(Copy) {
@@ -69,13 +53,6 @@ test {
   failFast = true
 }
 
-task functional(type: Test) {
-  description = "Runs functional tests"
-  group = "Verification"
-  testClassesDirs = sourceSets.functionalTest.output.classesDirs
-  classpath = sourceSets.functionalTest.runtimeClasspath
-}
-
 task integration(type: Test) {
   description = "Runs integration tests"
   group = "Verification"
@@ -84,16 +61,10 @@ task integration(type: Test) {
   failFast = true
 }
 
-task smoke(type: Test) {
-  description = "Runs Smoke Tests"
-  testClassesDirs = sourceSets.smokeTest.output.classesDirs
-  classpath = sourceSets.smokeTest.runtimeClasspath
-}
-
 task tests {
-  description = "Runs junit , integration and functional tests"
+  description = "Runs junit and integration tests"
   group = "Verification"
-  dependsOn test, integration, smoke, functional
+  dependsOn test, integration
 }
 
 checkstyle {
@@ -259,15 +230,6 @@ dependencies {
   integrationTestImplementation sourceSets.main.runtimeClasspath
   integrationTestImplementation sourceSets.test.runtimeClasspath
 
-  functionalTestImplementation sourceSets.main.runtimeClasspath
-  functionalTestImplementation libraries.junit5
-  functionalTestImplementation "org.junit.platform:junit-platform-launcher:${versions.junitPlatform}"
-  functionalTestImplementation 'io.rest-assured:rest-assured:5.3.2'
-
-  smokeTestImplementation sourceSets.main.runtimeClasspath
-  smokeTestImplementation libraries.junit5
-  smokeTestImplementation "org.junit.platform:junit-platform-launcher:${versions.junitPlatform}"
-  smokeTestImplementation 'io.rest-assured:rest-assured:5.3.2'
 }
 
 application {
