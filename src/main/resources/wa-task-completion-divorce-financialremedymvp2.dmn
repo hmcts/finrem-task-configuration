@@ -11,7 +11,7 @@
       <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string" />
       <rule id="Rule_completion_1">
         <inputEntry id="InputEntry_completion_1_1">
-          <text>"FR_attachScannedDocs"</text>
+          <text>"attachScannedDocs"</text>
         </inputEntry>
         <outputEntry id="OutputEntry_completion_1_1">
           <text>"processScannedDocuments"</text>

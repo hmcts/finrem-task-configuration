@@ -25,7 +25,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(7));
+        assertThat(logic.getRules().size(), is(17));
     }
 
     @Test
@@ -50,13 +50,26 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
             Map.of("name", "description", "value",
                 "[Attach scanned document]"
-                    + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_attachScannedDocs/FR_attachScannedDocsDocs)",
+                    + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
                 "canReconfigure", true),
             Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true),
             Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
-            Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate,priorityDate",
+            Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
                    "canReconfigure", true),
-            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true)
+            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
+            Map.of("name", "dueDateNonWorkingCalendar", "value",
+                "https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/"
+                    + "finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json",
+                "canReconfigure", true),
+            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
+            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
+            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
+            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
+            Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
+            Map.of("name", "caseName", "value", "", "canReconfigure", true),
+            Map.of("name", "region", "value", "", "canReconfigure", true),
+            Map.of("name", "location", "value", "", "canReconfigure", true)
         )));
     }
 
@@ -75,5 +88,30 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             .findFirst()
             .orElseThrow();
         assertThat(nextHearingDateRow.get("value"), is("2026-05-27"));
+    }
+
+    @Test
+    void givenCaseDataShouldReturnCaseNameRegionAndLocation() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Applicant v Respondent",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(valueOf(results, "caseName"), is("Applicant v Respondent"));
+        assertThat(valueOf(results, "region"), is("2"));
+        assertThat(valueOf(results, "location"), is("366796"));
+    }
+
+    private static Object valueOf(List<Map<String, Object>> results, String name) {
+        return results.stream()
+            .filter(r -> name.equals(r.get("name")))
+            .findFirst()
+            .orElseThrow()
+            .get("value");
     }
 }

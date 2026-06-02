@@ -38,9 +38,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenFrAttachScannedDocsShouldAutoCompleteProcessScannedDocumentsTask() {
+    void givenAttachScannedDocsShouldAutoCompleteProcessScannedDocumentsTask() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_attachScannedDocs");
+        inputVariables.putValue("eventId", "attachScannedDocs");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of(

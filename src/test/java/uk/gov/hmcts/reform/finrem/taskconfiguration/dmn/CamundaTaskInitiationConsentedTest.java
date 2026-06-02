@@ -39,9 +39,9 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenFrAttachScannedDocsShouldCreateProcessScannedDocumentsTask() {
+    void givenAttachScannedDocsWithUnhandledEvidenceShouldCreateProcessScannedDocumentsTask() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_attachScannedDocs");
+        inputVariables.putValue("eventId", "attachScannedDocs");
         inputVariables.putValue("postEventState", "");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -50,10 +50,31 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "taskId", "processScannedDocuments",
                 "name", "Process Scanned Documents",
                 "taskType", "processScannedDocuments",
-                "workingDaysAllowed", 5,
                 "delayDuration", 0,
                 "processCategories", "caseManagement"
             )
         )));
+    }
+
+    @Test
+    void givenAttachScannedDocsWithEvidenceHandledNoShouldCreateProcessScannedDocumentsTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "attachScannedDocs");
+        inputVariables.putValue("postEventState", "");
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList().size(), is(1));
+    }
+
+    @Test
+    void givenAttachScannedDocsWithEvidenceHandledYesShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "attachScannedDocs");
+        inputVariables.putValue("postEventState", "");
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "Yes")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
     }
 }

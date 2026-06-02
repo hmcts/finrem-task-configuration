@@ -65,7 +65,7 @@ null</text>
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_3_2">
-          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_attachScannedDocs/FR_attachScannedDocsDocs)"</text>
+          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_3_3">
           <text>true</text>
@@ -116,7 +116,7 @@ null</text>
           <text>"priorityDateOriginRef"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_6_2">
-          <text>"nextHearingDate,dueDate,priorityDate"</text>
+          <text>"nextHearingDate,dueDate"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_6_3">
           <text>true</text>
@@ -221,6 +221,91 @@ null</text>
           <text>"No"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_12_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_13">
+        <inputEntry id="InputEntry_config_13_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_13_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_13_1">
+          <text>"majorPriority"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_13_2">
+          <text>5000</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_13_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_14">
+        <inputEntry id="InputEntry_config_14_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_14_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_14_1">
+          <text>"minorPriority"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_14_2">
+          <text>500</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_14_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_15">
+        <inputEntry id="InputEntry_config_15_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_15_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_15_1">
+          <text>"caseName"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_15_2">
+          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_15_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_16">
+        <inputEntry id="InputEntry_config_16_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_16_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_16_1">
+          <text>"region"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_16_2">
+          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_16_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_17">
+        <inputEntry id="InputEntry_config_17_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_17_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_17_1">
+          <text>"location"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_17_2">
+          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_17_3">
           <text>true</text>
         </outputEntry>
       </rule>
