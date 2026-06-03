@@ -49,9 +49,8 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
             Map.of(
                 "taskId", "processScannedDocuments",
                 "name", "Process Scanned Documents",
-                "taskType", "processScannedDocuments",
                 "delayDuration", 0,
-                "processCategories", "caseManagement"
+                "processCategories", "processScannedDocuments"
             )
         )));
     }

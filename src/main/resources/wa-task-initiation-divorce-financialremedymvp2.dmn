@@ -19,7 +19,6 @@
       </input>
       <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
       <output id="Output_2" label="Name" name="name" typeRef="string" />
-      <output id="Output_3" label="Task Type" name="taskType" typeRef="string" />
       <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
       <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
       <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
@@ -39,9 +38,6 @@
         <outputEntry id="OutputEntry_initiation_1_2">
           <text>"Process Scanned Documents"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_1_3">
-          <text>"processScannedDocuments"</text>
-        </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_4">
           <text>0</text>
         </outputEntry>
@@ -49,7 +45,7 @@
           <text></text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_6">
-          <text>"caseManagement"</text>
+          <text>"processScannedDocuments"</text>
         </outputEntry>
       </rule>
     </decisionTable>
