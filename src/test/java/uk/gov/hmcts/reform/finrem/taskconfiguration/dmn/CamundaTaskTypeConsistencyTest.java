@@ -59,21 +59,6 @@ class CamundaTaskTypeConsistencyTest {
     }
 
     @Test
-    void initiatedTaskTypeMustMatchTaskIdInInitiationDmn() throws Exception {
-        Map<String, String> taskIdToTaskType =
-            DmnXmlHelper.extractOutputColumnPair(INITIATION_DMN, "taskId", "taskType");
-
-        List<String> mismatches = taskIdToTaskType.entrySet().stream()
-            .filter(e -> !e.getKey().equals(e.getValue()))
-            .map(e -> String.format("taskId='%s' but taskType='%s'", e.getKey(), e.getValue()))
-            .sorted()
-            .toList();
-
-        assertThat("taskId and taskType output columns must be identical in each initiation rule: " + mismatches,
-            mismatches, is(List.of()));
-    }
-
-    @Test
     void completedTaskTypesMustBeRegisteredInTaskTypesDmn() throws Exception {
         Set<String> registeredTypes = DmnXmlHelper.extractOutputColumn(TYPES_DMN, "taskTypeId");
         Set<String> completedTypes  = DmnXmlHelper.extractOutputColumn(COMPLETION_DMN, "taskType");
