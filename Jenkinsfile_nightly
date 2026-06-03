@@ -10,8 +10,5 @@ def type = "java"
 def product = "finrem"
 def component = "task-configuration"
 
-withPipeline(type, product, component) {
-  afterAlways('smokeTest') {
-    junit(testResults: '**/build/test-results/smokeTest/*.xml', allowEmptyResults: true)
-  }
+withNightlyPipeline(type, product, component) {
 }
