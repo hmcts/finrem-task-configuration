@@ -224,6 +224,40 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_config_12a">
+        <inputEntry id="InputEntry_config_12a_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_12a_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_12a_1">
+          <text>"dueDateOrigin"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_12a_2">
+          <text>now()</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_12a_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_12b">
+        <inputEntry id="InputEntry_config_12b_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_12b_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_12b_1">
+          <text>"dueDateTime"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_12b_2">
+          <text>time("14:00")</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_12b_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_config_13">
         <inputEntry id="InputEntry_config_13_1">
           <text></text>

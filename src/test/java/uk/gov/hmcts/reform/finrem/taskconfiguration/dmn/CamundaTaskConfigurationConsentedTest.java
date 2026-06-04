@@ -25,7 +25,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(17));
+        assertThat(logic.getRules().size(), is(19));
     }
 
     @Test
@@ -45,7 +45,10 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         inputVariables.putValue("taskType", "processScannedDocuments");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        List<Map<String, Object>> actualResults = dmnDecisionTableResult.getResultList();
+
+        // dueDateOrigin is now() so its value is non-deterministic - asserted by name/canReconfigure only below
+        List<Map<String, Object>> expectedResults = List.of(
             Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
             Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
             Map.of("name", "description", "value",
@@ -65,12 +68,25 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
             Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
             Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
+            Map.of("name", "dueDateOrigin", "canReconfigure", true),
+            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
             Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
             Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
             Map.of("name", "caseName", "value", "", "canReconfigure", true),
             Map.of("name", "region", "value", "", "canReconfigure", true),
             Map.of("name", "location", "value", "", "canReconfigure", true)
-        )));
+        );
+
+        assertThat(actualResults.size(), is(expectedResults.size()));
+        for (int idx = 0; idx < actualResults.size(); idx++) {
+            Map<String, Object> actual = actualResults.get(idx);
+            Map<String, Object> expected = expectedResults.get(idx);
+            assertThat(actual.get("name"), is(expected.get("name")));
+            assertThat(actual.get("canReconfigure"), is(expected.get("canReconfigure")));
+            if (!"dueDateOrigin".equals(expected.get("name"))) {
+                assertThat(actual.get("value"), is(expected.get("value")));
+            }
+        }
     }
 
     @Test
