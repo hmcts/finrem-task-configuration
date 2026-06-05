@@ -75,7 +75,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "caseName", "value", "", "canReconfigure", true),
             Map.of("name", "region", "value", "", "canReconfigure", true),
             Map.of("name", "location", "value", "", "canReconfigure", true),
-            Map.of("name", "caseManagementCategory", "value", "CHANGE_LATER_CASE_MANAGEMENT_CATEGORY",
+            Map.of("name", "caseManagementCategory", "value", "FR Consented",
                 "canReconfigure", true)
         );
 
