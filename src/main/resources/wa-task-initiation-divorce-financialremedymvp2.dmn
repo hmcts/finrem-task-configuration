@@ -42,7 +42,10 @@
           <text>0</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_5">
-          <text></text>
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
