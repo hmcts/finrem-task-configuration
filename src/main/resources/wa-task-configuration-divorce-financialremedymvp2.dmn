@@ -343,6 +343,23 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_config_18">
+        <inputEntry id="InputEntry_config_18_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_18_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_18_1">
+          <text>"caseManagementCategory"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_18_2">
+          <text>"CHANGE_LATER_CASE_MANAGEMENT_CATEGORY"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_18_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

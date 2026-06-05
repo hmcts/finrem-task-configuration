@@ -50,7 +50,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "taskId", "processScannedDocuments",
                 "name", "Process Scanned Documents",
                 "delayDuration", 0,
-                "processCategories", "processScannedDocuments"
+                "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
             )
         )));
     }

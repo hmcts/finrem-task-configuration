@@ -25,7 +25,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(19));
+        assertThat(logic.getRules().size(), is(20));
     }
 
     @Test
@@ -74,7 +74,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
             Map.of("name", "caseName", "value", "", "canReconfigure", true),
             Map.of("name", "region", "value", "", "canReconfigure", true),
-            Map.of("name", "location", "value", "", "canReconfigure", true)
+            Map.of("name", "location", "value", "", "canReconfigure", true),
+            Map.of("name", "caseManagementCategory", "value", "CHANGE_LATER_CASE_MANAGEMENT_CATEGORY",
+                "canReconfigure", true)
         );
 
         assertThat(actualResults.size(), is(expectedResults.size()));
