@@ -360,6 +360,346 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_config_pao_1">
+        <inputEntry id="InputEntry_config_pao_1_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_1_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_1_1">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_1_2">
+          <text>"routine_work"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_1_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_2">
+        <inputEntry id="InputEntry_config_pao_2_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_2_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_2_1">
+          <text>"roleCategory"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_2_2">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_2_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_3">
+        <inputEntry id="InputEntry_config_pao_3_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_3_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_3_1">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_3_2">
+          <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_3_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_4">
+        <inputEntry id="InputEntry_config_pao_4_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_4_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_4_1">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_4_2">
+          <text>"Process Approved Order"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_4_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_5">
+        <inputEntry id="InputEntry_config_pao_5_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_5_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_5_1">
+          <text>"calculatedDates"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_5_2">
+          <text>"nextHearingDate,dueDate,priorityDate"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_5_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_6">
+        <inputEntry id="InputEntry_config_pao_6_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_6_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_6_1">
+          <text>"priorityDateOriginRef"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_6_2">
+          <text>"nextHearingDate,dueDate"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_6_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_7">
+        <inputEntry id="InputEntry_config_pao_7_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_7_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_7_1">
+          <text>"nextHearingDate"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_7_2">
+          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings) &gt; 0) then caseData.listForHearings[1].value.hearingDate else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_7_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_8">
+        <inputEntry id="InputEntry_config_pao_8_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_8_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_8_1">
+          <text>"dueDateIntervalDays"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_8_2">
+          <text>5</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_8_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_9">
+        <inputEntry id="InputEntry_config_pao_9_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_9_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_9_1">
+          <text>"dueDateNonWorkingCalendar"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_9_2">
+          <text>"https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_9_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_10">
+        <inputEntry id="InputEntry_config_pao_10_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_10_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_10_1">
+          <text>"dueDateNonWorkingDaysOfWeek"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_10_2">
+          <text>"SATURDAY,SUNDAY"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_10_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_11">
+        <inputEntry id="InputEntry_config_pao_11_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_11_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_11_1">
+          <text>"dueDateSkipNonWorkingDays"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_11_2">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_11_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_12">
+        <inputEntry id="InputEntry_config_pao_12_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_12_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_12_1">
+          <text>"dueDateMustBeWorkingDay"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_12_2">
+          <text>"No"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_12_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_13">
+        <inputEntry id="InputEntry_config_pao_13_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_13_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_13_1">
+          <text>"dueDateOrigin"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_13_2">
+          <text>now()</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_13_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_14">
+        <inputEntry id="InputEntry_config_pao_14_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_14_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_14_1">
+          <text>"dueDateTime"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_14_2">
+          <text>time("14:00")</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_14_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_15">
+        <inputEntry id="InputEntry_config_pao_15_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_15_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_15_1">
+          <text>"majorPriority"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_15_2">
+          <text>5000</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_15_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_16">
+        <inputEntry id="InputEntry_config_pao_16_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_16_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_16_1">
+          <text>"minorPriority"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_16_2">
+          <text>500</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_16_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_17">
+        <inputEntry id="InputEntry_config_pao_17_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_17_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_17_1">
+          <text>"caseName"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_17_2">
+          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_17_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_18">
+        <inputEntry id="InputEntry_config_pao_18_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_18_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_18_1">
+          <text>"region"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_18_2">
+          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_18_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_19">
+        <inputEntry id="InputEntry_config_pao_19_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_19_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_19_1">
+          <text>"location"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_19_2">
+          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_19_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_20">
+        <inputEntry id="InputEntry_config_pao_20_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_pao_20_2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_pao_20_1">
+          <text>"caseManagementCategory"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_20_2">
+          <text>"FR Consented"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_pao_20_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

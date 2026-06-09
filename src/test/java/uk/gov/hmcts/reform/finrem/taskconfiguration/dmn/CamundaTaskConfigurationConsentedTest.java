@@ -25,7 +25,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(20));
+        assertThat(logic.getRules().size(), is(40));
     }
 
     @Test
@@ -123,6 +123,32 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseName"), is("Applicant v Respondent"));
         assertThat(valueOf(results, "region"), is("2"));
         assertThat(valueOf(results, "location"), is("366796"));
+    }
+
+    @Test
+    void givenProcessApprovedOrderTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Tony Stark v Pepper Potts",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
+        ));
+        inputVariables.putValue("taskType", "processApprovedOrder");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results.size(), is(20));
+        assertThat(valueOf(results, "workType"), is("routine_work"));
+        assertThat(valueOf(results, "roleCategory"), is("CTSC"));
+        assertThat(valueOf(results, "title"), is("Process Approved Order"));
+        assertThat(valueOf(results, "description"),
+            is("[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"));
+        assertThat(valueOf(results, "caseManagementCategory"), is("FR Consented"));
+        assertThat(valueOf(results, "dueDateIntervalDays"), is("5"));
+        assertThat(valueOf(results, "caseName"), is("Tony Stark v Pepper Potts"));
+        assertThat(valueOf(results, "region"), is("2"));
+        assertThat(valueOf(results, "location"), is("765324"));
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {

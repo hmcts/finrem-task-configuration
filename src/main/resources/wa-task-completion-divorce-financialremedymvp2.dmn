@@ -20,6 +20,17 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_completion_2">
+        <inputEntry id="InputEntry_completion_2_1">
+          <text>"FR_amendedConsentOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_2_1">
+          <text>"processApprovedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_2_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
