@@ -12,7 +12,9 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest
 import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
@@ -61,6 +63,28 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "assignmentPriority", 1,
                 "autoAssignable", false
             )
+        )));
+    }
+
+    @Test
+    void givenProcessScannedDocumentsTaskTypeShouldNotReturnPermissionsForOtherRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        List<String> rolesWithPermissions = dmnDecisionTableResult.getResultList().stream()
+            .map(permission -> permission.get("name").toString())
+            .toList();
+
+        assertThat(rolesWithPermissions, is(List.of("ctsc-admin", "ctsc-team-leader")));
+        assertThat(rolesWithPermissions, not(hasItems(
+            "ctsc",
+            "hearing-centre-admin",
+            "hearing-centre-team-leader",
+            "judge",
+            "tribunal-caseworker",
+            "task-supervisor"
         )));
     }
 }
