@@ -88,7 +88,7 @@
 }</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_2_6">
-          <text>"processApprovedOrder"</text>
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
     </decisionTable>

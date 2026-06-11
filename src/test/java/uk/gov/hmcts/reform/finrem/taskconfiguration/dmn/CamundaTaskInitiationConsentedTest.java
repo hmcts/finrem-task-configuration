@@ -110,7 +110,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result.get("taskId"), is("processApprovedOrder"));
         assertThat(result.get("name"), is("Process Approved Order"));
         assertThat(result.get("delayDuration"), is(0));
-        assertThat(result.get("processCategories"), is("processApprovedOrder"));
+        assertThat(result.get("processCategories"), is("CHANGE_LATER_PROCESS_CATEGORIES"));
 
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
