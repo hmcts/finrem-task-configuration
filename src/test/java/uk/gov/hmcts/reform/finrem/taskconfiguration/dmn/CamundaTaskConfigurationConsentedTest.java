@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -41,13 +42,18 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void givenProcessScannedDocumentsTaskTypeShouldReturnConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Applicant v Respondent",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
+        ));
         inputVariables.putValue("taskType", "processScannedDocuments");
 
+        ZonedDateTime beforeEvaluation = ZonedDateTime.now();
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        ZonedDateTime afterEvaluation = ZonedDateTime.now();
         List<Map<String, Object>> actualResults = dmnDecisionTableResult.getResultList();
 
-        // dueDateOrigin is now() so its value is non-deterministic - asserted by name/canReconfigure only below
+        // dueDateOrigin is now() so its value is asserted against the evaluation time below
         List<Map<String, Object>> expectedResults = List.of(
             Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
             Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
@@ -72,9 +78,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
             Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
             Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
-            Map.of("name", "caseName", "value", "", "canReconfigure", true),
-            Map.of("name", "region", "value", "", "canReconfigure", true),
-            Map.of("name", "location", "value", "", "canReconfigure", true),
+            Map.of("name", "caseName", "value", "Applicant v Respondent", "canReconfigure", true),
+            Map.of("name", "region", "value", "2", "canReconfigure", true),
+            Map.of("name", "location", "value", "366796", "canReconfigure", true),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
                 "canReconfigure", true)
         );
@@ -85,7 +91,12 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map<String, Object> expected = expectedResults.get(idx);
             assertThat(actual.get("name"), is(expected.get("name")));
             assertThat(actual.get("canReconfigure"), is(expected.get("canReconfigure")));
-            if (!"dueDateOrigin".equals(expected.get("name"))) {
+            if ("dueDateOrigin".equals(expected.get("name"))) {
+                ZonedDateTime dueDateOrigin = ZonedDateTime.parse(actual.get("value").toString());
+                assertThat("dueDateOrigin should be the time the DMN was evaluated (now())",
+                    !dueDateOrigin.isBefore(beforeEvaluation) && !dueDateOrigin.isAfter(afterEvaluation),
+                    is(true));
+            } else {
                 assertThat(actual.get("value"), is(expected.get("value")));
             }
         }
@@ -109,20 +120,77 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
-    void givenCaseDataShouldReturnCaseNameRegionAndLocation() {
+    void givenDueDateConfigurationShouldCountFiveWorkingDaysUsingFinremAndBankHolidayCalendars() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("caseData", Map.of(
-            "caseNameHmctsInternal", "Applicant v Respondent",
-            "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
-        ));
+        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        // SLA is 5 working days from task creation: weekends, gov.uk bank holidays and
+        // finrem-specific non-working days are skipped when counting the interval
+        // (the calculation itself is performed by wa-task-management-api from these attributes)
+        assertThat(valueOf(results, "dueDateIntervalDays"), is("5"));
+        assertThat(valueOf(results, "dueDateSkipNonWorkingDays"), is("true"));
+        assertThat(valueOf(results, "dueDateNonWorkingDaysOfWeek"), is("SATURDAY,SUNDAY"));
+        assertThat(valueOf(results, "dueDateNonWorkingCalendar"), is(
+            "https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/"
+                + "finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json"));
+
+        // the resulting due date is allowed to land on a non-working day
+        assertThat(valueOf(results, "dueDateMustBeWorkingDay"), is("No"));
+        assertThat(valueOf(results, "dueDateTime"), is("14:00"));
+    }
+
+    @Test
+    void givenDueDateConfigurationShouldPrioritiseByNextHearingDateThenDueDate() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        // priorityDate uses nextHearingDate when one is set, otherwise falls back to dueDate
+        assertThat(valueOf(results, "calculatedDates"), is("nextHearingDate,dueDate,priorityDate"));
+        assertThat(valueOf(results, "priorityDateOriginRef"), is("nextHearingDate,dueDate"));
+    }
+
+    @Test
+    void givenNoHearingCollectionShouldReturnEmptyNextHearingDate() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate"), is(""));
+    }
+
+    @Test
+    void givenEmptyHearingCollectionShouldReturnEmptyNextHearingDate() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of("listForHearings", List.of()));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate"), is(""));
+    }
+
+    @Test
+    void givenCaseDataWithoutMandatoryFieldsShouldReturnEmptyCaseNameRegionAndLocation() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of());
         inputVariables.putValue("taskType", "processScannedDocuments");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
-        assertThat(valueOf(results, "caseName"), is("Applicant v Respondent"));
-        assertThat(valueOf(results, "region"), is("2"));
-        assertThat(valueOf(results, "location"), is("366796"));
+        // mandatory fields fall back to empty strings, which fail task initiation
+        // downstream in the same way as null
+        assertThat(valueOf(results, "caseName"), is(""));
+        assertThat(valueOf(results, "region"), is(""));
+        assertThat(valueOf(results, "location"), is(""));
     }
 
     @Test
