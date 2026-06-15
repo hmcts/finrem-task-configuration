@@ -167,7 +167,7 @@ null</text>
           <text>"dueDateNonWorkingCalendar"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_9_2">
-          <text>"https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_9_3">
           <text>true</text>

@@ -68,8 +68,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
             Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
             Map.of("name", "dueDateNonWorkingCalendar", "value",
-                "https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/"
-                    + "finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json",
+                "https://www.gov.uk/bank-holidays/england-and-wales.json",
                 "canReconfigure", true),
             Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
             Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
@@ -120,22 +119,21 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
-    void givenDueDateConfigurationShouldCountFiveWorkingDaysUsingFinremAndBankHolidayCalendars() {
+    void givenDueDateConfigurationShouldCountFiveWorkingDaysUsingBankHolidayCalendar() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
         inputVariables.putValue("taskType", "processScannedDocuments");
 
         List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
 
-        // SLA is 5 working days from task creation: weekends, gov.uk bank holidays and
-        // finrem-specific non-working days are skipped when counting the interval
+        // SLA is 5 working days from task creation: weekends and gov.uk bank holidays
+        // are skipped when counting the interval
         // (the calculation itself is performed by wa-task-management-api from these attributes)
         assertThat(valueOf(results, "dueDateIntervalDays"), is("5"));
         assertThat(valueOf(results, "dueDateSkipNonWorkingDays"), is("true"));
         assertThat(valueOf(results, "dueDateNonWorkingDaysOfWeek"), is("SATURDAY,SUNDAY"));
         assertThat(valueOf(results, "dueDateNonWorkingCalendar"), is(
-            "https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/"
-                + "finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json"));
+            "https://www.gov.uk/bank-holidays/england-and-wales.json"));
 
         // the resulting due date is allowed to land on a non-working day
         assertThat(valueOf(results, "dueDateMustBeWorkingDay"), is("No"));
