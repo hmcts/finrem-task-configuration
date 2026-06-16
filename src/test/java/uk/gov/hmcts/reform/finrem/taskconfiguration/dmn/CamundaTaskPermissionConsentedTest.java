@@ -48,7 +48,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
             Map.of(
                 "name", "ctsc-admin",
-                "value", "Read,Own,Claim,Unclaim,CancelOwn,CompleteOwn,Execute",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
                 "roleCategory", "CTSC",
                 "authorisations", "FR_Processing_Orders",
                 "assignmentPriority", 1,

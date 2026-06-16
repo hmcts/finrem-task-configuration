@@ -94,7 +94,7 @@ else
           <text>"ctsc-admin"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_3">
-          <text>"Read,Own,Claim,Unclaim,CancelOwn,CompleteOwn,Execute"</text>
+          <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_4">
           <text>"CTSC"</text>
