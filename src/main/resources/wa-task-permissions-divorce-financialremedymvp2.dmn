@@ -36,7 +36,7 @@ else
           <text>"ctsc"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_3">
-          <text>"Read,Own,Claim,Unclaim,CancelOwn,CompleteOwn,Execute"</text>
+          <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_4">
           <text>"CTSC"</text>
