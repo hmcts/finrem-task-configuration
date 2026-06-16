@@ -36,7 +36,51 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(4));
+        assertThat(logic.getRules().size(), is(6));
+    }
+
+    @Test
+    void givenCheckHelpWithFeesTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "checkHelpWithFees"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of(
+                "name", "ctsc-admin",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "FR_Checking_HWF",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "FR_Checking_HWF",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        )));
+    }
+
+    @Test
+    void givenCheckHelpWithFeesTaskTypeShouldNotGrantUnclaimToCtscAdmin() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "checkHelpWithFees"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        String adminPermissions = dmnDecisionTableResult.getResultList().stream()
+            .filter(permission -> "ctsc-admin".equals(permission.get("name")))
+            .map(permission -> permission.get("value").toString())
+            .findFirst()
+            .orElseThrow();
+
+        // BA confirmed a CTSC Admin cannot unclaim a task
+        assertThat(adminPermissions.contains("Unclaim"), is(false));
     }
 
     @Test
