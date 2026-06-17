@@ -31,6 +31,39 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_completion_hwf_1">
+        <inputEntry id="InputEntry_completion_hwf_1_1">
+          <text>"FR_HWFDecisionMade"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_completion_hwf_2">
+        <inputEntry id="InputEntry_completion_hwf_2_1">
+          <text>"FR_paymentMadeFromHWF"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_2_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_2_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_completion_hwf_3">
+        <inputEntry id="InputEntry_completion_hwf_3_1">
+          <text>"FR_awaitingPaymentResponseFromHWF"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_3_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_3_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

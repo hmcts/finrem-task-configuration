@@ -34,7 +34,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(2));
+        assertThat(logic.getRules().size(), is(5));
     }
 
     @Test
@@ -56,6 +56,39 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
             Map.of("taskType", "processApprovedOrder", "completionMode", "Auto")
+        )));
+    }
+
+    @Test
+    void givenHwfApplicationAcceptedShouldAutoCompleteCheckHelpWithFeesTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_HWFDecisionMade");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
+        )));
+    }
+
+    @Test
+    void givenFeeAccountDebitedShouldAutoCompleteCheckHelpWithFeesTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_paymentMadeFromHWF");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
+        )));
+    }
+
+    @Test
+    void givenAwaitingPaymentResponseFromHwfShouldAutoCompleteCheckHelpWithFeesTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_awaitingPaymentResponseFromHWF");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+            Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
         )));
     }
 }
