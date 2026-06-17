@@ -87,6 +87,27 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
     }
 
+    @Test
+    void givenNonAttachScannedDocsEventWithEvidenceHandledNoShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "someOtherEvent");
+        inputVariables.putValue("postEventState", "");
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+    }
+
+    @Test
+    void givenNonAttachScannedDocsEventWithEvidenceHandledAbsentShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "someOtherEvent");
+        inputVariables.putValue("postEventState", "");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+    }
+    
     private static Map<String, Object> additionalDataWithPensionDocuments(int numberOfDocuments) {
         List<Map<String, Object>> pensionCollection = IntStream.range(0, numberOfDocuments)
             .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))
