@@ -107,7 +107,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
     }
-    
+
     private static Map<String, Object> additionalDataWithPensionDocuments(int numberOfDocuments) {
         List<Map<String, Object>> pensionCollection = IntStream.range(0, numberOfDocuments)
             .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))

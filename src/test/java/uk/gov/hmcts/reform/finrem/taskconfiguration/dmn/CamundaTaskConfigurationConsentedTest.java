@@ -26,7 +26,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(60));
+        assertThat(logic.getRules().size(), is(80));
     }
 
     @Test
@@ -257,6 +257,39 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(description.contains(
             "[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"), is(true));
+    }
+
+    @Test
+    void givenReviewRefusedOrderTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Peter Parker v Mary Jane",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
+        ));
+        inputVariables.putValue("taskType", "reviewRefusedOrder");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results.size(), is(20));
+        assertThat(valueOf(results, "workType"), is("hearing_work"));
+        assertThat(valueOf(results, "roleCategory"), is("CTSC"));
+        assertThat(valueOf(results, "title"), is("Review Refused Order"));
+        assertThat(valueOf(results, "description"),
+            is("[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_listForHearing/FR_listForHearing1)"));
+        assertThat(valueOf(results, "caseManagementCategory"), is("FR Consented"));
+        assertThat(valueOf(results, "caseName"), is("Peter Parker v Mary Jane"));
+        assertThat(valueOf(results, "region"), is("2"));
+        assertThat(valueOf(results, "location"), is("366796"));
+
+        // SLA = 5 working days: weekends and gov.uk bank holidays are skipped
+        assertThat(valueOf(results, "dueDateIntervalDays"), is("5"));
+        assertThat(valueOf(results, "dueDateSkipNonWorkingDays"), is("true"));
+        assertThat(valueOf(results, "dueDateNonWorkingDaysOfWeek"), is("SATURDAY,SUNDAY"));
+        assertThat(valueOf(results, "dueDateNonWorkingCalendar"),
+            is("https://www.gov.uk/bank-holidays/england-and-wales.json"));
+        assertThat(valueOf(results, "dueDateTime"), is("14:00"));
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {

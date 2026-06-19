@@ -196,6 +196,64 @@ else
           <text>false</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_permissions_7">
+        <inputEntry id="InputEntry_permissions_7_1">
+          <text>"reviewRefusedOrder"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_permissions_7_2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_permissions_7_1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_7_2">
+          <text>"ctsc-admin"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_7_3">
+          <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_7_4">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_7_5">
+          <text>"FR_Managing_Hearings"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_7_6">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_7_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_permissions_8">
+        <inputEntry id="InputEntry_permissions_8_1">
+          <text>"reviewRefusedOrder"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_permissions_8_2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_permissions_8_1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_8_2">
+          <text>"ctsc-team-leader"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_8_3">
+          <text>"Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_8_4">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_8_5">
+          <text>"FR_Managing_Hearings"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_8_6">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_8_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
