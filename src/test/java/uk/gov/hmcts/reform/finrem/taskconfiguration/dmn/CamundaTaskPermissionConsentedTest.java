@@ -10,9 +10,9 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
 import java.util.List;
+import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -24,15 +24,35 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void givenUnknownTaskTypeShouldReturnEmptyPermissions() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("taskAttributes", java.util.Map.of("taskType", "unknownTaskType"));
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "unknownTaskType"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules()).hasSize(1);
+    }
+
+    @Test
+    void givenReviewApplicationTaskType_WhenEvaluated_ThenReturnsAuthorisation() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewApplication"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "leadership-judge",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign",
+                "roleCategory", "JUDICIAL",
+                "authorisations", "410",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
     }
 }
