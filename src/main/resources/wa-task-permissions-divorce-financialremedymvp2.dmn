@@ -33,7 +33,7 @@ else
           <text></text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_2">
-          <text>"ctsc"</text>
+          <text>"hmcts-ctsc"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_3">
           <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
