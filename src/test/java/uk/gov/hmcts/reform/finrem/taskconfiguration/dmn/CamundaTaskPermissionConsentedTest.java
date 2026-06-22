@@ -50,7 +50,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "name", "hmcts-ctsc",
                 "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
                 "roleCategory", "CTSC",
-                "authorisations", "FR_Managing_ScannedDocs",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             ),
@@ -59,7 +59,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
                     + "Claim,Own,Execute,Assign",
                 "roleCategory", "CTSC",
-                "authorisations", "FR_Managing_ScannedDocs",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             )

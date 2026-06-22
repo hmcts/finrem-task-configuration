@@ -42,7 +42,7 @@ else
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_5">
-          <text>"FR_Managing_ScannedDocs"</text>
+          <text>"SKILL:ABA2:ManageScannedDocuments"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_6">
           <text>1</text>
@@ -71,7 +71,7 @@ else
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_2_5">
-          <text>"FR_Managing_ScannedDocs"</text>
+          <text>"SKILL:ABA2:ManageScannedDocuments"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_2_6">
           <text>1</text>
