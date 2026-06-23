@@ -206,7 +206,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
-    void givenCaseDataWithoutMandatoryFieldsShouldReturnEmptyCaseNameRegionAndLocation() {
+    void givenCaseDataWithoutMandatoryFieldsShouldDefaultCaseNameAndEmptyRegionAndLocation() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
         inputVariables.putValue("taskType", "processScannedDocuments");
@@ -214,9 +214,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
-        // mandatory fields fall back to empty strings, which fail task initiation
-        // downstream in the same way as null
-        assertThat(valueOf(results, "caseName")).isEqualTo("");
+        // caseName falls back to a default; region and location fall back to empty
+        // strings, which fail task initiation downstream in the same way as null
+        assertThat(valueOf(results, "caseName")).isEqualTo("Financial Remedy");
         assertThat(valueOf(results, "region")).isEqualTo("");
         assertThat(valueOf(results, "location")).isEqualTo("");
     }

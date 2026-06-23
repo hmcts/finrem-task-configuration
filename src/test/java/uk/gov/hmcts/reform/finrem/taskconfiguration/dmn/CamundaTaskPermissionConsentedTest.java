@@ -44,7 +44,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of(
-                "name", "hmcts-ctsc",
+                "name", "ctsc",
                 "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
                 "roleCategory", "CTSC",
                 "authorisations", "SKILL:ABA2:ProcessApprovedOrders",
@@ -53,7 +53,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
             ),
             Map.of(
                 "name", "ctsc-team-leader",
-                "value", "Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,Unassign,"
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
                     + "Claim,Own,Execute,Assign",
                 "roleCategory", "CTSC",
                 "authorisations", "SKILL:ABA2:ProcessApprovedOrders",

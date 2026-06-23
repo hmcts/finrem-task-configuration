@@ -91,7 +91,7 @@ else
           <text></text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_2">
-          <text>"hmcts-ctsc"</text>
+          <text>"ctsc"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_3">
           <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
@@ -123,7 +123,7 @@ else
           <text>"ctsc-team-leader"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_4_3">
-          <text>"Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
+          <text>"Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_4_4">
           <text>"CTSC"</text>

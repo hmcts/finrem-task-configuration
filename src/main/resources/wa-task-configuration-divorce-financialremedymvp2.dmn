@@ -218,7 +218,7 @@ null</text>
           <text>"caseName"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_12_out2">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
+          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else "Financial Remedy"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_12_out3">
           <text>true</text>
