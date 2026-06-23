@@ -13,8 +13,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -26,7 +25,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(20));
+        assertThat(logic.getRules()).hasSize(20);
     }
 
     @Test
@@ -36,7 +35,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         inputVariables.putValue("taskType", "unknownTaskType");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
@@ -84,19 +83,19 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 "canReconfigure", true)
         );
 
-        assertThat(actualResults.size(), is(expectedResults.size()));
+        assertThat(actualResults).hasSameSizeAs(expectedResults);
         for (int idx = 0; idx < actualResults.size(); idx++) {
             Map<String, Object> actual = actualResults.get(idx);
             Map<String, Object> expected = expectedResults.get(idx);
-            assertThat(actual.get("name"), is(expected.get("name")));
-            assertThat(actual.get("canReconfigure"), is(expected.get("canReconfigure")));
+            assertThat(actual.get("name")).isEqualTo(expected.get("name"));
+            assertThat(actual.get("canReconfigure")).isEqualTo(expected.get("canReconfigure"));
             if ("dueDateOrigin".equals(expected.get("name"))) {
                 ZonedDateTime dueDateOrigin = ZonedDateTime.parse(actual.get("value").toString());
-                assertThat("dueDateOrigin should be the time the DMN was evaluated (now())",
-                    !dueDateOrigin.isBefore(beforeEvaluation) && !dueDateOrigin.isAfter(afterEvaluation),
-                    is(true));
+                assertThat(!dueDateOrigin.isBefore(beforeEvaluation) && !dueDateOrigin.isAfter(afterEvaluation))
+                    .as("dueDateOrigin should be the time the DMN was evaluated (now())")
+                    .isTrue();
             } else {
-                assertThat(actual.get("value"), is(expected.get("value")));
+                assertThat(actual.get("value")).isEqualTo(expected.get("value"));
             }
         }
     }
@@ -115,7 +114,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             .filter(r -> "nextHearingDate".equals(r.get("name")))
             .findFirst()
             .orElseThrow();
-        assertThat(nextHearingDateRow.get("value"), is("2026-05-27"));
+        assertThat(nextHearingDateRow.get("value")).isEqualTo("2026-05-27");
     }
 
     @Test
@@ -133,7 +132,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
 
-        assertThat(valueOf(results, "nextHearingDate"), is("2026-05-27"));
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo("2026-05-27");
     }
 
     @Test
@@ -147,15 +146,15 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         // SLA is 5 working days from task creation: weekends and gov.uk bank holidays
         // are skipped when counting the interval
         // (the calculation itself is performed by wa-task-management-api from these attributes)
-        assertThat(valueOf(results, "dueDateIntervalDays"), is("5"));
-        assertThat(valueOf(results, "dueDateSkipNonWorkingDays"), is("true"));
-        assertThat(valueOf(results, "dueDateNonWorkingDaysOfWeek"), is("SATURDAY,SUNDAY"));
-        assertThat(valueOf(results, "dueDateNonWorkingCalendar"), is(
-            "https://www.gov.uk/bank-holidays/england-and-wales.json"));
+        assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
+        assertThat(valueOf(results, "dueDateSkipNonWorkingDays")).isEqualTo("true");
+        assertThat(valueOf(results, "dueDateNonWorkingDaysOfWeek")).isEqualTo("SATURDAY,SUNDAY");
+        assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
+            "https://www.gov.uk/bank-holidays/england-and-wales.json");
 
         // the resulting due date is allowed to land on a non-working day
-        assertThat(valueOf(results, "dueDateMustBeWorkingDay"), is("No"));
-        assertThat(valueOf(results, "dueDateTime"), is("14:00"));
+        assertThat(valueOf(results, "dueDateMustBeWorkingDay")).isEqualTo("No");
+        assertThat(valueOf(results, "dueDateTime")).isEqualTo("14:00");
     }
 
     @Test
@@ -167,8 +166,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
 
         // priorityDate uses nextHearingDate when one is set, otherwise falls back to dueDate
-        assertThat(valueOf(results, "calculatedDates"), is("nextHearingDate,dueDate,priorityDate"));
-        assertThat(valueOf(results, "priorityDateOriginRef"), is("nextHearingDate,dueDate"));
+        assertThat(valueOf(results, "calculatedDates")).isEqualTo("nextHearingDate,dueDate,priorityDate");
+        assertThat(valueOf(results, "priorityDateOriginRef")).isEqualTo("nextHearingDate,dueDate");
     }
 
     @Test
@@ -179,7 +178,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
 
-        assertThat(valueOf(results, "nextHearingDate"), is(""));
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo("");
     }
 
     @Test
@@ -190,7 +189,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
 
-        assertThat(valueOf(results, "nextHearingDate"), is(""));
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo("");
     }
 
     @Test
@@ -204,9 +203,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         // mandatory fields fall back to empty strings, which fail task initiation
         // downstream in the same way as null
-        assertThat(valueOf(results, "caseName"), is(""));
-        assertThat(valueOf(results, "region"), is(""));
-        assertThat(valueOf(results, "location"), is(""));
+        assertThat(valueOf(results, "caseName")).isEqualTo("");
+        assertThat(valueOf(results, "region")).isEqualTo("");
+        assertThat(valueOf(results, "location")).isEqualTo("");
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {

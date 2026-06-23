@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
@@ -36,8 +35,9 @@ class CamundaTaskTypeConsistencyTest {
             .sorted()
             .toList();
 
-        assertThat("Task IDs in initiation DMN not registered in task types DMN: " + unregistered,
-            unregistered, is(List.of()));
+        assertThat(unregistered)
+            .as("Task IDs in initiation DMN not registered in task types DMN: " + unregistered)
+            .isEmpty();
     }
 
     @Test
@@ -54,8 +54,9 @@ class CamundaTaskTypeConsistencyTest {
             .sorted()
             .toList();
 
-        assertThat("Task display names differ between initiation DMN and types DMN: " + mismatches,
-            mismatches, is(List.of()));
+        assertThat(mismatches)
+            .as("Task display names differ between initiation DMN and types DMN: " + mismatches)
+            .isEmpty();
     }
 
     @Test
@@ -70,8 +71,9 @@ class CamundaTaskTypeConsistencyTest {
             .sorted()
             .toList();
 
-        assertThat("Task types in completion DMN not registered in task types DMN: " + unregistered,
-            unregistered, is(List.of()));
+        assertThat(unregistered)
+            .as("Task types in completion DMN not registered in task types DMN: " + unregistered)
+            .isEmpty();
     }
 
     @Test
@@ -84,7 +86,8 @@ class CamundaTaskTypeConsistencyTest {
             .sorted()
             .toList();
 
-        assertThat("Registered task types with no permission rules in permissions DMN: " + missing,
-            missing, is(List.of()));
+        assertThat(missing)
+            .as("Registered task types with no permission rules in permissions DMN: " + missing)
+            .isEmpty();
     }
 }
