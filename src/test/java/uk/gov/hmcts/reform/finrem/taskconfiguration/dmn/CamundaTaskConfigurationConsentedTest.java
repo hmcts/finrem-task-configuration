@@ -119,6 +119,24 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
+    void givenMultipleHearingsShouldReturnFirstHearingDate() {
+        // FEEL lists are 1-indexed, so listForHearings[1] is the first element.
+        // With several hearings present, only the first hearing's date is used.
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", "2026-05-27")),
+                Map.of("value", Map.of("hearingDate", "2026-08-15"))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate"), is("2026-05-27"));
+    }
+
+    @Test
     void givenDueDateConfigurationShouldCountFiveWorkingDaysUsingBankHolidayCalendar() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
