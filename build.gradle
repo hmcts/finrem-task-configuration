@@ -216,6 +216,7 @@ dependencies {
     exclude group: 'junit', module: 'junit'
     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
   }
+  testImplementation group: 'org.assertj', name: 'assertj-core'
 
   testImplementation group: 'org.camunda.bpm.dmn', name: 'camunda-engine-dmn', version: "${versions.camunda}"
   testImplementation "org.junit.platform:junit-platform-launcher:${versions.junitPlatform}"

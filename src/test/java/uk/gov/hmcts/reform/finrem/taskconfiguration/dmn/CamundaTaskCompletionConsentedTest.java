@@ -12,8 +12,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -28,13 +27,13 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "unknownEvent");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(2));
+        assertThat(logic.getRules()).hasSize(2);
     }
 
     @Test
@@ -43,9 +42,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "attachScannedDocs");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "processScannedDocuments", "completionMode", "Auto")
-        )));
+        ));
     }
 
     @Test
@@ -54,8 +53,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_amendedConsentOrder");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "processApprovedOrder", "completionMode", "Auto")
-        )));
+        ));
     }
 }
