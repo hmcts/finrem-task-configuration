@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
@@ -101,10 +102,11 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
-    void givenProcessScannedDocumentsWithHearingDateShouldReturnNextHearingDate() {
+    void givenProcessScannedDocumentsWithUpcomingHearingShouldReturnNextHearingDate() {
+        String upcomingHearing = LocalDate.now().plusDays(30).toString();
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
-            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", "2026-05-27")))
+            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", upcomingHearing)))
         ));
         inputVariables.putValue("taskType", "processScannedDocuments");
 
@@ -114,25 +116,47 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             .filter(r -> "nextHearingDate".equals(r.get("name")))
             .findFirst()
             .orElseThrow();
-        assertThat(nextHearingDateRow.get("value")).isEqualTo("2026-05-27");
+        assertThat(nextHearingDateRow.get("value")).isEqualTo(upcomingHearing);
     }
 
     @Test
-    void givenMultipleHearingsShouldReturnFirstHearingDate() {
-        // FEEL lists are 1-indexed, so listForHearings[1] is the first element.
-        // With several hearings present, only the first hearing's date is used.
+    void givenMultipleHearingsShouldReturnEarliestUpcomingHearingDate() {
+        // Only hearings on or after today are considered (date(hearingDate) >= today()).
+        // finrem-cos stores the collection earliest-first and FEEL lists are 1-indexed, so
+        // [1] of the upcoming-only filter is the next hearing. A past hearing is skipped.
+        String pastHearing = LocalDate.now().minusDays(10).toString();
+        String nextUpcomingHearing = LocalDate.now().plusDays(5).toString();
+        String laterUpcomingHearing = LocalDate.now().plusDays(20).toString();
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
             "listForHearings", List.of(
-                Map.of("value", Map.of("hearingDate", "2026-05-27")),
-                Map.of("value", Map.of("hearingDate", "2026-08-15"))
+                Map.of("value", Map.of("hearingDate", pastHearing)),
+                Map.of("value", Map.of("hearingDate", nextUpcomingHearing)),
+                Map.of("value", Map.of("hearingDate", laterUpcomingHearing))
             )
         ));
         inputVariables.putValue("taskType", "processScannedDocuments");
 
         List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
 
-        assertThat(valueOf(results, "nextHearingDate")).isEqualTo("2026-05-27");
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(nextUpcomingHearing);
+    }
+
+    @Test
+    void givenOnlyPastHearingsShouldReturnEmptyNextHearingDate() {
+        // All hearings are in the past, so none qualify as the next hearing.
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", LocalDate.now().minusDays(20).toString())),
+                Map.of("value", Map.of("hearingDate", LocalDate.now().minusDays(5).toString()))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo("");
     }
 
     @Test
