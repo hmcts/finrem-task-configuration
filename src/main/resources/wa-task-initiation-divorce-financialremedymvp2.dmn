@@ -22,6 +22,11 @@
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.pensionCollection != null) then count(additionalData.Data.pensionCollection) else 0</text>
         </inputExpression>
       </input>
+      <input id="Input_5" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
+        <inputExpression id="InputExpression_5" typeRef="string">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion != null) then additionalData.Data.helpWithFeesQuestion else ""</text>
+        </inputExpression>
+      </input>
       <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
       <output id="Output_2" label="Name" name="name" typeRef="string" />
       <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
@@ -38,6 +43,9 @@
           <text>not("Yes")</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_1_4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_5">
           <text></text>
         </inputEntry>
         <outputEntry id="OutputEntry_initiation_1_1">
@@ -72,6 +80,9 @@
         <inputEntry id="InputEntry_initiation_2_4">
           <text>&gt; 0</text>
         </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_5">
+          <text></text>
+        </inputEntry>
         <outputEntry id="OutputEntry_initiation_2_1">
           <text>"processApprovedOrder"</text>
         </outputEntry>
@@ -88,6 +99,41 @@
 }</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_2_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_initiation_3">
+        <inputEntry id="InputEntry_initiation_3_1">
+          <text>"FR_applicationPaymentSubmission"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_2">
+          <text>"applicationSubmitted"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_5">
+          <text>"Yes"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_3_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_2">
+          <text>"Check Help With Fees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>

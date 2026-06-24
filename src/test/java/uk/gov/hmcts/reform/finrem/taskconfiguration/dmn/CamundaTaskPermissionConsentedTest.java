@@ -44,19 +44,19 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of(
-                "name", "ctsc-admin",
+                "name", "ctsc",
                 "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
                 "roleCategory", "CTSC",
-                "authorisations", "FR_Checking_HWF",
+                "authorisations", "SKILL:ABA2:CheckingHWF",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             ),
             Map.of(
                 "name", "ctsc-team-leader",
-                "value", "Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,Unassign,"
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
                     + "Claim,Own,Execute,Assign",
                 "roleCategory", "CTSC",
-                "authorisations", "FR_Checking_HWF",
+                "authorisations", "SKILL:ABA2:CheckingHWF",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             )
@@ -64,20 +64,20 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenCheckHelpWithFeesTaskTypeShouldNotGrantUnclaimToCtscAdmin() {
+    void givenCheckHelpWithFeesTaskTypeShouldNotGrantUnclaimToCtscCaseworker() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("taskAttributes", Map.of("taskType", "checkHelpWithFees"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 
-        String adminPermissions = dmnDecisionTableResult.getResultList().stream()
-            .filter(permission -> "ctsc-admin".equals(permission.get("name")))
+        String ctscPermissions = dmnDecisionTableResult.getResultList().stream()
+            .filter(permission -> "ctsc".equals(permission.get("name")))
             .map(permission -> permission.get("value").toString())
             .findFirst()
             .orElseThrow();
 
-        // BA confirmed a CTSC Admin cannot unclaim a task
-        assertThat(adminPermissions).doesNotContain("Unclaim");
+        // BA confirmed a CTSC caseworker cannot unclaim a task
+        assertThat(ctscPermissions).doesNotContain("Unclaim");
     }
 
     @Test
