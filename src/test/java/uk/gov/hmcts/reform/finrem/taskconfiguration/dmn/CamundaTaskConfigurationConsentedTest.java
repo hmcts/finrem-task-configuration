@@ -37,13 +37,14 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
-        // generic rules apply to every task type, so an unknown type still returns the 15
-        // generic attributes but none of the task-specific rows (workType/title/description/
-        // dueDateIntervalDays/dueDateNonWorkingCalendar)
+        // generic rules apply to every task type, so an unknown type still returns the 14
+        // generic attributes but none of the task-specific rows (roleCategory/workType/title/
+        // description/dueDateIntervalDays/dueDateNonWorkingCalendar). roleCategory is scoped to
+        // the CTSC task types, so it is not emitted for an unknown task type.
         List<Object> names = results.stream().map(r -> r.get("name")).toList();
-        assertThat(results).hasSize(15);
-        assertThat(names).contains("roleCategory", "caseManagementCategory");
-        assertThat(names).doesNotContain("workType", "title", "description",
+        assertThat(results).hasSize(14);
+        assertThat(names).contains("caseManagementCategory");
+        assertThat(names).doesNotContain("roleCategory", "workType", "title", "description",
             "dueDateIntervalDays", "dueDateNonWorkingCalendar");
     }
 
@@ -242,6 +243,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 + "/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)");
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
+        assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
+            "https://www.gov.uk/bank-holidays/england-and-wales.json");
         assertThat(valueOf(results, "caseName")).isEqualTo("Tony Stark v Pepper Potts");
         assertThat(valueOf(results, "region")).isEqualTo("2");
         assertThat(valueOf(results, "location")).isEqualTo("765324");

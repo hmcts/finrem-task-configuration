@@ -20,20 +20,20 @@ null</text>
       <output id="Output_1" label="Name" name="name" typeRef="string" />
       <output id="Output_2" label="Value" name="value" typeRef="string" />
       <output id="Output_3" label="Can Reconfigure?" name="canReconfigure" typeRef="boolean" />
-      <rule id="Rule_config_generic_1">
-        <inputEntry id="Rule_config_generic_1_in1">
+      <rule id="Rule_config_roleCategory">
+        <inputEntry id="Rule_config_roleCategory_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="Rule_config_generic_1_in2">
-          <text></text>
+        <inputEntry id="Rule_config_roleCategory_in2">
+          <text>"processScannedDocuments","processApprovedOrder"</text>
         </inputEntry>
-        <outputEntry id="Rule_config_generic_1_out1">
+        <outputEntry id="Rule_config_roleCategory_out1">
           <text>"roleCategory"</text>
         </outputEntry>
-        <outputEntry id="Rule_config_generic_1_out2">
+        <outputEntry id="Rule_config_roleCategory_out2">
           <text>"CTSC"</text>
         </outputEntry>
-        <outputEntry id="Rule_config_generic_1_out3">
+        <outputEntry id="Rule_config_roleCategory_out3">
           <text>true</text>
         </outputEntry>
       </rule>
@@ -422,7 +422,7 @@ null</text>
           <text>"dueDateNonWorkingCalendar"</text>
         </outputEntry>
         <outputEntry id="Rule_config_pao_4_out2">
-          <text>"https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
         </outputEntry>
         <outputEntry id="Rule_config_pao_4_out3">
           <text>true</text>
