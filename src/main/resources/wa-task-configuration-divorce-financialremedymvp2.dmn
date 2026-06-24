@@ -82,7 +82,7 @@ null</text>
           <text>"nextHearingDate"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_4_out2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings) &gt; 0) then caseData.listForHearings[1].value.hearingDate else ""</text>
+          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then caseData.listForHearings[date(value.hearingDate) &gt;= today()][1].value.hearingDate else ""</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_4_out3">
           <text>true</text>
