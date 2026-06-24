@@ -160,6 +160,95 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
+    void givenHearingEarlierTodayShouldStillReturnTodayAsNextHearingDate() {
+        // hearingDate is a date-only CCD field, so a hearing held earlier today is
+        // indistinguishable from one later today. With date(hearingDate) >= today() a same-day
+        // hearing is intentionally still treated as the next hearing, while an older hearing
+        // in the same collection is skipped.
+        String today = LocalDate.now().toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", LocalDate.now().minusDays(3).toString())),
+                Map.of("value", Map.of("hearingDate", today))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(today);
+    }
+
+    @Test
+    void givenSingleHearingDatedTodayShouldReturnTodayAsNextHearingDate() {
+        // Boundary case: date(hearingDate) >= today() is inclusive, so a hearing dated exactly
+        // today qualifies as the next hearing.
+        String today = LocalDate.now().toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", today)))
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(today);
+    }
+
+    @Test
+    void givenSinglePastHearingShouldReturnEmptyNextHearingDate() {
+        // Negative case: a lone past hearing does not qualify as the next hearing.
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", LocalDate.now().minusDays(1).toString()))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo("");
+    }
+
+    @Test
+    void givenHearingWithMissingDateShouldBeSkippedAndReturnNextValidHearing() {
+        // Edge case: a hearing can exist before its date is set. A missing hearingDate must be
+        // skipped without failing evaluation, and the next valid upcoming hearing returned.
+        String upcomingHearing = LocalDate.now().plusDays(7).toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of()),
+                Map.of("value", Map.of("hearingDate", upcomingHearing))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(upcomingHearing);
+    }
+
+    @Test
+    void givenAllHearingsMissingDateShouldReturnEmptyNextHearingDate() {
+        // Negative case: no hearing has a date, so there is no next hearing date.
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of()),
+                Map.of("value", Map.of())
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo("");
+    }
+
+    @Test
     void givenDueDateConfigurationShouldCountFiveWorkingDaysUsingBankHolidayCalendar() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
