@@ -42,7 +42,7 @@ else
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_5">
-          <text>"FR_Managing_ScannedDocs"</text>
+          <text>"SKILL:ABA2:ManageScannedDocuments"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_1_6">
           <text>1</text>
@@ -71,7 +71,7 @@ else
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_2_5">
-          <text>"FR_Managing_ScannedDocs"</text>
+          <text>"SKILL:ABA2:ManageScannedDocuments"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_2_6">
           <text>1</text>
@@ -91,7 +91,7 @@ else
           <text></text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_2">
-          <text>"ctsc-admin"</text>
+          <text>"ctsc"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_3">
           <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
@@ -100,7 +100,7 @@ else
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_5">
-          <text>"FR_Processing_Orders"</text>
+          <text>"SKILL:ABA2:ProcessApprovedOrders"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_3_6">
           <text>1</text>
@@ -123,13 +123,13 @@ else
           <text>"ctsc-team-leader"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_4_3">
-          <text>"Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
+          <text>"Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_4_4">
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_4_5">
-          <text>"FR_Processing_Orders"</text>
+          <text>"SKILL:ABA2:ProcessApprovedOrders"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_4_6">
           <text>1</text>

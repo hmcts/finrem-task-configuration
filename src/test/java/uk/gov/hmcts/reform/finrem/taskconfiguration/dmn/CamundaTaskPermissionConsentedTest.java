@@ -12,10 +12,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -30,13 +27,13 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("taskAttributes", Map.of("taskType", "unknownTaskType"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(6));
+        assertThat(logic.getRules()).hasSize(6);
     }
 
     @Test
@@ -45,7 +42,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("taskAttributes", Map.of("taskType", "checkHelpWithFees"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of(
                 "name", "ctsc-admin",
                 "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
@@ -63,7 +60,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "assignmentPriority", 1,
                 "autoAssignable", false
             )
-        )));
+        ));
     }
 
     @Test
@@ -80,7 +77,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
             .orElseThrow();
 
         // BA confirmed a CTSC Admin cannot unclaim a task
-        assertThat(adminPermissions.contains("Unclaim"), is(false));
+        assertThat(adminPermissions).doesNotContain("Unclaim");
     }
 
     @Test
@@ -89,39 +86,12 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("taskAttributes", Map.of("taskType", "processApprovedOrder"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
-            Map.of(
-                "name", "ctsc-admin",
-                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
-                "roleCategory", "CTSC",
-                "authorisations", "FR_Processing_Orders",
-                "assignmentPriority", 1,
-                "autoAssignable", false
-            ),
-            Map.of(
-                "name", "ctsc-team-leader",
-                "value", "Read,Manage,Cancel,CancelOwn,Complete,CompleteOwn,Unclaim,Unassign,"
-                    + "Claim,Own,Execute,Assign",
-                "roleCategory", "CTSC",
-                "authorisations", "FR_Processing_Orders",
-                "assignmentPriority", 1,
-                "autoAssignable", false
-            )
-        )));
-    }
-
-    @Test
-    void givenProcessScannedDocumentsTaskTypeShouldReturnPermissionsForCtscRoles() {
-        VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
-
-        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of(
                 "name", "ctsc",
                 "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
                 "roleCategory", "CTSC",
-                "authorisations", "FR_Managing_ScannedDocs",
+                "authorisations", "SKILL:ABA2:ProcessApprovedOrders",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             ),
@@ -130,11 +100,38 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
                     + "Claim,Own,Execute,Assign",
                 "roleCategory", "CTSC",
-                "authorisations", "FR_Managing_ScannedDocs",
+                "authorisations", "SKILL:ABA2:ProcessApprovedOrders",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             )
-        )));
+        ));
+    }
+
+    @Test
+    void givenProcessScannedDocumentsTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
     }
 
     @Test
@@ -148,14 +145,14 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
             .map(permission -> permission.get("name").toString())
             .toList();
 
-        assertThat(rolesWithPermissions, is(List.of("ctsc", "ctsc-team-leader")));
-        assertThat(rolesWithPermissions, not(hasItems(
+        assertThat(rolesWithPermissions).isEqualTo(List.of("ctsc", "ctsc-team-leader"));
+        assertThat(rolesWithPermissions).doesNotContain(
             "ctsc-admin",
             "hearing-centre-admin",
             "hearing-centre-team-leader",
             "judge",
             "tribunal-caseworker",
             "task-supervisor"
-        )));
+        );
     }
 }

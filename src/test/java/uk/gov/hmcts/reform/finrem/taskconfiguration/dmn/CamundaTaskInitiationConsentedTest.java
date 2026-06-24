@@ -15,9 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -33,13 +31,13 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("postEventState", "");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(2));
+        assertThat(logic.getRules()).hasSize(2);
     }
 
     @Test
@@ -51,18 +49,18 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
-        assertThat(results.size(), is(1));
+        assertThat(results).hasSize(1);
         Map<String, Object> result = results.get(0);
-        assertThat(result.get("taskId"), is("processScannedDocuments"));
-        assertThat(result.get("name"), is("Process Scanned Documents"));
-        assertThat(result.get("delayDuration"), is(0));
-        assertThat(result.get("processCategories"), is("CHANGE_LATER_PROCESS_CATEGORIES"));
+        assertThat(result.get("taskId")).isEqualTo("processScannedDocuments");
+        assertThat(result.get("name")).isEqualTo("Process Scanned Documents");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
 
         // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
-        assertThat(delayUntil.get("delayUntilIntervalDays"), is("0"));
-        assertThat(delayUntil.get("delayUntil"), is(notNullValue()));
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
     }
 
     @Test
@@ -73,7 +71,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList().size(), is(1));
+        assertThat(dmnDecisionTableResult.getResultList()).hasSize(1);
     }
 
     @Test
@@ -84,7 +82,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "Yes")));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
@@ -95,7 +93,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
@@ -105,9 +103,9 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("postEventState", "");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
-    
+
     private static Map<String, Object> additionalDataWithPensionDocuments(int numberOfDocuments) {
         List<Map<String, Object>> pensionCollection = IntStream.range(0, numberOfDocuments)
             .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))
@@ -126,17 +124,17 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
-        assertThat(results.size(), is(1));
+        assertThat(results).hasSize(1);
         Map<String, Object> result = results.get(0);
-        assertThat(result.get("taskId"), is("processApprovedOrder"));
-        assertThat(result.get("name"), is("Process Approved Order"));
-        assertThat(result.get("delayDuration"), is(0));
-        assertThat(result.get("processCategories"), is("CHANGE_LATER_PROCESS_CATEGORIES"));
+        assertThat(result.get("taskId")).isEqualTo("processApprovedOrder");
+        assertThat(result.get("name")).isEqualTo("Process Approved Order");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
 
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
-        assertThat(delayUntil.get("delayUntilIntervalDays"), is("0"));
-        assertThat(delayUntil.get("delayUntil"), is(notNullValue()));
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
     }
 
     @ParameterizedTest
@@ -148,7 +146,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("additionalData", additionalDataWithPensionDocuments(0));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @ParameterizedTest
@@ -159,7 +157,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("postEventState", "consentOrderApproved");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
@@ -170,6 +168,6 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("additionalData", additionalDataWithPensionDocuments(1));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 }
