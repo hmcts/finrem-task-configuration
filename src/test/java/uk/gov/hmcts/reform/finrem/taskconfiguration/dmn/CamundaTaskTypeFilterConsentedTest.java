@@ -12,8 +12,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -25,21 +24,21 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void checkDmnChanged() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getInputs().size(), is(1));
-        assertThat(logic.getOutputs().size(), is(2));
-        assertThat(logic.getRules().size(), is(4));
+        assertThat(logic.getInputs()).hasSize(1);
+        assertThat(logic.getOutputs()).hasSize(2);
+        assertThat(logic.getRules()).hasSize(4);
     }
 
     @Test
-    void givenNoInputShouldReturnAllRegisteredTaskTypes() {
+    void givenNoInputShouldReturnProcessScannedDocumentsTaskType() {
         VariableMap inputVariables = new VariableMapImpl();
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskTypeId", "processScannedDocuments", "taskTypeName", "Process Scanned Documents"),
             Map.of("taskTypeId", "processApprovedOrder", "taskTypeName", "Process Approved Order"),
             Map.of("taskTypeId", "checkHelpWithFees", "taskTypeName", "Check Help With Fees"),
             Map.of("taskTypeId", "reviewRefusedOrder", "taskTypeName", "Review Refused Order")
-        )));
+        ));
     }
 }

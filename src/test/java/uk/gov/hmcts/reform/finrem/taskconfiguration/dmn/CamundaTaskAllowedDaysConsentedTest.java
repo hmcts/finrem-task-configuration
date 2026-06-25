@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskAllowedDaysConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -27,12 +24,12 @@ class CamundaTaskAllowedDaysConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("taskId", "unknownTaskId");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules()).isEmpty();
     }
 }

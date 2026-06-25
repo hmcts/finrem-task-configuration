@@ -12,8 +12,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -28,13 +27,13 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "unknownEvent");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(6));
+        assertThat(logic.getRules()).hasSize(6);
     }
 
     @Test
@@ -43,9 +42,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "attachScannedDocs");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "processScannedDocuments", "completionMode", "Auto")
-        )));
+        ));
     }
 
     @Test
@@ -54,9 +53,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_amendedConsentOrder");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "processApprovedOrder", "completionMode", "Auto")
-        )));
+        ));
     }
 
     @Test
@@ -65,9 +64,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_HWFDecisionMade");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
-        )));
+        ));
     }
 
     @Test
@@ -76,9 +75,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_paymentMadeFromHWF");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
-        )));
+        ));
     }
 
     @Test
@@ -87,9 +86,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_awaitingPaymentResponseFromHWF");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
-        )));
+        ));
     }
 
     @Test
@@ -98,8 +97,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_listForHearing");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of(
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "reviewRefusedOrder", "completionMode", "Auto")
-        )));
+        ));
     }
 }

@@ -20,1363 +20,547 @@ null</text>
       <output id="Output_1" label="Name" name="name" typeRef="string" />
       <output id="Output_2" label="Value" name="value" typeRef="string" />
       <output id="Output_3" label="Can Reconfigure?" name="canReconfigure" typeRef="boolean" />
-      <rule id="Rule_config_1">
-        <inputEntry id="InputEntry_config_1_1">
+      <rule id="Rule_config_roleCategory">
+        <inputEntry id="Rule_config_roleCategory_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_1_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_roleCategory_in2">
+          <text>"processScannedDocuments","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_1_1">
-          <text>"workType"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_1_2">
-          <text>"evidence"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_1_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_2">
-        <inputEntry id="InputEntry_config_2_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_2_2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_2_1">
+        <outputEntry id="Rule_config_roleCategory_out1">
           <text>"roleCategory"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_2_2">
+        <outputEntry id="Rule_config_roleCategory_out2">
           <text>"CTSC"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_2_3">
+        <outputEntry id="Rule_config_roleCategory_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_3">
-        <inputEntry id="InputEntry_config_3_1">
+      <rule id="Rule_config_generic_2">
+        <inputEntry id="Rule_config_generic_2_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_3_2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_3_1">
-          <text>"description"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_3_2">
-          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_3_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_4">
-        <inputEntry id="InputEntry_config_4_1">
+        <inputEntry id="Rule_config_generic_2_in2">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_4_2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_4_1">
-          <text>"title"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_4_2">
-          <text>"Process Scanned Documents"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_4_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_5">
-        <inputEntry id="InputEntry_config_5_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_5_2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_5_1">
+        <outputEntry id="Rule_config_generic_2_out1">
           <text>"calculatedDates"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_5_2">
+        <outputEntry id="Rule_config_generic_2_out2">
           <text>"nextHearingDate,dueDate,priorityDate"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_5_3">
+        <outputEntry id="Rule_config_generic_2_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_6">
-        <inputEntry id="InputEntry_config_6_1">
+      <rule id="Rule_config_generic_3">
+        <inputEntry id="Rule_config_generic_3_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_6_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_3_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_6_1">
+        <outputEntry id="Rule_config_generic_3_out1">
           <text>"priorityDateOriginRef"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_6_2">
+        <outputEntry id="Rule_config_generic_3_out2">
           <text>"nextHearingDate,dueDate"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_6_3">
+        <outputEntry id="Rule_config_generic_3_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_7">
-        <inputEntry id="InputEntry_config_7_1">
+      <rule id="Rule_config_generic_4">
+        <inputEntry id="Rule_config_generic_4_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_7_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_4_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_7_1">
+        <outputEntry id="Rule_config_generic_4_out1">
           <text>"nextHearingDate"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_7_2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings) > 0) then caseData.listForHearings[1].value.hearingDate else ""</text>
+        <outputEntry id="Rule_config_generic_4_out2">
+          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then caseData.listForHearings[date(value.hearingDate) &gt;= today()][1].value.hearingDate else ""</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_7_3">
+        <outputEntry id="Rule_config_generic_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_8">
-        <inputEntry id="InputEntry_config_8_1">
+      <rule id="Rule_config_generic_5">
+        <inputEntry id="Rule_config_generic_5_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_8_2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_8_1">
-          <text>"dueDateIntervalDays"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_8_2">
-          <text>5</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_8_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_9">
-        <inputEntry id="InputEntry_config_9_1">
+        <inputEntry id="Rule_config_generic_5_in2">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_9_2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_9_1">
-          <text>"dueDateNonWorkingCalendar"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_9_2">
-          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_9_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_10">
-        <inputEntry id="InputEntry_config_10_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_10_2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_10_1">
+        <outputEntry id="Rule_config_generic_5_out1">
           <text>"dueDateNonWorkingDaysOfWeek"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_10_2">
+        <outputEntry id="Rule_config_generic_5_out2">
           <text>"SATURDAY,SUNDAY"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_10_3">
+        <outputEntry id="Rule_config_generic_5_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_11">
-        <inputEntry id="InputEntry_config_11_1">
+      <rule id="Rule_config_generic_6">
+        <inputEntry id="Rule_config_generic_6_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_11_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_6_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_11_1">
+        <outputEntry id="Rule_config_generic_6_out1">
           <text>"dueDateSkipNonWorkingDays"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_11_2">
+        <outputEntry id="Rule_config_generic_6_out2">
           <text>true</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_11_3">
+        <outputEntry id="Rule_config_generic_6_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_12">
-        <inputEntry id="InputEntry_config_12_1">
+      <rule id="Rule_config_generic_7">
+        <inputEntry id="Rule_config_generic_7_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_12_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_7_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_12_1">
+        <outputEntry id="Rule_config_generic_7_out1">
           <text>"dueDateMustBeWorkingDay"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_12_2">
+        <outputEntry id="Rule_config_generic_7_out2">
           <text>"No"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_12_3">
+        <outputEntry id="Rule_config_generic_7_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_12a">
-        <inputEntry id="InputEntry_config_12a_1">
+      <rule id="Rule_config_generic_8">
+        <inputEntry id="Rule_config_generic_8_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_12a_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_8_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_12a_1">
+        <outputEntry id="Rule_config_generic_8_out1">
           <text>"dueDateOrigin"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_12a_2">
+        <outputEntry id="Rule_config_generic_8_out2">
           <text>now()</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_12a_3">
+        <outputEntry id="Rule_config_generic_8_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_12b">
-        <inputEntry id="InputEntry_config_12b_1">
+      <rule id="Rule_config_generic_9">
+        <inputEntry id="Rule_config_generic_9_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_12b_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_9_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_12b_1">
+        <outputEntry id="Rule_config_generic_9_out1">
           <text>"dueDateTime"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_12b_2">
+        <outputEntry id="Rule_config_generic_9_out2">
           <text>time("14:00")</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_12b_3">
+        <outputEntry id="Rule_config_generic_9_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_13">
-        <inputEntry id="InputEntry_config_13_1">
+      <rule id="Rule_config_generic_10">
+        <inputEntry id="Rule_config_generic_10_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_13_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_10_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_13_1">
+        <outputEntry id="Rule_config_generic_10_out1">
           <text>"majorPriority"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_13_2">
+        <outputEntry id="Rule_config_generic_10_out2">
           <text>5000</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_13_3">
+        <outputEntry id="Rule_config_generic_10_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_14">
-        <inputEntry id="InputEntry_config_14_1">
+      <rule id="Rule_config_generic_11">
+        <inputEntry id="Rule_config_generic_11_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_14_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_11_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_14_1">
+        <outputEntry id="Rule_config_generic_11_out1">
           <text>"minorPriority"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_14_2">
+        <outputEntry id="Rule_config_generic_11_out2">
           <text>500</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_14_3">
+        <outputEntry id="Rule_config_generic_11_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_15">
-        <inputEntry id="InputEntry_config_15_1">
+      <rule id="Rule_config_generic_12">
+        <inputEntry id="Rule_config_generic_12_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_15_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_12_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_15_1">
+        <outputEntry id="Rule_config_generic_12_out1">
           <text>"caseName"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_15_2">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
+        <outputEntry id="Rule_config_generic_12_out2">
+          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else "Financial Remedy"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_15_3">
+        <outputEntry id="Rule_config_generic_12_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_16">
-        <inputEntry id="InputEntry_config_16_1">
+      <rule id="Rule_config_generic_13">
+        <inputEntry id="Rule_config_generic_13_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_16_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_13_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_16_1">
+        <outputEntry id="Rule_config_generic_13_out1">
           <text>"region"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_16_2">
+        <outputEntry id="Rule_config_generic_13_out2">
           <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_16_3">
+        <outputEntry id="Rule_config_generic_13_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_17">
-        <inputEntry id="InputEntry_config_17_1">
+      <rule id="Rule_config_generic_14">
+        <inputEntry id="Rule_config_generic_14_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_17_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_14_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_17_1">
+        <outputEntry id="Rule_config_generic_14_out1">
           <text>"location"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_17_2">
+        <outputEntry id="Rule_config_generic_14_out2">
           <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_17_3">
+        <outputEntry id="Rule_config_generic_14_out3">
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_18">
-        <inputEntry id="InputEntry_config_18_1">
+      <rule id="Rule_config_generic_15">
+        <inputEntry id="Rule_config_generic_15_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_18_2">
-          <text>"processScannedDocuments"</text>
+        <inputEntry id="Rule_config_generic_15_in2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_18_1">
+        <outputEntry id="Rule_config_generic_15_out1">
           <text>"caseManagementCategory"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_18_2">
+        <outputEntry id="Rule_config_generic_15_out2">
           <text>"FR Consented"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_18_3">
+        <outputEntry id="Rule_config_generic_15_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_dueDateIntervalDays">
+        <inputEntry id="Rule_config_dueDateIntervalDays_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_dueDateIntervalDays_in2">
+          <text>"processScannedDocuments","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_dueDateIntervalDays_out1">
+          <text>"dueDateIntervalDays"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_dueDateIntervalDays_out2">
+          <text>5</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_dueDateIntervalDays_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_psd_1">
+        <inputEntry id="Rule_config_psd_1_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_psd_1_in2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_psd_1_out1">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_1_out2">
+          <text>"evidence"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_1_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_psd_2">
+        <inputEntry id="Rule_config_psd_2_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_psd_2_in2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_psd_2_out1">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_2_out2">
+          <text>"Process Scanned Documents"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_2_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_psd_3">
+        <inputEntry id="Rule_config_psd_3_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_psd_3_in2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_psd_3_out1">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_3_out2">
+          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_3_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_psd_4">
+        <inputEntry id="Rule_config_psd_4_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_psd_4_in2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_psd_4_out1">
+          <text>"dueDateNonWorkingCalendar"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_4_out2">
+          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_psd_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_pao_1">
-        <inputEntry id="InputEntry_config_pao_1_1">
+        <inputEntry id="Rule_config_pao_1_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_pao_1_2">
+        <inputEntry id="Rule_config_pao_1_in2">
           <text>"processApprovedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_1_1">
+        <outputEntry id="Rule_config_pao_1_out1">
           <text>"workType"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_1_2">
+        <outputEntry id="Rule_config_pao_1_out2">
           <text>"routine_work"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_1_3">
+        <outputEntry id="Rule_config_pao_1_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_pao_2">
-        <inputEntry id="InputEntry_config_pao_2_1">
+        <inputEntry id="Rule_config_pao_2_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_pao_2_2">
+        <inputEntry id="Rule_config_pao_2_in2">
           <text>"processApprovedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_2_1">
-          <text>"roleCategory"</text>
+        <outputEntry id="Rule_config_pao_2_out1">
+          <text>"title"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_2_2">
-          <text>"CTSC"</text>
+        <outputEntry id="Rule_config_pao_2_out2">
+          <text>"Process Approved Order"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_2_3">
+        <outputEntry id="Rule_config_pao_2_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_pao_3">
-        <inputEntry id="InputEntry_config_pao_3_1">
+        <inputEntry id="Rule_config_pao_3_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_pao_3_2">
+        <inputEntry id="Rule_config_pao_3_in2">
           <text>"processApprovedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_3_1">
+        <outputEntry id="Rule_config_pao_3_out1">
           <text>"description"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_3_2">
+        <outputEntry id="Rule_config_pao_3_out2">
           <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_3_3">
+        <outputEntry id="Rule_config_pao_3_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_pao_4">
-        <inputEntry id="InputEntry_config_pao_4_1">
+        <inputEntry id="Rule_config_pao_4_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_pao_4_2">
+        <inputEntry id="Rule_config_pao_4_in2">
           <text>"processApprovedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_4_1">
-          <text>"title"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_4_2">
-          <text>"Process Approved Order"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_4_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_5">
-        <inputEntry id="InputEntry_config_pao_5_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_5_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_5_1">
-          <text>"calculatedDates"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_5_2">
-          <text>"nextHearingDate,dueDate,priorityDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_5_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_6">
-        <inputEntry id="InputEntry_config_pao_6_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_6_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_6_1">
-          <text>"priorityDateOriginRef"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_6_2">
-          <text>"nextHearingDate,dueDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_6_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_7">
-        <inputEntry id="InputEntry_config_pao_7_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_7_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_7_1">
-          <text>"nextHearingDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_7_2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings) &gt; 0) then caseData.listForHearings[1].value.hearingDate else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_7_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_8">
-        <inputEntry id="InputEntry_config_pao_8_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_8_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_8_1">
-          <text>"dueDateIntervalDays"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_8_2">
-          <text>5</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_8_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_9">
-        <inputEntry id="InputEntry_config_pao_9_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_9_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_9_1">
+        <outputEntry id="Rule_config_pao_4_out1">
           <text>"dueDateNonWorkingCalendar"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_9_2">
-          <text>"https://raw.githubusercontent.com/hmcts/finrem-task-configuration/master/src/main/resources/finrem-specific-holidays.json,https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+        <outputEntry id="Rule_config_pao_4_out2">
+          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_9_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_10">
-        <inputEntry id="InputEntry_config_pao_10_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_10_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_10_1">
-          <text>"dueDateNonWorkingDaysOfWeek"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_10_2">
-          <text>"SATURDAY,SUNDAY"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_10_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_11">
-        <inputEntry id="InputEntry_config_pao_11_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_11_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_11_1">
-          <text>"dueDateSkipNonWorkingDays"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_11_2">
-          <text>true</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_11_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_12">
-        <inputEntry id="InputEntry_config_pao_12_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_12_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_12_1">
-          <text>"dueDateMustBeWorkingDay"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_12_2">
-          <text>"No"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_12_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_13">
-        <inputEntry id="InputEntry_config_pao_13_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_13_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_13_1">
-          <text>"dueDateOrigin"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_13_2">
-          <text>now()</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_13_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_14">
-        <inputEntry id="InputEntry_config_pao_14_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_14_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_14_1">
-          <text>"dueDateTime"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_14_2">
-          <text>time("14:00")</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_14_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_15">
-        <inputEntry id="InputEntry_config_pao_15_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_15_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_15_1">
-          <text>"majorPriority"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_15_2">
-          <text>5000</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_15_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_16">
-        <inputEntry id="InputEntry_config_pao_16_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_16_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_16_1">
-          <text>"minorPriority"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_16_2">
-          <text>500</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_16_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_17">
-        <inputEntry id="InputEntry_config_pao_17_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_17_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_17_1">
-          <text>"caseName"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_17_2">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_17_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_18">
-        <inputEntry id="InputEntry_config_pao_18_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_18_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_18_1">
-          <text>"region"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_18_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_18_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_19">
-        <inputEntry id="InputEntry_config_pao_19_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_19_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_19_1">
-          <text>"location"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_19_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_19_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_20">
-        <inputEntry id="InputEntry_config_pao_20_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_pao_20_2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_pao_20_1">
-          <text>"caseManagementCategory"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_20_2">
-          <text>"FR Consented"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_pao_20_3">
+        <outputEntry id="Rule_config_pao_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_1">
-        <inputEntry id="InputEntry_config_hwf_1_1">
+        <inputEntry id="Rule_config_hwf_1_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_1_2">
+        <inputEntry id="Rule_config_hwf_1_in2">
           <text>"checkHelpWithFees"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_1_1">
+        <outputEntry id="Rule_config_hwf_1_out1">
           <text>"workType"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_1_2">
+        <outputEntry id="Rule_config_hwf_1_out2">
           <text>"applications"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_1_3">
+        <outputEntry id="Rule_config_hwf_1_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_2">
-        <inputEntry id="InputEntry_config_hwf_2_1">
+        <inputEntry id="Rule_config_hwf_2_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_2_2">
+        <inputEntry id="Rule_config_hwf_2_in2">
           <text>"checkHelpWithFees"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_2_1">
-          <text>"roleCategory"</text>
+        <outputEntry id="Rule_config_hwf_2_out1">
+          <text>"title"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_2_2">
-          <text>"CTSC"</text>
+        <outputEntry id="Rule_config_hwf_2_out2">
+          <text>"Check Help With Fees"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_2_3">
+        <outputEntry id="Rule_config_hwf_2_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_3">
-        <inputEntry id="InputEntry_config_hwf_3_1">
+        <inputEntry id="Rule_config_hwf_3_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_3_2">
+        <inputEntry id="Rule_config_hwf_3_in2">
           <text>"checkHelpWithFees"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_3_1">
+        <outputEntry id="Rule_config_hwf_3_out1">
           <text>"description"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_3_2">
+        <outputEntry id="Rule_config_hwf_3_out2">
           <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_3_3">
+        <outputEntry id="Rule_config_hwf_3_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_4">
-        <inputEntry id="InputEntry_config_hwf_4_1">
+        <inputEntry id="Rule_config_hwf_4_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_4_2">
+        <inputEntry id="Rule_config_hwf_4_in2">
           <text>"checkHelpWithFees"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_4_1">
-          <text>"title"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_4_2">
-          <text>"Check Help With Fees"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_4_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_5">
-        <inputEntry id="InputEntry_config_hwf_5_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_5_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_5_1">
-          <text>"calculatedDates"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_5_2">
-          <text>"nextHearingDate,dueDate,priorityDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_5_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_6">
-        <inputEntry id="InputEntry_config_hwf_6_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_6_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_6_1">
-          <text>"priorityDateOriginRef"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_6_2">
-          <text>"nextHearingDate,dueDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_6_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_7">
-        <inputEntry id="InputEntry_config_hwf_7_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_7_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_7_1">
-          <text>"nextHearingDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_7_2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings) &gt; 0) then caseData.listForHearings[1].value.hearingDate else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_7_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_8">
-        <inputEntry id="InputEntry_config_hwf_8_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_8_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_8_1">
-          <text>"dueDateIntervalDays"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_8_2">
-          <text>5</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_8_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_9">
-        <inputEntry id="InputEntry_config_hwf_9_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_9_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_9_1">
+        <outputEntry id="Rule_config_hwf_4_out1">
           <text>"dueDateNonWorkingCalendar"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_9_2">
+        <outputEntry id="Rule_config_hwf_4_out2">
           <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_9_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_10">
-        <inputEntry id="InputEntry_config_hwf_10_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_10_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_10_1">
-          <text>"dueDateNonWorkingDaysOfWeek"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_10_2">
-          <text>"SATURDAY,SUNDAY"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_10_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_11">
-        <inputEntry id="InputEntry_config_hwf_11_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_11_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_11_1">
-          <text>"dueDateSkipNonWorkingDays"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_11_2">
-          <text>true</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_11_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_12">
-        <inputEntry id="InputEntry_config_hwf_12_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_12_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12_1">
-          <text>"dueDateMustBeWorkingDay"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12_2">
-          <text>"No"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_12a">
-        <inputEntry id="InputEntry_config_hwf_12a_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_12a_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12a_1">
-          <text>"dueDateOrigin"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12a_2">
-          <text>now()</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12a_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_12b">
-        <inputEntry id="InputEntry_config_hwf_12b_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_12b_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12b_1">
-          <text>"dueDateTime"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12b_2">
-          <text>time("14:00")</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_12b_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_13">
-        <inputEntry id="InputEntry_config_hwf_13_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_13_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_13_1">
-          <text>"majorPriority"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_13_2">
-          <text>5000</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_13_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_14">
-        <inputEntry id="InputEntry_config_hwf_14_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_14_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_14_1">
-          <text>"minorPriority"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_14_2">
-          <text>500</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_14_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_15">
-        <inputEntry id="InputEntry_config_hwf_15_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_15_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_15_1">
-          <text>"caseName"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_15_2">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_15_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_16">
-        <inputEntry id="InputEntry_config_hwf_16_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_16_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_16_1">
-          <text>"region"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_16_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_16_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_17">
-        <inputEntry id="InputEntry_config_hwf_17_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_17_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_17_1">
-          <text>"location"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_17_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_17_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_18">
-        <inputEntry id="InputEntry_config_hwf_18_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_hwf_18_2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_hwf_18_1">
-          <text>"caseManagementCategory"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_18_2">
-          <text>"FR Consented"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_hwf_18_3">
+        <outputEntry id="Rule_config_hwf_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_rro_1">
-        <inputEntry id="InputEntry_config_rro_1_1">
+        <inputEntry id="Rule_config_rro_1_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_rro_1_2">
+        <inputEntry id="Rule_config_rro_1_in2">
           <text>"reviewRefusedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_1_1">
+        <outputEntry id="Rule_config_rro_1_out1">
           <text>"workType"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_1_2">
+        <outputEntry id="Rule_config_rro_1_out2">
           <text>"hearing_work"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_1_3">
+        <outputEntry id="Rule_config_rro_1_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_rro_2">
-        <inputEntry id="InputEntry_config_rro_2_1">
+        <inputEntry id="Rule_config_rro_2_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_rro_2_2">
+        <inputEntry id="Rule_config_rro_2_in2">
           <text>"reviewRefusedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_2_1">
-          <text>"roleCategory"</text>
+        <outputEntry id="Rule_config_rro_2_out1">
+          <text>"title"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_2_2">
-          <text>"CTSC"</text>
+        <outputEntry id="Rule_config_rro_2_out2">
+          <text>"Review Refused Order"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_2_3">
+        <outputEntry id="Rule_config_rro_2_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_rro_3">
-        <inputEntry id="InputEntry_config_rro_3_1">
+        <inputEntry id="Rule_config_rro_3_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_rro_3_2">
+        <inputEntry id="Rule_config_rro_3_in2">
           <text>"reviewRefusedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_3_1">
+        <outputEntry id="Rule_config_rro_3_out1">
           <text>"description"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_3_2">
+        <outputEntry id="Rule_config_rro_3_out2">
           <text>"[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_3_3">
+        <outputEntry id="Rule_config_rro_3_out3">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_rro_4">
-        <inputEntry id="InputEntry_config_rro_4_1">
+        <inputEntry id="Rule_config_rro_4_in1">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_config_rro_4_2">
+        <inputEntry id="Rule_config_rro_4_in2">
           <text>"reviewRefusedOrder"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_4_1">
-          <text>"title"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_4_2">
-          <text>"Review Refused Order"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_4_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_5">
-        <inputEntry id="InputEntry_config_rro_5_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_5_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_5_1">
-          <text>"calculatedDates"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_5_2">
-          <text>"nextHearingDate,dueDate,priorityDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_5_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_6">
-        <inputEntry id="InputEntry_config_rro_6_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_6_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_6_1">
-          <text>"priorityDateOriginRef"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_6_2">
-          <text>"nextHearingDate,dueDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_6_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_7">
-        <inputEntry id="InputEntry_config_rro_7_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_7_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_7_1">
-          <text>"nextHearingDate"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_7_2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings) &gt; 0) then caseData.listForHearings[1].value.hearingDate else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_7_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_8">
-        <inputEntry id="InputEntry_config_rro_8_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_8_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_8_1">
-          <text>"dueDateIntervalDays"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_8_2">
-          <text>5</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_8_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_9">
-        <inputEntry id="InputEntry_config_rro_9_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_9_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_9_1">
+        <outputEntry id="Rule_config_rro_4_out1">
           <text>"dueDateNonWorkingCalendar"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_9_2">
+        <outputEntry id="Rule_config_rro_4_out2">
           <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_9_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_10">
-        <inputEntry id="InputEntry_config_rro_10_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_10_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_10_1">
-          <text>"dueDateNonWorkingDaysOfWeek"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_10_2">
-          <text>"SATURDAY,SUNDAY"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_10_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_11">
-        <inputEntry id="InputEntry_config_rro_11_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_11_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_11_1">
-          <text>"dueDateSkipNonWorkingDays"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_11_2">
-          <text>true</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_11_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_12">
-        <inputEntry id="InputEntry_config_rro_12_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_12_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_12_1">
-          <text>"dueDateMustBeWorkingDay"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_12_2">
-          <text>"No"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_12_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_12a">
-        <inputEntry id="InputEntry_config_rro_12a_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_12a_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_12a_1">
-          <text>"dueDateOrigin"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_12a_2">
-          <text>now()</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_12a_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_12b">
-        <inputEntry id="InputEntry_config_rro_12b_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_12b_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_12b_1">
-          <text>"dueDateTime"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_12b_2">
-          <text>time("14:00")</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_12b_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_13">
-        <inputEntry id="InputEntry_config_rro_13_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_13_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_13_1">
-          <text>"majorPriority"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_13_2">
-          <text>5000</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_13_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_14">
-        <inputEntry id="InputEntry_config_rro_14_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_14_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_14_1">
-          <text>"minorPriority"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_14_2">
-          <text>500</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_14_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_15">
-        <inputEntry id="InputEntry_config_rro_15_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_15_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_15_1">
-          <text>"caseName"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_15_2">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_15_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_16">
-        <inputEntry id="InputEntry_config_rro_16_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_16_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_16_1">
-          <text>"region"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_16_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_16_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_17">
-        <inputEntry id="InputEntry_config_rro_17_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_17_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_17_1">
-          <text>"location"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_17_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_17_3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_rro_18">
-        <inputEntry id="InputEntry_config_rro_18_1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_config_rro_18_2">
-          <text>"reviewRefusedOrder"</text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_config_rro_18_1">
-          <text>"caseManagementCategory"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_18_2">
-          <text>"FR Consented"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_config_rro_18_3">
+        <outputEntry id="Rule_config_rro_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>

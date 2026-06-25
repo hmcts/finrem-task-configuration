@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Cross-DMN consistency tests. Each test loads two DMN files and asserts
@@ -28,16 +26,17 @@ class CamundaTaskTypeConsistencyTest {
         Set<String> registeredTypes = DmnXmlHelper.extractOutputColumn(TYPES_DMN, "taskTypeId");
         Set<String> initiatedIds    = DmnXmlHelper.extractOutputColumn(INITIATION_DMN, "taskId");
 
-        assertFalse(registeredTypes.isEmpty(), "Task types DMN must have entries");
-        assertFalse(initiatedIds.isEmpty(),    "Initiation DMN must produce at least one task");
+        assertThat(registeredTypes).as("Task types DMN must have entries").isNotEmpty();
+        assertThat(initiatedIds).as("Initiation DMN must produce at least one task").isNotEmpty();
 
         List<String> unregistered = initiatedIds.stream()
             .filter(id -> !registeredTypes.contains(id))
             .sorted()
             .toList();
 
-        assertThat("Task IDs in initiation DMN not registered in task types DMN: " + unregistered,
-            unregistered, is(List.of()));
+        assertThat(unregistered)
+            .as("Task IDs in initiation DMN not registered in task types DMN: " + unregistered)
+            .isEmpty();
     }
 
     @Test
@@ -54,8 +53,9 @@ class CamundaTaskTypeConsistencyTest {
             .sorted()
             .toList();
 
-        assertThat("Task display names differ between initiation DMN and types DMN: " + mismatches,
-            mismatches, is(List.of()));
+        assertThat(mismatches)
+            .as("Task display names differ between initiation DMN and types DMN: " + mismatches)
+            .isEmpty();
     }
 
     @Test
@@ -63,15 +63,16 @@ class CamundaTaskTypeConsistencyTest {
         Set<String> registeredTypes = DmnXmlHelper.extractOutputColumn(TYPES_DMN, "taskTypeId");
         Set<String> completedTypes  = DmnXmlHelper.extractOutputColumn(COMPLETION_DMN, "taskType");
 
-        assertFalse(completedTypes.isEmpty(), "Completion DMN must reference at least one task type");
+        assertThat(completedTypes).as("Completion DMN must reference at least one task type").isNotEmpty();
 
         List<String> unregistered = completedTypes.stream()
             .filter(id -> !registeredTypes.contains(id))
             .sorted()
             .toList();
 
-        assertThat("Task types in completion DMN not registered in task types DMN: " + unregistered,
-            unregistered, is(List.of()));
+        assertThat(unregistered)
+            .as("Task types in completion DMN not registered in task types DMN: " + unregistered)
+            .isEmpty();
     }
 
     @Test
@@ -84,7 +85,8 @@ class CamundaTaskTypeConsistencyTest {
             .sorted()
             .toList();
 
-        assertThat("Registered task types with no permission rules in permissions DMN: " + missing,
-            missing, is(List.of()));
+        assertThat(missing)
+            .as("Registered task types with no permission rules in permissions DMN: " + missing)
+            .isEmpty();
     }
 }
