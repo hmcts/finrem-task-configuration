@@ -133,7 +133,7 @@ null</text>
           <text>"nextHearingDate"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_7_2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) >= today()]) > 0) then caseData.listForHearings[date(value.hearingDate) >= today()][1].value.hearingDate else ""</text>
+          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) >= today()]) > 0) then sort(caseData.listForHearings[date(value.hearingDate) >= today()], function(x,y) date(y.value.hearingDate) > date(x.value.hearingDate))[1].value.hearingDate else ""</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_7_3">
           <text>true</text>
