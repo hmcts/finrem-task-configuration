@@ -136,8 +136,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void givenMultipleHearingsShouldReturnEarliestUpcomingHearingDate() {
         // Only hearings on or after today are considered (date(hearingDate) >= today()).
-        // finrem-cos stores the collection earliest-first and FEEL lists are 1-indexed, so
-        // [1] of the upcoming-only filter is the next hearing. A past hearing is skipped.
+        // The upcoming-only filter is sorted ascending by hearingDate before taking [1], so the
+        // earliest upcoming hearing is returned regardless of the collection's order. Here the
+        // input is already earliest-first and a past hearing is skipped.
         String pastHearing = LocalDate.now().minusDays(10).toString();
         String nextUpcomingHearing = LocalDate.now().plusDays(5).toString();
         String laterUpcomingHearing = LocalDate.now().plusDays(20).toString();
@@ -154,6 +155,165 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
 
         assertThat(valueOf(results, "nextHearingDate")).isEqualTo(nextUpcomingHearing);
+    }
+
+    @Test
+    void givenUpcomingHearingsInAscendingOrderShouldReturnEarliestUpcomingHearingDate() {
+        // Sorting is order-independent: when the upcoming hearings are already ascending, the
+        // sort is a no-op and the earliest (first) hearing is still returned.
+        String earliest = LocalDate.now().plusDays(3).toString();
+        String middle = LocalDate.now().plusDays(15).toString();
+        String latest = LocalDate.now().plusDays(40).toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", earliest)),
+                Map.of("value", Map.of("hearingDate", middle)),
+                Map.of("value", Map.of("hearingDate", latest))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(earliest);
+    }
+
+    @Test
+    void givenUpcomingHearingsPartiallySortedShouldReturnEarliestUpcomingHearingDate() {
+        // Half-sorted input: the earliest hearing is not first in the collection, so the sort
+        // must reorder the list before [1] to return the correct next hearing.
+        String earliest = LocalDate.now().plusDays(4).toString();
+        String middle = LocalDate.now().plusDays(12).toString();
+        String latest = LocalDate.now().plusDays(25).toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", middle)),
+                Map.of("value", Map.of("hearingDate", earliest)),
+                Map.of("value", Map.of("hearingDate", latest))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(earliest);
+    }
+
+    @Test
+    void givenUpcomingHearingsInDescendingOrderShouldReturnEarliestUpcomingHearingDate() {
+        // Worst case for an unsorted [1]: the collection is fully reversed (latest-first), so
+        // without the sort [1] would wrongly return the latest hearing. The sort guarantees the
+        // earliest upcoming hearing is returned.
+        String earliest = LocalDate.now().plusDays(2).toString();
+        String middle = LocalDate.now().plusDays(18).toString();
+        String latest = LocalDate.now().plusDays(50).toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", latest)),
+                Map.of("value", Map.of("hearingDate", middle)),
+                Map.of("value", Map.of("hearingDate", earliest))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(earliest);
+    }
+
+    @Test
+    void givenDuplicateEarliestUpcomingHearingsShouldReturnThatDate() {
+        // Tie case: two hearings share the earliest upcoming date. The sort comparator is strict
+        // (no swap on equal dates), so evaluation must not error and the shared earliest date is
+        // returned regardless of which duplicate the sort settles on first.
+        String earliest = LocalDate.now().plusDays(6).toString();
+        String later = LocalDate.now().plusDays(21).toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", later)),
+                Map.of("value", Map.of("hearingDate", earliest)),
+                Map.of("value", Map.of("hearingDate", earliest))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(earliest);
+    }
+
+    @Test
+    void givenMixedPastMissingAndUnsortedUpcomingHearingsShouldReturnEarliestUpcomingHearingDate() {
+        // Realistic messy collection: a past hearing, a hearing with no date yet, and upcoming
+        // hearings in no particular order. The filter must drop the past and dateless entries and
+        // the sort must order the survivors so the earliest upcoming hearing is returned.
+        String earliest = LocalDate.now().plusDays(8).toString();
+        String latest = LocalDate.now().plusDays(35).toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", latest)),
+                Map.of("value", Map.of("hearingDate", LocalDate.now().minusDays(9).toString())),
+                Map.of("value", Map.of()),
+                Map.of("value", Map.of("hearingDate", earliest))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(earliest);
+    }
+
+    @Test
+    void givenPastHearingsInterleavedBetweenUnsortedUpcomingShouldReturnEarliestUpcoming() {
+        // Filtering does not reorder: past hearings interleaved between out-of-order upcoming
+        // hearings are removed in place, leaving the upcoming ones still unsorted ([latest,
+        // earliest, middle]). The sort must then surface the earliest, which here sits in the
+        // middle of both the original and the filtered collection.
+        String earliest = LocalDate.now().plusDays(3).toString();
+        String middle = LocalDate.now().plusDays(16).toString();
+        String latest = LocalDate.now().plusDays(45).toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", latest)),
+                Map.of("value", Map.of("hearingDate", LocalDate.now().minusDays(12).toString())),
+                Map.of("value", Map.of("hearingDate", earliest)),
+                Map.of("value", Map.of("hearingDate", LocalDate.now().minusDays(2).toString())),
+                Map.of("value", Map.of("hearingDate", middle))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(earliest);
+    }
+
+    @Test
+    void givenTodayHearingListedLastAmongUpcomingShouldReturnToday() {
+        // Boundary + ordering combined: a hearing dated exactly today is the earliest qualifying
+        // hearing but appears last in the collection. The inclusive >= today() filter keeps it and
+        // the sort surfaces it ahead of the later upcoming hearings.
+        String today = LocalDate.now().toString();
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(
+                Map.of("value", Map.of("hearingDate", LocalDate.now().plusDays(14).toString())),
+                Map.of("value", Map.of("hearingDate", LocalDate.now().plusDays(2).toString())),
+                Map.of("value", Map.of("hearingDate", today))
+            )
+        ));
+        inputVariables.putValue("taskType", "processScannedDocuments");
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "nextHearingDate")).isEqualTo(today);
     }
 
     @Test
