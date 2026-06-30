@@ -26,7 +26,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(24);
+        assertThat(logic.getRules()).hasSize(23);
     }
 
     @Test
@@ -84,17 +84,17 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "location", "value", "366796", "canReconfigure", true),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
                 "canReconfigure", true),
-            // dueDateIntervalDays is shared by both tasks (one combined rule), emitted before
-            // the task-specific rows
+            // dueDateIntervalDays and dueDateNonWorkingCalendar are shared by both tasks
+            // (combined rules), emitted before the task-specific rows
             Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
+            Map.of("name", "dueDateNonWorkingCalendar", "value",
+                "https://www.gov.uk/bank-holidays/england-and-wales.json",
+                "canReconfigure", true),
             Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
             Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true),
             Map.of("name", "description", "value",
                 "[Attach scanned document]"
                     + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
-                "canReconfigure", true),
-            Map.of("name", "dueDateNonWorkingCalendar", "value",
-                "https://www.gov.uk/bank-holidays/england-and-wales.json",
                 "canReconfigure", true)
         );
 

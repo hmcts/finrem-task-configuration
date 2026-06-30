@@ -292,6 +292,23 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_config_dueDateNonWorkingCalendar">
+        <inputEntry id="Rule_config_dueDateNonWorkingCalendar_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_dueDateNonWorkingCalendar_in2">
+          <text>"processScannedDocuments","processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_dueDateNonWorkingCalendar_out1">
+          <text>"dueDateNonWorkingCalendar"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_dueDateNonWorkingCalendar_out2">
+          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_dueDateNonWorkingCalendar_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_config_psd_1">
         <inputEntry id="Rule_config_psd_1_in1">
           <text></text>
@@ -343,23 +360,6 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_psd_4">
-        <inputEntry id="Rule_config_psd_4_in1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="Rule_config_psd_4_in2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="Rule_config_psd_4_out1">
-          <text>"dueDateNonWorkingCalendar"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_psd_4_out2">
-          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_psd_4_out3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
       <rule id="Rule_config_pao_1">
         <inputEntry id="Rule_config_pao_1_in1">
           <text></text>
@@ -408,23 +408,6 @@ null</text>
           <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_pao_3_out3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_pao_4">
-        <inputEntry id="Rule_config_pao_4_in1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="Rule_config_pao_4_in2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="Rule_config_pao_4_out1">
-          <text>"dueDateNonWorkingCalendar"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_pao_4_out2">
-          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_pao_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>
