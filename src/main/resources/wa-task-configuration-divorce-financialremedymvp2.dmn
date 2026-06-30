@@ -292,6 +292,23 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_config_dueDateNonWorkingCalendar">
+        <inputEntry id="Rule_config_dueDateNonWorkingCalendar_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_dueDateNonWorkingCalendar_in2">
+          <text>"processScannedDocuments","processApprovedOrder","checkHelpWithFees"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_dueDateNonWorkingCalendar_out1">
+          <text>"dueDateNonWorkingCalendar"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_dueDateNonWorkingCalendar_out2">
+          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_dueDateNonWorkingCalendar_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_config_psd_1">
         <inputEntry id="Rule_config_psd_1_in1">
           <text></text>
@@ -340,23 +357,6 @@ null</text>
           <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_psd_3_out3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_psd_4">
-        <inputEntry id="Rule_config_psd_4_in1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="Rule_config_psd_4_in2">
-          <text>"processScannedDocuments"</text>
-        </inputEntry>
-        <outputEntry id="Rule_config_psd_4_out1">
-          <text>"dueDateNonWorkingCalendar"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_psd_4_out2">
-          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_psd_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>
@@ -411,23 +411,6 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_pao_4">
-        <inputEntry id="Rule_config_pao_4_in1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="Rule_config_pao_4_in2">
-          <text>"processApprovedOrder"</text>
-        </inputEntry>
-        <outputEntry id="Rule_config_pao_4_out1">
-          <text>"dueDateNonWorkingCalendar"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_pao_4_out2">
-          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_pao_4_out3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
       <rule id="Rule_config_hwf_1">
         <inputEntry id="Rule_config_hwf_1_in1">
           <text></text>
@@ -476,23 +459,6 @@ null</text>
           <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out3">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_config_hwf_4">
-        <inputEntry id="Rule_config_hwf_4_in1">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="Rule_config_hwf_4_in2">
-          <text>"checkHelpWithFees"</text>
-        </inputEntry>
-        <outputEntry id="Rule_config_hwf_4_out1">
-          <text>"dueDateNonWorkingCalendar"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_hwf_4_out2">
-          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_hwf_4_out3">
           <text>true</text>
         </outputEntry>
       </rule>
