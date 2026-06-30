@@ -151,6 +151,20 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
+    void givenTriggerEventWithAdditionalDataButNoPensionCollectionShouldNotCreateTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "consentOrderApproved");
+        // additionalData.Data is present but has no pensionCollection key, so the gate falls
+        // through its null-guard to 0 documents and no task is created
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("someOtherField", "value")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
     void givenTriggerEventWithNoAdditionalDataShouldNotCreateTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
@@ -160,10 +174,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
-    @Test
-    void givenApproveApplicationWithUnexpectedPostStateShouldNotCreateTask() {
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
+    void givenTriggerEventWithUnexpectedPostStateShouldNotCreateTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_approveApplication");
+        inputVariables.putValue("eventId", eventId);
         inputVariables.putValue("postEventState", "consentOrderMade");
         inputVariables.putValue("additionalData", additionalDataWithPensionDocuments(1));
 
