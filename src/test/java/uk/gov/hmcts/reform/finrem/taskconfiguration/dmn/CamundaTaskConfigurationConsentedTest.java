@@ -98,10 +98,10 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("roleCategory", "JUDICIAL"),
                 entry("description",
                       "[Approve Application](/cases/case-details/${[CASE_REFERENCE]}/trigger"
-                          + "/FR_approveApplication/FR_approveApplication1) "
-                          + "or [Upload Approved Order](/cases/case-details/${[CASE_REFERENCE]}/trigger"
-                          + "/FR_uploadApprovedOrder/FR_uploadApprovedOrder1) "
-                          + "or [Application Not Approved]"
+                          + "/FR_approveApplication/FR_approveApplication1)"
+                          + "<br>[Upload Approved Order](/cases/case-details/${[CASE_REFERENCE]}/trigger"
+                          + "/FR_uploadApprovedOrder/FR_uploadApprovedOrder1)"
+                          + "<br>[Application Not Approved]"
                           + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_orderRefusal/FR_orderRefusal1)"),
                 entry("title", "Review Application"),
                 entry("dueDateIntervalDays", "10"),
