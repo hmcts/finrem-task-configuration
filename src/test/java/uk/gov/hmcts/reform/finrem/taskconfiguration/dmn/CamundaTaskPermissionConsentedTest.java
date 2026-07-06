@@ -34,7 +34,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(1);
+        assertThat(logic.getRules()).hasSize(2);
     }
 
     @Test
@@ -48,6 +48,14 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
             Map.of(
                 "name", "leadership-judge",
                 "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign",
+                "roleCategory", "JUDICIAL",
+                "authorisations", "410",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "judge",
+                "value", "Read,CancelOwn, CompleteOwn,Claim,Unclaim,Execute",
                 "roleCategory", "JUDICIAL",
                 "authorisations", "410",
                 "assignmentPriority", 1,

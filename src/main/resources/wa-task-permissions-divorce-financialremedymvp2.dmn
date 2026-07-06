@@ -57,6 +57,35 @@
           <text>false</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_1gngato">
+        <inputEntry id="UnaryTests_1kub3cu">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hwicff">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_120j0sg">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0id5tgr">
+          <text>"judge"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1n2gc09">
+          <text>"Read,CancelOwn, CompleteOwn,Claim,Unclaim,Execute"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0acykt2">
+          <text>"JUDICIAL"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1k1xr6u">
+          <text>410</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1wnvsys">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rtlz7m">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
