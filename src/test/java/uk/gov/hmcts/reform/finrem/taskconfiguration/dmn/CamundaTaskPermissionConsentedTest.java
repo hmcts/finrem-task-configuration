@@ -10,9 +10,9 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
 import java.util.List;
+import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -24,15 +24,64 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void givenUnknownTaskTypeShouldReturnEmptyPermissions() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("taskAttributes", java.util.Map.of("taskType", "unknownTaskType"));
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "unknownTaskType"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getRules()).hasSize(2);
+    }
+
+    @Test
+    void givenProcessScannedDocumentsTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenProcessScannedDocumentsTaskTypeShouldNotReturnPermissionsForOtherRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        List<String> rolesWithPermissions = dmnDecisionTableResult.getResultList().stream()
+            .map(permission -> permission.get("name").toString())
+            .toList();
+
+        assertThat(rolesWithPermissions).isEqualTo(List.of("ctsc", "ctsc-team-leader"));
+        assertThat(rolesWithPermissions).doesNotContain(
+            "ctsc-admin",
+            "hearing-centre-admin",
+            "hearing-centre-team-leader",
+            "judge",
+            "tribunal-caseworker",
+            "task-supervisor"
+        );
     }
 }

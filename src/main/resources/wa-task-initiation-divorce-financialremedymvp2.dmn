@@ -12,12 +12,45 @@
           <text></text>
         </inputExpression>
       </input>
+      <input id="Input_3" label="Supplementary evidence handled" camunda:inputVariable="evidenceHandled">
+        <inputExpression id="InputExpression_3" typeRef="string">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.evidenceHandled != null) then additionalData.Data.evidenceHandled else ""</text>
+        </inputExpression>
+      </input>
       <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
       <output id="Output_2" label="Name" name="name" typeRef="string" />
-      <output id="Output_3" label="Task Type" name="taskType" typeRef="string" />
-      <output id="Output_4" label="Working Days Allowed" name="workingDaysAllowed" typeRef="integer" />
-      <output id="Output_5" label="Delay Duration" name="delayDuration" typeRef="integer" />
-      <output id="Output_6" label="Process Categories" name="processCategories" typeRef="string" />
+      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
+      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
+      <rule id="Rule_initiation_1">
+        <inputEntry id="InputEntry_initiation_1_1">
+          <text>"attachScannedDocs"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_3">
+          <text>not("Yes")</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_1_1">
+          <text>"processScannedDocuments"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_2">
+          <text>"Process Scanned Documents"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

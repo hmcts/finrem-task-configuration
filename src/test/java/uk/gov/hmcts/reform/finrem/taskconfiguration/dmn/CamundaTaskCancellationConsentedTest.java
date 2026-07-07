@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskCancellationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
@@ -29,14 +26,14 @@ class CamundaTaskCancellationConsentedTest extends DmnDecisionTableBaseUnitTest 
         inputVariables.putValue("state", "");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList(), is(List.of()));
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getInputs().size(), is(3));
-        assertThat(logic.getOutputs().size(), is(4));
-        assertThat(logic.getRules().size(), is(0));
+        assertThat(logic.getInputs()).hasSize(3);
+        assertThat(logic.getOutputs()).hasSize(4);
+        assertThat(logic.getRules()).isEmpty();
     }
 }
