@@ -13,7 +13,9 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest {
@@ -26,17 +28,40 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(20);
+        assertThat(logic.getRules()).hasSize(23);
     }
 
     @Test
-    void givenUnknownTaskTypeShouldReturnEmptyConfiguration() {
+    void givenNoTaskType_whenEvaluated_thenReturnsGenericConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
         inputVariables.putValue("taskType", "unknownTaskType");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+
+        Map<String, Object> results = dmnDecisionTableResult.getResultList()
+            .stream().collect(Collectors.toMap(map -> (String) map.get("name"), map -> map.get("value")));
+
+        assertThat(results)
+            .satisfies(result -> assertThat(result.get("dueDateOrigin")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("dueDateOrigin")
+            .isEqualTo(Map.ofEntries(
+                entry("calculatedDates", "nextHearingDate,dueDate,priorityDate"),
+                entry("priorityDateOriginRef", "nextHearingDate,dueDate"),
+                entry("nextHearingDate", ""),
+                entry("dueDateNonWorkingCalendar","https://www.gov.uk/bank-holidays/england-and-wales.json"),
+                entry("dueDateNonWorkingDaysOfWeek", "SATURDAY,SUNDAY"),
+                entry("dueDateSkipNonWorkingDays", "true"),
+                entry("dueDateMustBeWorkingDay", "No"),
+                entry("dueDateTime", "14:00"),
+                entry("majorPriority", "5000"),
+                entry("minorPriority", "500"),
+                entry("caseName", ""),
+                entry("region", ""),
+                entry("location", ""),
+                entry("caseManagementCategory", "FR Consented")
+            ));
     }
 
     @Test
@@ -55,18 +80,10 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         // dueDateOrigin is now() so its value is asserted against the evaluation time below
         List<Map<String, Object>> expectedResults = List.of(
-            Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
-            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
-            Map.of("name", "description", "value",
-                "[Attach scanned document]"
-                    + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
-                "canReconfigure", true),
-            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true),
             Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
             Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
                    "canReconfigure", true),
             Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
-            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
             Map.of("name", "dueDateNonWorkingCalendar", "value",
                 "https://www.gov.uk/bank-holidays/england-and-wales.json",
                 "canReconfigure", true),
@@ -81,7 +98,17 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "region", "value", "2", "canReconfigure", true),
             Map.of("name", "location", "value", "366796", "canReconfigure", true),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
-                "canReconfigure", true)
+                "canReconfigure", true),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
+            Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
+            Map.of("name", "description", "value",
+                   "[Attach scanned document]"
+                       + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
+                   "canReconfigure", true),
+            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true)
+
+
         );
 
         assertThat(actualResults).hasSameSizeAs(expectedResults);
@@ -479,6 +506,47 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseName")).isEqualTo("");
         assertThat(valueOf(results, "region")).isEqualTo("");
         assertThat(valueOf(results, "location")).isEqualTo("");
+    }
+
+    @Test
+    void givenCheckApplicationTaskType_whenEvaluated_thenReturnsCorrectConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("taskType", "checkApplication");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        Map<String, Object> results = dmnDecisionTableResult.getResultList()
+            .stream().collect(Collectors.toMap(map -> (String) map.get("name"), map -> map.get("value")));
+
+        assertThat(results)
+            .satisfies(result -> assertThat(result.get("dueDateOrigin")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("dueDateOrigin")
+            .isEqualTo(Map.ofEntries(
+                entry("calculatedDates", "nextHearingDate,dueDate,priorityDate"),
+                entry("priorityDateOriginRef", "nextHearingDate,dueDate"),
+                entry("nextHearingDate", ""),
+                entry("dueDateNonWorkingCalendar","https://www.gov.uk/bank-holidays/england-and-wales.json"),
+                entry("dueDateNonWorkingDaysOfWeek", "SATURDAY,SUNDAY"),
+                entry("dueDateSkipNonWorkingDays", "true"),
+                entry("dueDateMustBeWorkingDay", "No"),
+                entry("dueDateTime", "14:00"),
+                entry("majorPriority", "5000"),
+                entry("minorPriority", "500"),
+                entry("caseName", ""),
+                entry("region", ""),
+                entry("location", ""),
+                entry("caseManagementCategory", "FR Consented"),
+                entry("roleCategory", "CTSC"),
+                entry("dueDateIntervalDays", "5"),
+                entry("workType", "applications"),
+                entry("description",
+                       "[Issue Application]"
+                           + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
+                           + "FR_issueApplication/FR_issueApplication1)"),
+                entry("title", "Check Application")
+            ));
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {

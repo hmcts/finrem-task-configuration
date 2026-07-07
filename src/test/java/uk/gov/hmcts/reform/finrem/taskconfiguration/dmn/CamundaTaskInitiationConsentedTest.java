@@ -6,6 +6,8 @@ import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.impl.VariableMapImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
@@ -34,7 +36,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(1);
+        assertThat(logic.getRules()).hasSize(2);
     }
 
     @Test
@@ -101,5 +103,28 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "FR_HWFDecisionMade", "FR_paymentMadeFromHWF", "FR_applicationPaymentSubmission" })
+    void givenCheckApplicationTriggerEventIds_whenEvaluated_thenInitiatesCheckApplicationTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "applicationSubmitted");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList())
+            .satisfies(result -> assertThat(result.getFirst().get("delayUntil")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("delayUntil")
+            .isEqualTo(List.of(
+                Map.of(
+                    "taskId", "checkApplication",
+                    "name", "Check Application",
+                    "delayDuration", 0,
+                    "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
+                )
+            ));
     }
 }

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-permissions-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
-  <decision id="wa-task-permissions-divorce-financialremedymvp2" name="Permissions DMN" camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+             id="wa-permissions-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
+             exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-permissions-divorce-financialremedymvp2" name="Permissions DMN"
+            camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_permissions_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="Task Type" camunda:inputVariable="taskType">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -15,13 +20,13 @@ else
           <text></text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Case Access Category" name="caseAccessCategory" typeRef="string" />
-      <output id="Output_2" label="name" name="name" typeRef="string" />
-      <output id="Output_3" label="value" name="value" typeRef="string" />
-      <output id="Output_4" label="RoleCategory" name="roleCategory" typeRef="string" />
-      <output id="Output_5" label="Authorisations" name="authorisations" typeRef="string" />
-      <output id="Output_6" label="Assignment Priority" name="assignmentPriority" typeRef="integer" />
-      <output id="Output_7" label="Auto Assignable" name="autoAssignable" typeRef="boolean" />
+      <output id="Output_1" label="Case Access Category" name="caseAccessCategory" typeRef="string"/>
+      <output id="Output_2" label="name" name="name" typeRef="string"/>
+      <output id="Output_3" label="value" name="value" typeRef="string"/>
+      <output id="Output_4" label="RoleCategory" name="roleCategory" typeRef="string"/>
+      <output id="Output_5" label="Authorisations" name="authorisations" typeRef="string"/>
+      <output id="Output_6" label="Assignment Priority" name="assignmentPriority" typeRef="integer"/>
+      <output id="Output_7" label="Auto Assignable" name="autoAssignable" typeRef="boolean"/>
       <rule id="Rule_permissions_1">
         <inputEntry id="InputEntry_permissions_1_1">
           <text>"processScannedDocuments"</text>
@@ -80,12 +85,70 @@ else
           <text>false</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_048nbev">
+        <inputEntry id="UnaryTests_1w8qb2c">
+          <text>"checkApplication"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pn3b41">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0dykvvx">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1b4ckwn">
+          <text>"ctsc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1tqi625">
+          <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ogkry9">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1epyvvq">
+          <text>"SKILL:ABA2:CheckingApplications"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_15e66ho">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00144l2">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1frf0q8">
+        <inputEntry id="UnaryTests_1e7p87y">
+          <text>"checkApplication"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03gcn1q">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_048751m">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19clogb">
+          <text>"ctsc-team-leader"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0eb395l">
+          <text>"Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_063qqs2">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ian8rs">
+          <text>"SKILL:ABA2:CheckingApplications"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1gn0bz5">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0e3gg4j">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-permissions-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="160" y="80" />
+        <dc:Bounds height="80" width="180" x="160" y="80"/>
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

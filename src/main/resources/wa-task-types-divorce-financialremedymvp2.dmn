@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_task-types-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+             id="Definitions_task-types-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
+             exporter="Camunda Modeler" exporterVersion="5.32.0">
   <decision id="wa-task-types-divorce-financialremedymvp2" name="Task Types DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_task_types_consented" hitPolicy="COLLECT">
       <input id="Input_1">
@@ -7,8 +11,8 @@
           <text></text>
         </inputExpression>
       </input>
-      <output id="Output_1" name="taskTypeId" typeRef="string" />
-      <output id="Output_2" name="taskTypeName" typeRef="string" />
+      <output id="Output_1" name="taskTypeId" typeRef="string"/>
+      <output id="Output_2" name="taskTypeName" typeRef="string"/>
       <rule id="Rule_types_1">
         <inputEntry id="InputEntry_types_1_1">
           <text></text>
@@ -20,12 +24,23 @@
           <text>"Process Scanned Documents"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0hd1l6b">
+        <inputEntry id="UnaryTests_16nswdi">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1055pxs">
+          <text>"checkApplication"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_15rdcpg">
+          <text>"Check Application"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-types-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="150" y="80" />
+        <dc:Bounds height="80" width="180" x="150" y="80"/>
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
