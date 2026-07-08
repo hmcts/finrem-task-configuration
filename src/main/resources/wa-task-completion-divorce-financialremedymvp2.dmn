@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-completion-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
-  <decision id="wa-task-completion-divorce-financialremedymvp2" name="Task completion DMN" camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+             xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-completion-consented" name="DRD"
+             namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
+  <decision id="wa-task-completion-divorce-financialremedymvp2" name="Task completion DMN"
+            camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_completion_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="Event ID" biodi:width="614">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -105,6 +110,9 @@
           <text>"checkResponseReceived"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0davy7o">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_completion_2">
         <inputEntry id="InputEntry_completion_2_1">
           <text>"FR_amendedConsentOrder"</text>
