@@ -39,6 +39,9 @@
         <inputEntry id="InputEntry_initiation_1_3">
           <text>not("Yes")</text>
         </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_4">
+          <text></text>
+        </inputEntry>
         <outputEntry id="OutputEntry_initiation_1_1">
           <text>"processScannedDocuments"</text>
         </outputEntry>
@@ -296,6 +299,35 @@
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0v2ekoc">
+      <rule id="Rule_initiation_2">
+        <inputEntry id="InputEntry_initiation_2_1">
+          <text>"FR_approveApplication","FR_uploadApprovedOrder"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_2">
+          <text>"consentOrderApproved"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_2_1">
+          <text>"processApprovedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_2">
+          <text>"Process Approved Order"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>

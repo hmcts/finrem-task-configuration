@@ -7,8 +7,8 @@
           <text>eventId</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Task Type" name="taskType" typeRef="string" />
-      <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string" />
+      <output id="Output_1" label="Task Type" name="taskType" typeRef="string"/>
+      <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string"/>
       <rule id="Rule_completion_1">
         <inputEntry id="InputEntry_completion_1_1">
           <text>"attachScannedDocs"</text>
@@ -105,6 +105,14 @@
           <text>"checkResponseReceived"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0davy7o">
+      <rule id="Rule_completion_2">
+        <inputEntry id="InputEntry_completion_2_1">
+          <text>"FR_amendedConsentOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_2_1">
+          <text>"processApprovedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_2_2">
           <text>"Auto"</text>
         </outputEntry>
       </rule>
@@ -113,7 +121,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-completion-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="160" y="80" />
+        <dc:Bounds height="80" width="180" x="160" y="80"/>
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

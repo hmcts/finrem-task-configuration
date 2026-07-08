@@ -26,17 +26,18 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getInputs()).hasSize(1);
         assertThat(logic.getOutputs()).hasSize(2);
-        assertThat(logic.getRules()).hasSize(2);
+        assertThat(logic.getRules()).hasSize(3);
     }
 
     @Test
-    void givenNoInputShouldReturnProcessScannedDocumentsTaskType() {
+    void givenNoInput_whenEvaluated_thenReturnsAllTaskTypes() {
         VariableMap inputVariables = new VariableMapImpl();
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskTypeId", "processScannedDocuments", "taskTypeName", "Process Scanned Documents"),
-            Map.of("taskTypeId", "checkResponseReceived", "taskTypeName", "Check Response Received")
+            Map.of("taskTypeId", "checkResponseReceived", "taskTypeName", "Check Response Received"),
+            Map.of("taskTypeId", "processApprovedOrder", "taskTypeName", "Process Approved Order")
         ));
     }
 }
