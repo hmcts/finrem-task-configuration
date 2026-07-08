@@ -13,7 +13,9 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest {
@@ -26,17 +28,40 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(20);
+        assertThat(logic.getRules()).hasSize(23);
     }
 
     @Test
-    void givenUnknownTaskTypeShouldReturnEmptyConfiguration() {
+    void givenNoTaskType_whenEvaluated_thenReturnsGenericConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
         inputVariables.putValue("taskType", "unknownTaskType");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+
+        Map<String, Object> results = dmnDecisionTableResult.getResultList()
+            .stream().collect(Collectors.toMap(map -> (String) map.get("name"), map -> map.get("value")));
+
+        assertThat(results)
+            .satisfies(result -> assertThat(result.get("dueDateOrigin")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("dueDateOrigin")
+            .isEqualTo(Map.ofEntries(
+                entry("calculatedDates", "nextHearingDate,dueDate,priorityDate"),
+                entry("priorityDateOriginRef", "nextHearingDate,dueDate"),
+                entry("nextHearingDate", ""),
+                entry("dueDateNonWorkingCalendar","https://www.gov.uk/bank-holidays/england-and-wales.json"),
+                entry("dueDateNonWorkingDaysOfWeek", "SATURDAY,SUNDAY"),
+                entry("dueDateSkipNonWorkingDays", "true"),
+                entry("dueDateMustBeWorkingDay", "No"),
+                entry("dueDateTime", "14:00"),
+                entry("majorPriority", "5000"),
+                entry("minorPriority", "500"),
+                entry("caseName", "Financial Remedy"),
+                entry("region", ""),
+                entry("location", ""),
+                entry("caseManagementCategory", "FR Consented")
+            ));
     }
 
     @Test
@@ -55,21 +80,13 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         // dueDateOrigin is now() so its value is asserted against the evaluation time below
         List<Map<String, Object>> expectedResults = List.of(
-            Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
-            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
-            Map.of("name", "description", "value",
-                "[Attach scanned document]"
-                    + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
-                "canReconfigure", true),
-            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true),
             Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
             Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
                    "canReconfigure", true),
             Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
-            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
             Map.of("name", "dueDateNonWorkingCalendar", "value",
-                "https://www.gov.uk/bank-holidays/england-and-wales.json",
-                "canReconfigure", true),
+                   "https://www.gov.uk/bank-holidays/england-and-wales.json",
+                   "canReconfigure", true),
             Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
             Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
             Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
@@ -81,7 +98,15 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "region", "value", "2", "canReconfigure", true),
             Map.of("name", "location", "value", "366796", "canReconfigure", true),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
-                "canReconfigure", true)
+                   "canReconfigure", true),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
+            Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
+            Map.of("name", "description", "value",
+                   "[Attach scanned document]"
+                       + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
+                   "canReconfigure", true),
+            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true)
         );
 
         assertThat(actualResults).hasSameSizeAs(expectedResults);
@@ -466,7 +491,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
-    void givenCaseDataWithoutMandatoryFieldsShouldReturnEmptyCaseNameRegionAndLocation() {
+    void givenCaseDataWithoutMandatoryFieldsShouldReturnDefaultCaseNameRegionAndLocation() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
         inputVariables.putValue("taskType", "processScannedDocuments");
@@ -476,9 +501,37 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         // mandatory fields fall back to empty strings, which fail task initiation
         // downstream in the same way as null
-        assertThat(valueOf(results, "caseName")).isEqualTo("");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Financial Remedy");
         assertThat(valueOf(results, "region")).isEqualTo("");
         assertThat(valueOf(results, "location")).isEqualTo("");
+    }
+
+    @Test
+    void givenProcessApprovedOrderTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Tony Stark v Pepper Potts",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
+        ));
+        inputVariables.putValue("taskType", "processApprovedOrder");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(20);
+        assertThat(valueOf(results, "workType")).isEqualTo("routine_work");
+        assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
+        assertThat(valueOf(results, "title")).isEqualTo("Process Approved Order");
+        assertThat(valueOf(results, "description"))
+            .isEqualTo("[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}"
+                           + "/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)");
+        assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
+        assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
+        assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
+            "https://www.gov.uk/bank-holidays/england-and-wales.json");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Tony Stark v Pepper Potts");
+        assertThat(valueOf(results, "region")).isEqualTo("2");
+        assertThat(valueOf(results, "location")).isEqualTo("765324");
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {

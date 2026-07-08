@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Cross-DMN consistency tests. Each test loads two DMN files and asserts
@@ -27,8 +26,8 @@ class CamundaTaskTypeConsistencyTest {
         Set<String> registeredTypes = DmnXmlHelper.extractOutputColumn(TYPES_DMN, "taskTypeId");
         Set<String> initiatedIds    = DmnXmlHelper.extractOutputColumn(INITIATION_DMN, "taskId");
 
-        assertFalse(registeredTypes.isEmpty(), "Task types DMN must have entries");
-        assertFalse(initiatedIds.isEmpty(),    "Initiation DMN must produce at least one task");
+        assertThat(registeredTypes).as("Task types DMN must have entries").isNotEmpty();
+        assertThat(initiatedIds).as("Initiation DMN must produce at least one task").isNotEmpty();
 
         List<String> unregistered = initiatedIds.stream()
             .filter(id -> !registeredTypes.contains(id))
@@ -64,7 +63,7 @@ class CamundaTaskTypeConsistencyTest {
         Set<String> registeredTypes = DmnXmlHelper.extractOutputColumn(TYPES_DMN, "taskTypeId");
         Set<String> completedTypes  = DmnXmlHelper.extractOutputColumn(COMPLETION_DMN, "taskType");
 
-        assertFalse(completedTypes.isEmpty(), "Completion DMN must reference at least one task type");
+        assertThat(completedTypes).as("Completion DMN must reference at least one task type").isNotEmpty();
 
         List<String> unregistered = completedTypes.stream()
             .filter(id -> !registeredTypes.contains(id))

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-completion-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
-  <decision id="wa-task-completion-divorce-financialremedymvp2" name="Task completion DMN" camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0"
+             xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-completion-consented" name="DRD"
+             namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-completion-divorce-financialremedymvp2" name="Task completion DMN"
+            camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_completion_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="Event ID" biodi:width="614">
         <inputExpression id="InputExpression_1" typeRef="string">
           <text>eventId</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Task Type" name="taskType" typeRef="string" />
-      <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string" />
+      <output id="Output_1" label="Task Type" name="taskType" typeRef="string"/>
+      <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string"/>
       <rule id="Rule_completion_1">
         <inputEntry id="InputEntry_completion_1_1">
           <text>"attachScannedDocs"</text>
@@ -20,12 +25,23 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_completion_2">
+        <inputEntry id="InputEntry_completion_2_1">
+          <text>"FR_amendedConsentOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_2_1">
+          <text>"processApprovedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_2_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-completion-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="160" y="80" />
+        <dc:Bounds height="80" width="180" x="160" y="80"/>
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
