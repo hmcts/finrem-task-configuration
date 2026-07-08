@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
   <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_configuration_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="CCD Case Data" camunda:inputVariable="caseData">
@@ -133,7 +133,7 @@ null</text>
           <text>"nextHearingDate"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_7_2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) >= today()]) > 0) then sort(caseData.listForHearings[date(value.hearingDate) >= today()], function(x,y) date(y.value.hearingDate) > date(x.value.hearingDate))[1].value.hearingDate else ""</text>
+          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y) date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_7_3">
           <text>true</text>
@@ -357,6 +357,346 @@ null</text>
           <text>"FR Consented"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_18_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0nbt97x">
+        <inputEntry id="UnaryTests_0txueal">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10lxf6e">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0v0z8jc">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1n73c7n">
+          <text>"routine_work"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1m5372l">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1guxaeo">
+        <inputEntry id="UnaryTests_1a4n9my">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17wk4wh">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0h1yua0">
+          <text>"roleCategory"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fm82f2">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vbvfv8">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17m60w9">
+        <inputEntry id="UnaryTests_0lv7e34">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w9wfe1">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08o3a2c">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0yrs0kw">
+          <text>"[Check response received](/cases/case-details/${[CASE_REFERENCE]}/trigger/checkResponseReceived/checkResponseReceived1)"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_102ztng">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0jtnkcb">
+        <inputEntry id="UnaryTests_0l9xhyc">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_043iyv2">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1p7cx2h">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0krz5pp">
+          <text>"Check Response Received"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0a6nflp">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0p58jnf">
+        <inputEntry id="UnaryTests_14w8g29">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03a8fi3">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yy69wg">
+          <text>"calculatedDates"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_01826ie">
+          <text>"nextHearingDate,dueDate,priorityDate"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_15gqt5v">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1krnck4">
+        <inputEntry id="UnaryTests_09ae5er">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w9v56c">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1x6r47e">
+          <text>"priorityDateOriginRef"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1xrs4rs">
+          <text>"nextHearingDate,dueDate"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_010ig5u">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14wyrnl">
+        <inputEntry id="UnaryTests_14zp51b">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11v68lw">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19ljn0u">
+          <text>"nextHearingDate"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1okcl0o">
+          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y) date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06amtko">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00l1ev5">
+        <inputEntry id="UnaryTests_0gcbfh4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g08fj5">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0x44x9e">
+          <text>"dueDateIntervalDays"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0t54ren">
+          <text>5</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ou2elm">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1h1hdh4">
+        <inputEntry id="UnaryTests_08hx7s4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06xbi34">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pb6mgi">
+          <text>"dueDateNonWorkingCalendar"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1e51kjg">
+          <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1huap6q">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_159wc9n">
+        <inputEntry id="UnaryTests_0vmr0rw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1evw5lb">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jreizk">
+          <text>"dueDateNonWorkingDaysOfWeek"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1tabfaj">
+          <text>"SATURDAY,SUNDAY"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_01ttof2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0dk0dtp">
+        <inputEntry id="UnaryTests_0ilc4h4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1umwtwl">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1cnxok2">
+          <text>"dueDateSkipNonWorkingDays"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1vsnagh">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0dbsi63">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_02mmn1t">
+        <inputEntry id="UnaryTests_19ioba4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0b190uz">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0c6qn50">
+          <text>"dueDateMustBeWorkingDay"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19z5lnx">
+          <text>"No"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0635lvl">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10d65ov">
+        <inputEntry id="UnaryTests_0p3nbvv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13gl5n8">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14az7ty">
+          <text>"dueDateOrigin"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0whmota">
+          <text>now()</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0dac472">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1woktvl">
+        <inputEntry id="UnaryTests_07bcojj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p1nmlh">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pab3jn">
+          <text>"dueDateTime"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1u8lfig">
+          <text>time("14:00")</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1bdjakz">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1svdsh7">
+        <inputEntry id="UnaryTests_1vzesfd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1op8lmn">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hqe1mk">
+          <text>"majorPriority"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0womzpj">
+          <text>5000</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1j3cbum">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xwehoi">
+        <inputEntry id="UnaryTests_14sn8q8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y9fcev">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1oti6wy">
+          <text>"minorPriority"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09njdb1">
+          <text>500</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06ukhy3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ohlndt">
+        <inputEntry id="UnaryTests_13q9zun">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pwimxa">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16vvpo7">
+          <text>"caseName"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0sd7i4v">
+          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0fzzsjp">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0siaxs0">
+        <inputEntry id="UnaryTests_0fffabd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09lsrba">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h81x90">
+          <text>"region"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0854wx7">
+          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0dnu1cy">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wzjfvt">
+        <inputEntry id="UnaryTests_0ub6im9">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ed7zly">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05l1b14">
+          <text>"location"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0d84rsz">
+          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cc0reu">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_136dt4d">
+        <inputEntry id="UnaryTests_0sa5ws5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zfpuqf">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0n6xtiq">
+          <text>"caseManagementCategory"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qzu3vx">
+          <text>"FR Consented"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0alhik6">
           <text>true</text>
         </outputEntry>
       </rule>

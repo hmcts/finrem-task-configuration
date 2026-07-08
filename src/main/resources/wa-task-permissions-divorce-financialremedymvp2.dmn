@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-permissions-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-permissions-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
   <decision id="wa-task-permissions-divorce-financialremedymvp2" name="Permissions DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_permissions_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="Task Type" camunda:inputVariable="taskType">
@@ -77,6 +77,64 @@ else
           <text>1</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_2_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yjckkz">
+        <inputEntry id="UnaryTests_14pray7">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09wc4x2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fy4t1s">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0u2spfd">
+          <text>"ctsc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1vmudbg">
+          <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_119k24y">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1w6qeuz">
+          <text>"SKILL:ABA2:CheckingApplications"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0voxdky">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1c9z4la">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1p64d0q">
+        <inputEntry id="UnaryTests_0fxm2v3">
+          <text>"checkResponseReceived"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qhavcu">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05jhel5">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1tzqgxw">
+          <text>"ctsc-team-leader"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1avqso7">
+          <text>"Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign,Escalate"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05p4b3l">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ssuphg">
+          <text>"SKILL:ABA2:CheckingApplications"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qkwt4z">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0aluq7w">
           <text>false</text>
         </outputEntry>
       </rule>
