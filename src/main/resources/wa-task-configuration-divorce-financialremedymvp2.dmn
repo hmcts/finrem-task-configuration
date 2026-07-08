@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
-  <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN" camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+             id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
+             exporter="Camunda Modeler" exporterVersion="5.48.0">
+  <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN"
+            camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_configuration_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="CCD Case Data" camunda:inputVariable="caseData">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -11,10 +16,11 @@
         <inputExpression id="InputExpression_2" typeRef="string">
           <text>if(taskAttributes != null and taskAttributes.taskType != null) then
             taskAttributes.taskType
-else if(taskType != null) then
-           taskType
-else
-null</text>
+            else if(taskType != null) then
+            taskType
+            else
+            null
+          </text>
         </inputExpression>
       </input>
       <output id="Output_1" label="Name" name="name" typeRef="string"/>
@@ -65,7 +71,11 @@ null</text>
           <text>"nextHearingDate"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_4_out2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y) date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""</text>
+          <text>if (caseData != null and caseData.listForHearings != null and
+            count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then
+            sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y)
+            date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""
+          </text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_4_out3">
           <text>true</text>
@@ -133,7 +143,12 @@ null</text>
           <text>"dueDateMustBeWorkingDay"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_7_2">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y) date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""</text>
+          <text>if (caseData != null and caseData.listForHearings != null and
+            count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then
+            sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y)
+            date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""
+          </text>
+        </outputEntry>
         <outputEntry id="Rule_config_generic_7_out2">
           <text>"No"</text>
         </outputEntry>
@@ -220,7 +235,9 @@ null</text>
           <text>"caseName"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_12_out2">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else "Financial Remedy"</text>
+          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal
+            else "Financial Remedy"
+          </text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_12_out3">
           <text>true</text>
@@ -237,7 +254,9 @@ null</text>
           <text>"region"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_13_out2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null and
+            caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""
+          </text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_13_out3">
           <text>true</text>
@@ -254,7 +273,10 @@ null</text>
           <text>"location"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_14_out2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null and
+            caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else
+            ""
+          </text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_14_out3">
           <text>true</text>
@@ -339,7 +361,9 @@ null</text>
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_3_2">
-          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"</text>
+          <text>"[Attach scanned
+            document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"
+          </text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_3_3">
           <text>true</text>
@@ -407,7 +431,9 @@ null</text>
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="Rule_config_pao_3_out2">
-          <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"</text>
+          <text>"[Amended Consent
+            Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"
+          </text>
         </outputEntry>
         <outputEntry id="Rule_config_pao_3_out3">
           <text>true</text>
@@ -458,7 +484,9 @@ null</text>
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0yrs0kw">
-          <text>"[Check response received](/cases/case-details/${[CASE_REFERENCE]}/trigger/checkResponseReceived/checkResponseReceived1)"</text>
+          <text>"[Check response
+            received](/cases/case-details/${[CASE_REFERENCE]}/trigger/checkResponseReceived/checkResponseReceived1)"
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_102ztng">
           <text>true</text>
@@ -526,7 +554,11 @@ null</text>
           <text>"nextHearingDate"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1okcl0o">
-          <text>if (caseData != null and caseData.listForHearings != null and count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y) date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""</text>
+          <text>if (caseData != null and caseData.listForHearings != null and
+            count(caseData.listForHearings[date(value.hearingDate) &gt;= today()]) &gt; 0) then
+            sort(caseData.listForHearings[date(value.hearingDate) &gt;= today()], function(x,y)
+            date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_06amtko">
           <text>true</text>
@@ -696,7 +728,9 @@ null</text>
           <text>"caseName"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0sd7i4v">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal else ""</text>
+          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal
+            else ""
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0fzzsjp">
           <text>true</text>
@@ -713,7 +747,9 @@ null</text>
           <text>"region"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0854wx7">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null and
+            caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0dnu1cy">
           <text>true</text>
@@ -730,7 +766,10 @@ null</text>
           <text>"location"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0d84rsz">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null and
+            caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else
+            ""
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0cc0reu">
           <text>true</text>
