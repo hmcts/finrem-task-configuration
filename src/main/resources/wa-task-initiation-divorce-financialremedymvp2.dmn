@@ -24,6 +24,13 @@
           </text>
         </inputExpression>
       </input>
+      <input id="InputClause_0prpqwj" label="Pension documents present" camunda:inputVariable="pensionDocumentsCount">
+        <inputExpression id="LiteralExpression_1yika90" typeRef="integer">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.pensionCollection !=
+            null) then count(additionalData.Data.pensionCollection) else 0
+          </text>
+        </inputExpression>
+      </input>
       <output id="Output_1" label="Task Id" name="taskId" typeRef="string"/>
       <output id="Output_2" label="Name" name="name" typeRef="string"/>
       <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer"/>
@@ -39,7 +46,7 @@
         <inputEntry id="InputEntry_initiation_1_3">
           <text>not("Yes")</text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_1_4">
+        <inputEntry id="UnaryTests_112b9pv">
           <text></text>
         </inputEntry>
         <outputEntry id="OutputEntry_initiation_1_1">
@@ -64,12 +71,15 @@
       </rule>
       <rule id="DecisionRule_1l90mf6">
         <inputEntry id="UnaryTests_0m9ef1y">
-          <text>"FR_referToJudge"</text>
+          <text>"FR_referToJudge","FR_assignToJudge","FR_callbackRejectedOrder"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0m7ague">
           <text>"awaitingJudiciaryResponse"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1j42hzo">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08vlsly">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1la1dyz">
@@ -92,36 +102,6 @@
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_1go9ksk">
-        <inputEntry id="UnaryTests_0snq73i">
-          <text>"FR_assignToJudge"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1ii6tw7">
-          <text>"awaitingJudiciaryResponse"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1ya7ip1">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1maqlnp">
-          <text>"checkResponseReceived"</text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_0y066sq">
-          <text>"Check Response Received"</text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_0a6lmex">
-          <text>0</text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_0mpmcmk">
-          <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_02f3ifl">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
-        </outputEntry>
-      </rule>
       <rule id="DecisionRule_0x1adg2">
         <inputEntry id="UnaryTests_1ndj9kr">
           <text>"FR_generalOrder"</text>
@@ -130,6 +110,9 @@
           <text>"consentOrderNotApproved"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0s3fh5e">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_037afq3">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0hjgpm8">
@@ -152,36 +135,6 @@
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_13x022p">
-        <inputEntry id="UnaryTests_1o165jz">
-          <text>"FR_callbackRejectedOrder"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1nklt0u">
-          <text>"awaitingJudiciaryResponse"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_073gsw0">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1blljdj">
-          <text>"checkResponseReceived"</text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_0lkjch1">
-          <text>"Check Response Received"</text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_1ik0znx">
-          <text>0</text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_1x5mwip">
-          <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_0gdvyf7">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
-        </outputEntry>
-      </rule>
       <rule id="DecisionRule_1djpls6">
         <inputEntry id="UnaryTests_1scdlya">
           <text>"FR_awaitingInfo"</text>
@@ -190,6 +143,9 @@
           <text>"infoReceived"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0tuc0dy">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x0nifo">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0suj06m">
@@ -222,6 +178,9 @@
         <inputEntry id="UnaryTests_0e7kdfw">
           <text></text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1aa4r70">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1bjmiu4">
           <text>"checkResponseReceived"</text>
         </outputEntry>
@@ -250,6 +209,9 @@
           <text>"caseFileSubmitted"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1n0vdrg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_050ysic">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1ebotyu">
@@ -282,6 +244,9 @@
         <inputEntry id="UnaryTests_0r6akqy">
           <text></text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0y05rbm">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1pgp241">
           <text>"checkResponseReceived"</text>
         </outputEntry>
@@ -299,35 +264,39 @@
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0v2ekoc">
-      <rule id="Rule_initiation_2">
-        <inputEntry id="InputEntry_initiation_2_1">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1p4k4ox">
+        <inputEntry id="UnaryTests_09kafrp">
           <text>"FR_approveApplication","FR_uploadApprovedOrder"</text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_2_2">
+        <inputEntry id="UnaryTests_07x74py">
           <text>"consentOrderApproved"</text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_2_3">
+        <inputEntry id="UnaryTests_1mgj83g">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_2_4">
+        <inputEntry id="UnaryTests_0ut2ixy">
           <text>&gt; 0</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_initiation_2_1">
+        <outputEntry id="LiteralExpression_06lh4yn">
           <text>"processApprovedOrder"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_2">
+        <outputEntry id="LiteralExpression_0q289r8">
           <text>"Process Approved Order"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_4">
+        <outputEntry id="LiteralExpression_05gc41l">
           <text>0</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_5">
+        <outputEntry id="LiteralExpression_1dbi98u">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_6">
+        <outputEntry id="LiteralExpression_1030ooo">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
