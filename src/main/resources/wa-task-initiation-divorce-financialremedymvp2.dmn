@@ -96,6 +96,38 @@
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0hiut8c">
+        <inputEntry id="InputEntry_initiation_3_1">
+          <text>"FR_respondToOrder"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_2">
+          <text>"responseReceived"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_4">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_3_1">
+          <text>"reviewOrderResponse"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_2">
+          <text>"Review Order Response"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

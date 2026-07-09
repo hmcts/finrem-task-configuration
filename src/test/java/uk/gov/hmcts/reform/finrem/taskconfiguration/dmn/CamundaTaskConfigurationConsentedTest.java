@@ -28,7 +28,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(23);
+        assertThat(logic.getRules())
+            .as("Number of defined task configuration rules has changed.")
+            .hasSize(26);
     }
 
     @Test
@@ -532,6 +534,69 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseName")).isEqualTo("Tony Stark v Pepper Potts");
         assertThat(valueOf(results, "region")).isEqualTo("2");
         assertThat(valueOf(results, "location")).isEqualTo("765324");
+    }
+
+    @Test
+    void givenReviewOrderResponseTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Applicant v Respondent",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
+        ));
+        inputVariables.putValue("taskType", "reviewOrderResponse");
+
+        ZonedDateTime beforeEvaluation = ZonedDateTime.now();
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        ZonedDateTime afterEvaluation = ZonedDateTime.now();
+        List<Map<String, Object>> actualResults = dmnDecisionTableResult.getResultList();
+
+        // dueDateOrigin is now() so its value is asserted against the evaluation time below
+        List<Map<String, Object>> expectedResults = List.of(
+
+            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
+            Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
+                   "canReconfigure", true),
+            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
+            Map.of("name", "dueDateNonWorkingCalendar", "value",
+                   "https://www.gov.uk/bank-holidays/england-and-wales.json",
+                   "canReconfigure", true),
+            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
+            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
+            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
+            Map.of("name", "dueDateOrigin", "canReconfigure", true),
+            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
+            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
+            Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
+            Map.of("name", "caseName", "value", "Applicant v Respondent", "canReconfigure", true),
+            Map.of("name", "region", "value", "2", "canReconfigure", true),
+            Map.of("name", "location", "value", "366796", "canReconfigure", true),
+            Map.of("name", "caseManagementCategory", "value", "FR Consented",
+                   "canReconfigure", true),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
+            Map.of("name", "title", "value", "Review Order Response", "canReconfigure", true),
+            Map.of("name", "description", "value",
+                   "[Assign to Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_assignToJudgeConsent/FR_assignToJudgeConsent1)",
+                   "canReconfigure", true),
+            Map.of("name", "workType", "value", "review_case", "canReconfigure", true)
+
+        );
+
+        assertThat(actualResults).hasSameSizeAs(expectedResults);
+        for (int idx = 0; idx < actualResults.size(); idx++) {
+            Map<String, Object> actual = actualResults.get(idx);
+            Map<String, Object> expected = expectedResults.get(idx);
+            assertThat(actual.get("name")).isEqualTo(expected.get("name"));
+            assertThat(actual.get("canReconfigure")).isEqualTo(expected.get("canReconfigure"));
+            if ("dueDateOrigin".equals(expected.get("name"))) {
+                ZonedDateTime dueDateOrigin = ZonedDateTime.parse(actual.get("value").toString());
+                assertThat(!dueDateOrigin.isBefore(beforeEvaluation) && !dueDateOrigin.isAfter(afterEvaluation))
+                    .as("dueDateOrigin should be the time the DMN was evaluated (now())")
+                    .isTrue();
+            } else {
+                assertThat(actual.get("value")).isEqualTo(expected.get("value"));
+            }
+        }
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {

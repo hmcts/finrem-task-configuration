@@ -285,7 +285,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="Rule_config_roleCategory_in2">
-          <text>"processScannedDocuments","processApprovedOrder"</text>
+          <text>"processScannedDocuments","processApprovedOrder","reviewOrderResponse"</text>
         </inputEntry>
         <outputEntry id="Rule_config_roleCategory_out1">
           <text>"roleCategory"</text>
@@ -302,7 +302,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="Rule_config_dueDateIntervalDays_in2">
-          <text>"processScannedDocuments","processApprovedOrder"</text>
+          <text>"processScannedDocuments","processApprovedOrder","reviewOrderResponse"</text>
         </inputEntry>
         <outputEntry id="Rule_config_dueDateIntervalDays_out1">
           <text>"dueDateIntervalDays"</text>
@@ -413,6 +413,57 @@ null</text>
           <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_pao_3_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xne7ng">
+        <inputEntry id="UnaryTests_02jslcd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1aprpsh">
+          <text>"reviewOrderResponse"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0075l39">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ozbsez">
+          <text>"Review Order Response"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1rygnoz">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18r5xcp">
+        <inputEntry id="UnaryTests_191uarg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e3hfvv">
+          <text>"reviewOrderResponse"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_092a4rg">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0d2plfm">
+          <text>"[Assign to Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_assignToJudgeConsent/FR_assignToJudgeConsent1)"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0sxa534">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0906awe">
+        <inputEntry id="UnaryTests_0z1pojw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16emcf7">
+          <text>"reviewOrderResponse"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ty0hlu">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_16sf86l">
+          <text>"review_case"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fjfz98">
           <text>true</text>
         </outputEntry>
       </rule>

@@ -37,7 +37,9 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(2);
+        assertThat(logic.getRules())
+            .as("Number of defined task initiation rules has changed.")
+            .hasSize(3);
     }
 
     @Test
@@ -187,5 +189,40 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
             .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))
             .toList();
         return Map.of("Data", Map.of("pensionCollection", pensionCollection));
+    }
+
+    @Test
+    void givenRespondToOrderEventRecievedWithValidPostEventStateCreatesReviewOrderResponseTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_respondToOrder");
+        inputVariables.putValue("postEventState", "responseReceived");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.get(0);
+        assertThat(result.get("taskId")).isEqualTo("reviewOrderResponse");
+        assertThat(result.get("name")).isEqualTo("Review Order Response");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @Test
+    void givenRespondToOrderEventRecievedWithInValidPostEventStateDoesNotCreatesReviewOrderResponseTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_respondToOrder");
+        inputVariables.putValue("postEventState", "");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(0);
     }
 }
