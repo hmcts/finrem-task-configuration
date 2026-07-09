@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
-  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN" camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+             id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
+             exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN"
+            camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_initiation_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="Event Id" camunda:inputVariable="eventId">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -27,81 +32,11 @@
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion != null) then additionalData.Data.helpWithFeesQuestion else ""</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
-      <output id="Output_2" label="Name" name="name" typeRef="string" />
-      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
-      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
-      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
-      <rule id="Rule_initiation_1">
-        <inputEntry id="InputEntry_initiation_1_1">
-          <text>"attachScannedDocs"</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_1_2">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_1_3">
-          <text>not("Yes")</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_1_4">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_1_5">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_initiation_1_1">
-          <text>"processScannedDocuments"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_1_2">
-          <text>"Process Scanned Documents"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_1_4">
-          <text>0</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_1_5">
-          <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_1_6">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
-        </outputEntry>
-      </rule>
-      <rule id="Rule_initiation_2">
-        <inputEntry id="InputEntry_initiation_2_1">
-          <text>"FR_approveApplication","FR_uploadApprovedOrder"</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_2_2">
-          <text>"consentOrderApproved"</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_2_3">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_2_4">
-          <text>&gt; 0</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_2_5">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_initiation_2_1">
-          <text>"processApprovedOrder"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_2">
-          <text>"Process Approved Order"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_4">
-          <text>0</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_5">
-          <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_2_6">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
-        </outputEntry>
-      </rule>
+      <output id="Output_1" label="Task Id" name="taskId" typeRef="string"/>
+      <output id="Output_2" label="Name" name="name" typeRef="string"/>
+      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer"/>
+      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json"/>
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string"/>
       <rule id="Rule_initiation_3">
         <inputEntry id="InputEntry_initiation_3_1">
           <text>"FR_applicationPaymentSubmission"</text>
@@ -142,7 +77,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-initiation-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="150" y="80" />
+        <dc:Bounds height="80" width="180" x="150" y="80"/>
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
