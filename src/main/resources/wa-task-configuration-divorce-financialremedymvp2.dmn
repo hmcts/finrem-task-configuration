@@ -285,7 +285,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="Rule_config_roleCategory_in2">
-          <text>"checkHelpWithFees"</text>
+          <text>"processScannedDocuments","processApprovedOrder","checkHelpWithFees"</text>
         </inputEntry>
         <outputEntry id="Rule_config_roleCategory_out1">
           <text>"roleCategory"</text>
@@ -302,7 +302,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="Rule_config_dueDateIntervalDays_in2">
-          <text>"checkHelpWithFees"</text>
+          <text>"processScannedDocuments","processApprovedOrder","checkHelpWithFees"</text>
         </inputEntry>
         <outputEntry id="Rule_config_dueDateIntervalDays_out1">
           <text>"dueDateIntervalDays"</text>
@@ -311,6 +311,108 @@ null</text>
           <text>5</text>
         </outputEntry>
         <outputEntry id="Rule_config_dueDateIntervalDays_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_1">
+        <inputEntry id="InputEntry_config_1_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_1_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_1_1">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_1_2">
+          <text>"evidence"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_1_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_3">
+        <inputEntry id="InputEntry_config_3_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_3_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_3_1">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_3_2">
+          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_3_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_4">
+        <inputEntry id="InputEntry_config_4_1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_config_4_2">
+          <text>"processScannedDocuments"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_config_4_1">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_4_2">
+          <text>"Process Scanned Documents"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_config_4_3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_1">
+        <inputEntry id="Rule_config_pao_1_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_pao_1_in2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_pao_1_out1">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_pao_1_out2">
+          <text>"routine_work"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_pao_1_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_2">
+        <inputEntry id="Rule_config_pao_2_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_pao_2_in2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_pao_2_out1">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_pao_2_out2">
+          <text>"Process Approved Order"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_pao_2_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_pao_3">
+        <inputEntry id="Rule_config_pao_3_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_pao_3_in2">
+          <text>"processApprovedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_pao_3_out1">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_pao_3_out2">
+          <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_pao_3_out3">
           <text>true</text>
         </outputEntry>
       </rule>
