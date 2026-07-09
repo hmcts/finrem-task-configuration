@@ -132,15 +132,15 @@
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_config_generic_7">
-        <inputEntry id="Rule_config_generic_7_in1">
+      <rule id="Rule_config_7">
+        <inputEntry id="InputEntry_config_7_1">
           <text></text>
         </inputEntry>
-        <inputEntry id="Rule_config_generic_7_in2">
-          <text></text>
+        <inputEntry id="InputEntry_config_7_2">
+          <text>"processScannedDocuments"</text>
         </inputEntry>
-        <outputEntry id="Rule_config_generic_7_out1">
-          <text>"dueDateMustBeWorkingDay"</text>
+        <outputEntry id="OutputEntry_config_7_1">
+          <text>"nextHearingDate"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_7_2">
           <text>if (caseData != null and caseData.listForHearings != null and
@@ -149,10 +149,7 @@
             date(y.value.hearingDate) &gt; date(x.value.hearingDate))[1].value.hearingDate else ""
           </text>
         </outputEntry>
-        <outputEntry id="Rule_config_generic_7_out2">
-          <text>"No"</text>
-        </outputEntry>
-        <outputEntry id="Rule_config_generic_7_out3">
+        <outputEntry id="OutputEntry_config_7_3">
           <text>true</text>
         </outputEntry>
       </rule>
