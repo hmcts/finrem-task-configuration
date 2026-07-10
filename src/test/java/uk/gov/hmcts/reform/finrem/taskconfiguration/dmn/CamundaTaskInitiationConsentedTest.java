@@ -107,6 +107,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
+
     @Test
     void givenTriggerEventGeneralOrderShouldCreateCheckResponseReceivedTask() {
         VariableMap inputVariables = new VariableMapImpl();
