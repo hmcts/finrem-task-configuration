@@ -280,7 +280,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0m5ivw2">
-          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder"</text>
+          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0c2mqp0">
           <text>"roleCategory"</text>
@@ -297,7 +297,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="InputEntry_config_8_2">
-          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder"</text>
+          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees"</text>
         </inputEntry>
         <outputEntry id="OutputEntry_config_8_1">
           <text>"dueDateIntervalDays"</text>
@@ -444,6 +444,57 @@ null</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1ahb30u">
           <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_hwf_1">
+        <inputEntry id="Rule_config_hwf_1_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_hwf_1_in2">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_hwf_1_out1">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_1_out2">
+          <text>"applications"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_1_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_hwf_2">
+        <inputEntry id="Rule_config_hwf_2_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_hwf_2_in2">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_hwf_2_out1">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_2_out2">
+          <text>"Check Help With Fees"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_2_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_hwf_3">
+        <inputEntry id="Rule_config_hwf_3_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_hwf_3_in2">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_hwf_3_out1">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_3_out2">
+          <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_3_out3">
+          <text>true</text>
         </outputEntry>
       </rule>
     </decisionTable>

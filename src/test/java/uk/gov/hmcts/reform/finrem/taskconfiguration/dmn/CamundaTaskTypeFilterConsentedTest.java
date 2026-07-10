@@ -37,7 +37,8 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskTypeId", "processScannedDocuments", "taskTypeName", "Process Scanned Documents"),
             Map.of("taskTypeId", "checkResponseReceived", "taskTypeName", "Check Response Received"),
-            Map.of("taskTypeId", "processApprovedOrder", "taskTypeName", "Process Approved Order")
+            Map.of("taskTypeId", "processApprovedOrder", "taskTypeName", "Process Approved Order"),
+            Map.of("taskTypeId", "checkHelpWithFees", "taskTypeName", "Check Help With Fees")
         ));
     }
 }

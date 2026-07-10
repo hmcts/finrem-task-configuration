@@ -196,6 +196,64 @@ else
           <text>false</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_permissions_5">
+        <inputEntry id="InputEntry_permissions_5_1">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_permissions_5_2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_permissions_5_1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_5_2">
+          <text>"ctsc"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_5_3">
+          <text>"Read,Own,Claim,CancelOwn,CompleteOwn,Execute"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_5_4">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_5_5">
+          <text>"SKILL:ABA2:CheckingHWF"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_5_6">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_5_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_permissions_6">
+        <inputEntry id="InputEntry_permissions_6_1">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_permissions_6_2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_permissions_6_1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_6_2">
+          <text>"ctsc-team-leader"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_6_3">
+          <text>"Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_6_4">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_6_5">
+          <text>"SKILL:ABA2:CheckingHWF"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_6_6">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_permissions_6_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
