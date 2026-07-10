@@ -36,7 +36,18 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_1vy7rbz">
+      <rule id="Rule_completion_hwf_1">
+        <inputEntry id="InputEntry_completion_hwf_1_1">
+          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_completion_4">
         <inputEntry id="UnaryTests_06hrddo">
           <text>"FR_assignToJudgeConsent"</text>
         </inputEntry>

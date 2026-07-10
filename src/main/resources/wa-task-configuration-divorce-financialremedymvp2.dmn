@@ -285,7 +285,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="Rule_config_roleCategory_in2">
-          <text>"processScannedDocuments","processApprovedOrder","reviewOrderResponse"</text>
+          <text>"processScannedDocuments","processApprovedOrder","checkHelpWithFees","reviewOrderResponse"</text>
         </inputEntry>
         <outputEntry id="Rule_config_roleCategory_out1">
           <text>"roleCategory"</text>
@@ -302,7 +302,7 @@ null</text>
           <text></text>
         </inputEntry>
         <inputEntry id="Rule_config_dueDateIntervalDays_in2">
-          <text>"processScannedDocuments","processApprovedOrder","reviewOrderResponse"</text>
+          <text>"processScannedDocuments","processApprovedOrder","checkHelpWithFees","reviewOrderResponse"</text>
         </inputEntry>
         <outputEntry id="Rule_config_dueDateIntervalDays_out1">
           <text>"dueDateIntervalDays"</text>
@@ -416,7 +416,58 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0xne7ng">
+      <rule id="Rule_config_hwf_1">
+        <inputEntry id="Rule_config_hwf_1_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_hwf_1_in2">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_hwf_1_out1">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_1_out2">
+          <text>"applications"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_1_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_hwf_2">
+        <inputEntry id="Rule_config_hwf_2_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_hwf_2_in2">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_hwf_2_out1">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_2_out2">
+          <text>"Check Help With Fees"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_2_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_hwf_3">
+        <inputEntry id="Rule_config_hwf_3_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_hwf_3_in2">
+          <text>"checkHelpWithFees"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_hwf_3_out1">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_3_out2">
+          <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_hwf_3_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_ror_1">
         <inputEntry id="UnaryTests_02jslcd">
           <text></text>
         </inputEntry>
@@ -433,7 +484,7 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_18r5xcp">
+      <rule id="Rule_config_ror_2">
         <inputEntry id="UnaryTests_191uarg">
           <text></text>
         </inputEntry>
@@ -450,7 +501,7 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0906awe">
+      <rule id="Rule_config_ror_3">
         <inputEntry id="UnaryTests_0z1pojw">
           <text></text>
         </inputEntry>
