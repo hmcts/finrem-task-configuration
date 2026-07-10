@@ -58,4 +58,92 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
             Map.of("taskType", "processApprovedOrder", "completionMode", "Auto")
         ));
     }
+
+    @Test
+    void givenReferToJudgeShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_referToJudge");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenAssignToJudgeShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_assignToJudge");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenGeneralOrderShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_generalOrder");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenCallbackRejectedOrderShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_callbackRejectedOrder");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenAwaitingInfoShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_awaitingInfo");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenGeneralEmailShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_generalEmail");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenListForHearingShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_listForHearing");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenCloseShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_close");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        ));
+    }
 }
