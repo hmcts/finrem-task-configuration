@@ -284,7 +284,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("postEventState", "orderMade");
         // a non-hearing standard reason, but a manual free-text reason has been entered
         inputVariables.putValue("additionalData",
-            additionalDataWithOrderRefusal(List.of("The D81 form is incomplete"),
+            additionalDataWithOrderRefusal(List.of("The D81 incomplete"),
                 "Please clarify the pension figures"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -300,7 +300,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_orderRefusal");
         inputVariables.putValue("postEventState", "orderMade");
         inputVariables.putValue("additionalData",
-            additionalDataWithOrderRefusal(List.of("The D81 form is incomplete"), ""));
+            additionalDataWithOrderRefusal(List.of("The D81 incomplete"), ""));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
