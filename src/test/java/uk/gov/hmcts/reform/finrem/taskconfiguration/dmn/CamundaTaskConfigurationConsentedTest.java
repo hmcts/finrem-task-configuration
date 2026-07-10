@@ -546,7 +546,12 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
         ));
         inputVariables.putValue("taskType", "checkResponseReceived");
-  
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(20);
+
         assertThat(valueOf(results, "workType")).isEqualTo("routine_work");
         assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
         assertThat(valueOf(results, "title")).isEqualTo("Check Response Received");
@@ -561,7 +566,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "region")).isEqualTo("2");
         assertThat(valueOf(results, "location")).isEqualTo("765324");
     }
-  
+
     @Test
     void givenCheckHelpWithFeesTaskTypeShouldReturnConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
