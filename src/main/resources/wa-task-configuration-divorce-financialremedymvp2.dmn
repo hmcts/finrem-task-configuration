@@ -293,6 +293,23 @@
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_03xc8jx">
+        <inputEntry id="UnaryTests_1739yvd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06p10v3">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13hevwm">
+          <text>"roleCategory"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_137jxz2">
+          <text>"JUDICIAL"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19g70s2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_config_8">
         <inputEntry id="InputEntry_config_8_1">
           <text></text>
@@ -310,20 +327,20 @@
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_13fp5cl">
-        <inputEntry id="UnaryTests_110b9jd">
+      <rule id="DecisionRule_043cb84">
+        <inputEntry id="UnaryTests_08mue3b">
           <text></text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0pd8atg">
+        <inputEntry id="UnaryTests_0k64usx">
           <text>"reviewApplication"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1vkxvcp">
+        <outputEntry id="LiteralExpression_0kwtaja">
           <text>"dueDateIntervalDays"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1og5vnm">
+        <outputEntry id="LiteralExpression_0n2v6to">
           <text>10</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_0o6s5zl">
+        <outputEntry id="LiteralExpression_13t6orw">
           <text>true</text>
         </outputEntry>
       </rule>
@@ -445,7 +462,7 @@
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_11b77qt">
-          <text></text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0q2r2z4">
@@ -462,7 +479,7 @@
           <text>"Process Approved Order"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1ahb30u">
-          <text></text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_1">

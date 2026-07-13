@@ -37,8 +37,8 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-      
-        assertThat(logic.getRules()).hasSize(10);
+
+        assertThat(logic.getRules()).hasSize(11);
     }
 
     @Test
