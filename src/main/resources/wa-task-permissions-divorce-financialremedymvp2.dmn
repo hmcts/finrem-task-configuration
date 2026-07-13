@@ -6,8 +6,9 @@
         <inputExpression id="InputExpression_1" typeRef="string">
           <text>if(taskAttributes != null and taskAttributes.taskType != null) then
             taskAttributes.taskType
-else
-"r1"</text>
+            else
+            "r1"
+          </text>
         </inputExpression>
       </input>
       <input id="Input_2" label="Case Data" camunda:inputVariable="case">
@@ -251,6 +252,64 @@ else
           <text>1</text>
         </outputEntry>
         <outputEntry id="OutputEntry_permissions_6_7">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_131jtye">
+        <inputEntry id="UnaryTests_19ry9x9">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09xrnwl">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05dfkct">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0gfql9x">
+          <text>"leadership-judge"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0j1ryeh">
+          <text>"Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qsys1d">
+          <text>"JUDICIAL"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1bieakk">
+          <text>410</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rh92qt">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ihorcz">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1gngato">
+        <inputEntry id="UnaryTests_1kub3cu">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hwicff">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_120j0sg">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0id5tgr">
+          <text>"judge"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1n2gc09">
+          <text>"Read,CancelOwn, CompleteOwn,Claim,Unclaim,Execute"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0acykt2">
+          <text>"JUDICIAL"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1k1xr6u">
+          <text>410</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1wnvsys">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rtlz7m">
           <text>false</text>
         </outputEntry>
       </rule>

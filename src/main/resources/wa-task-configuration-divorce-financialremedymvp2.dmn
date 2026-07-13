@@ -11,10 +11,11 @@
         <inputExpression id="InputExpression_2" typeRef="string">
           <text>if(taskAttributes != null and taskAttributes.taskType != null) then
             taskAttributes.taskType
-else if(taskType != null) then
-           taskType
-else
-null</text>
+            else if(taskType != null) then
+            taskType
+            else
+            null
+          </text>
         </inputExpression>
       </input>
       <output id="Output_1" label="Name" name="name" typeRef="string" />
@@ -309,6 +310,23 @@ null</text>
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_13fp5cl">
+        <inputEntry id="UnaryTests_110b9jd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pd8atg">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vkxvcp">
+          <text>"dueDateIntervalDays"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1og5vnm">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0o6s5zl">
+          <text>true</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_config_1">
         <inputEntry id="InputEntry_config_1_1">
           <text></text>
@@ -495,6 +513,57 @@ null</text>
           <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yhfbc2">
+        <inputEntry id="UnaryTests_0wru739">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j9j9mf">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0q7isv4">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0fidgi5">
+          <text>"decision_making_work"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1eukgly">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_038ptnk">
+        <inputEntry id="UnaryTests_0wzp044">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w1kbkf">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_068laye">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zga3nh">
+          <text>"[Approve Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_approveApplication/FR_approveApplication1)&lt;br&gt;[Upload Approved Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_uploadApprovedOrder/FR_uploadApprovedOrder1)&lt;br&gt;[Application Not Approved](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_orderRefusal/FR_orderRefusal1)"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_054d91y">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0tb8282">
+        <inputEntry id="UnaryTests_1ffn6nn">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_121ho7v">
+          <text>"reviewApplication"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rufapo">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1okji44">
+          <text>"Review Application"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rrg4fx">
           <text>true</text>
         </outputEntry>
       </rule>
