@@ -159,7 +159,7 @@
       </rule>
       <rule id="Rule_initiation_4">
         <inputEntry id="InputEntry_initiation_4_1">
-          <text>"FR_issueApplication"</text>
+          <text>"FR_issueApplication","FR_referToJudgeFromRespondToOrder"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_2">
           <text>"referredToJudge"</text>
