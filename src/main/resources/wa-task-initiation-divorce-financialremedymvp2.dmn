@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
-  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN" camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+             id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
+             exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN"
+            camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_initiation_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="Event Id" camunda:inputVariable="eventId">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -22,7 +27,8 @@
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.pensionCollection != null) then count(additionalData.Data.pensionCollection) else 0</text>
         </inputExpression>
       </input>
-      <input id="Input_5" label="Hearing to be listed or manual refusal reason entered" camunda:inputVariable="reviewRefusedHearingOrManualReason">
+      <input id="Input_5" label="Hearing to be listed or manual refusal reason entered"
+             camunda:inputVariable="reviewRefusedHearingOrManualReason">
         <inputExpression id="InputExpression_5" typeRef="boolean">
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.orderRefusalCollection != null) then (some refusal in additionalData.Data.orderRefusalCollection satisfies ((refusal.value.orderRefusal != null and list contains(refusal.value.orderRefusal, "Hearing fixed for first available date")) or (refusal.value.orderRefusalOther != null and refusal.value.orderRefusalOther != ""))) else false</text>
         </inputExpression>
@@ -32,11 +38,11 @@
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion != null) then additionalData.Data.helpWithFeesQuestion else ""</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
-      <output id="Output_2" label="Name" name="name" typeRef="string" />
-      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
-      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
-      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
+      <output id="Output_1" label="Task Id" name="taskId" typeRef="string"/>
+      <output id="Output_2" label="Name" name="name" typeRef="string"/>
+      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer"/>
+      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json"/>
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string"/>
       <rule id="Rule_initiation_1">
         <inputEntry id="InputEntry_initiation_1_1">
           <text>"attachScannedDocs"</text>
@@ -115,10 +121,10 @@
       </rule>
       <rule id="Rule_initiation_3">
         <inputEntry id="InputEntry_initiation_3_1">
-          <text>"FR_orderRefusal"</text>
+          <text>"FR_applicationPaymentSubmission"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_3_2">
-          <text>"orderMade"</text>
+          <text>"applicationSubmitted"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_3_3">
           <text></text>
@@ -127,16 +133,16 @@
           <text></text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_3_5">
-          <text>true</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_6">
           <text></text>
         </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_6">
+          <text>"Yes"</text>
+        </inputEntry>
         <outputEntry id="OutputEntry_initiation_3_1">
-          <text>"reviewRefusedOrder"</text>
+          <text>"checkHelpWithFees"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_3_2">
-          <text>"Review Refused Order"</text>
+          <text>"Check Help With Fees"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_3_4">
           <text>0</text>
@@ -153,10 +159,10 @@
       </rule>
       <rule id="Rule_initiation_4">
         <inputEntry id="InputEntry_initiation_4_1">
-          <text>"FR_applicationPaymentSubmission"</text>
+          <text>"FR_issueApplication"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_2">
-          <text>"applicationSubmitted"</text>
+          <text>"referredToJudge"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_3">
           <text></text>
@@ -168,24 +174,62 @@
           <text></text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_6">
-          <text>"Yes"</text>
+          <text></text>
         </inputEntry>
         <outputEntry id="OutputEntry_initiation_4_1">
-          <text>"checkHelpWithFees"</text>
+          <text>"reviewApplication"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_4_2">
-          <text>"Check Help With Fees"</text>
+          <text>"Review Application"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_4_4">
+        <outputEntry id="OutputEntry_initiation_4_3">
           <text>0</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_4_5">
+        <outputEntry id="OutputEntry_initiation_4_4">
           <text>{
 "delayUntil": now(),
 "delayUntilIntervalDays": "0"
 }</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_4_6">
+        <outputEntry id="OutputEntry_initiation_4_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_initiation_5">
+        <inputEntry id="InputEntry_initiation_5_1">
+          <text>"FR_orderRefusal"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_2">
+          <text>"orderMade"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_5">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_5_1">
+          <text>"reviewRefusedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_2">
+          <text>"Review Refused Order"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
@@ -194,7 +238,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-initiation-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="150" y="80" />
+        <dc:Bounds height="80" width="180" x="150" y="80"/>
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

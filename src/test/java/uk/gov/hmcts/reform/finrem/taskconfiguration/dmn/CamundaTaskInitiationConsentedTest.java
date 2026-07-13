@@ -37,7 +37,8 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(4);
+
+        assertThat(logic.getRules()).hasSize(5);
     }
 
     @Test
@@ -50,7 +51,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
         assertThat(results).hasSize(1);
-        Map<String, Object> result = results.get(0);
+        Map<String, Object> result = results.getFirst();
         assertThat(result.get("taskId")).isEqualTo("processScannedDocuments");
         assertThat(result.get("name")).isEqualTo("Process Scanned Documents");
         assertThat(result.get("delayDuration")).isEqualTo(0);
@@ -71,7 +72,21 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList()).hasSize(1);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+
+        assertThat(result.get("taskId")).isEqualTo("processScannedDocuments");
+        assertThat(result.get("name")).isEqualTo("Process Scanned Documents");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
     }
 
     @Test
@@ -106,13 +121,6 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
-    private static Map<String, Object> additionalDataWithPensionDocuments(int numberOfDocuments) {
-        List<Map<String, Object>> pensionCollection = IntStream.range(0, numberOfDocuments)
-            .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))
-            .toList();
-        return Map.of("Data", Map.of("pensionCollection", pensionCollection));
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
     void givenTriggerEventWithPensionDocumentsShouldCreateProcessApprovedOrderTask(String eventId) {
@@ -125,12 +133,13 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
         assertThat(results).hasSize(1);
-        Map<String, Object> result = results.get(0);
+        Map<String, Object> result = results.getFirst();
+
         assertThat(result.get("taskId")).isEqualTo("processApprovedOrder");
         assertThat(result.get("name")).isEqualTo("Process Approved Order");
         assertThat(result.get("delayDuration")).isEqualTo(0);
         assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
-
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
         assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
@@ -199,12 +208,13 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
         assertThat(results).hasSize(1);
-        Map<String, Object> result = results.get(0);
+        Map<String, Object> result = results.getFirst();
+
         assertThat(result.get("taskId")).isEqualTo("checkHelpWithFees");
         assertThat(result.get("name")).isEqualTo("Check Help With Fees");
         assertThat(result.get("delayDuration")).isEqualTo(0);
         assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
-
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
         assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
@@ -245,12 +255,37 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
-    private static Map<String, Object> additionalDataWithOrderRefusal(List<String> reasons, String otherText) {
-        Map<String, Object> value = new java.util.HashMap<>();
-        value.put("orderRefusal", reasons);
-        value.put("orderRefusalOther", otherText);
-        return Map.of("Data", Map.of("orderRefusalCollection",
-            List.of(Map.of("id", "1", "value", value))));
+    @Test
+    void givenIssueApplicationEventIdAndReferredToJudgeState_whenEvaluated_thenInitiatesReviewApplicationTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("postEventState", "referredToJudge");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList())
+            .satisfies(result -> assertThat(result.getFirst().get("delayUntil")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("delayUntil")
+            .isEqualTo(List.of(
+                Map.of(
+                    "taskId", "reviewApplication",
+                    "name", "Review Application",
+                    "delayDuration", 0,
+                    "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
+                )
+            ));
+    }
+
+    @Test
+    void givenIssueApplicationEventIdAndOtherState_whenEvaluated_thenDoesNotInitiateReviewApplicationTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("postEventState", "someState");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
@@ -321,10 +356,27 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_orderRefusal");
         inputVariables.putValue("postEventState", "readyForHearing");
-        inputVariables.putValue("additionalData",
-            additionalDataWithOrderRefusal(List.of("Hearing fixed for first available date"), ""));
+        inputVariables.putValue(
+            "additionalData",
+            additionalDataWithOrderRefusal(List.of("Hearing fixed for first available date"), "")
+        );
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    private static Map<String, Object> additionalDataWithPensionDocuments(int numberOfDocuments) {
+        List<Map<String, Object>> pensionCollection = IntStream.range(0, numberOfDocuments)
+            .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))
+            .toList();
+        return Map.of("Data", Map.of("pensionCollection", pensionCollection));
+    }
+
+    private static Map<String, Object> additionalDataWithOrderRefusal(List<String> reasons, String otherText) {
+        Map<String, Object> value = new java.util.HashMap<>();
+        value.put("orderRefusal", reasons);
+        value.put("orderRefusalOther", otherText);
+        return Map.of("Data", Map.of("orderRefusalCollection",
+                                     List.of(Map.of("id", "1", "value", value))));
     }
 }
