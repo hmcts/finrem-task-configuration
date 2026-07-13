@@ -46,6 +46,17 @@
           <text>"Check Help With Fees"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_03e89nt">
+        <inputEntry id="UnaryTests_1fzsf63">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bm6ogg">
+          <text>"reviewApplication"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_076yy6h">
+          <text>"Review Application"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
