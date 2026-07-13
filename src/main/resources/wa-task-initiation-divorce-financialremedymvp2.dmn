@@ -142,6 +142,41 @@
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_1f3vf9r">
+        <inputEntry id="UnaryTests_1u1tlt0">
+          <text>"FR_issueApplication"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ff7bhb">
+          <text>"referredToJudge"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wsjv8k">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1s0ltzd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k4rppu">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h2vch4">
+          <text>"reviewApplication"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18i65gh">
+          <text>"Review Application"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1okkbnn">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uh71ys">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1r0to36">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_initiation_4">
 
         <inputEntry id="InputEntry_initiation_4_1">

@@ -27,6 +27,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("taskAttributes", Map.of("taskType", "unknownTaskType"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
@@ -35,7 +36,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined permission rules has changed.")
-            .hasSize(8);
+            .hasSize(10);
     }
 
     @Test
@@ -158,6 +159,33 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         // BA confirmed a CTSC caseworker cannot unclaim a task
         assertThat(ctscPermissions).doesNotContain("Unclaim");
+    }
+
+    @Test
+    void givenReviewApplicationTaskType_WhenEvaluated_ThenReturnsAuthorisation() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewApplication"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "leadership-judge",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign",
+                "roleCategory", "JUDICIAL",
+                "authorisations", "410",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "judge",
+                "value", "Read,CancelOwn, CompleteOwn,Claim,Unclaim,Execute",
+                "roleCategory", "JUDICIAL",
+                "authorisations", "410",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
     }
 
     @Test
