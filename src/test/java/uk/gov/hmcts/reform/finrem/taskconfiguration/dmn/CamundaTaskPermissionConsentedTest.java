@@ -229,12 +229,12 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(rolesWithPermissions)
             .isEqualTo(List.of("ctsc", "ctsc-team-leader"))
             .doesNotContain(
-            "ctsc-admin",
-            "hearing-centre-admin",
-            "hearing-centre-team-leader",
-            "judge",
-            "tribunal-caseworker",
-            "task-supervisor"
-        );
+                "ctsc-admin",
+                "hearing-centre-admin",
+                "hearing-centre-team-leader",
+                "judge",
+                "tribunal-caseworker",
+                "task-supervisor"
+            );
     }
 }
