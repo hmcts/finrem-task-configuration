@@ -75,9 +75,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenassignToJudgeConsentEventShouldAutoCompleteReviewOrderResponseTask() {
+    void givenAssignToJudgeConsentEventShouldAutoCompleteReviewOrderResponseTask() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_assignToJudgeConsent");
+        inputVariables.putValue("eventId", "FR_referToJudgeFromRespondToOrder");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(

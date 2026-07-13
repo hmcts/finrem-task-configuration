@@ -266,7 +266,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenRespondToOrderEventRecievedWithValidPostEventStateCreatesReviewOrderResponseTask() {
+    void givenRespondToOrderEventReceivedWithValidPostEventStateCreatesReviewOrderResponseTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_respondToOrder");
         inputVariables.putValue("postEventState", "responseReceived");
@@ -276,7 +276,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         assertThat(results).hasSize(1);
         Map<String, Object> result = results.getFirst();
-        assertThat(result.get("taskId")).isEqualTo("reviewOrderResponse");
+        assertThat(result).containsEntry("taskId", "reviewOrderResponse");
         assertThat(result.get("name")).isEqualTo("Review Order Response");
         assertThat(result.get("delayDuration")).isEqualTo(0);
         assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
@@ -297,6 +297,6 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
-        assertThat(results).hasSize(0);
+        assertThat(results).isEmpty();
     }
 }

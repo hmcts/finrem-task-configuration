@@ -49,7 +49,7 @@
       </rule>
       <rule id="Rule_completion_4">
         <inputEntry id="UnaryTests_06hrddo">
-          <text>"FR_assignToJudgeConsent"</text>
+          <text>"FR_referToJudgeFromRespondToOrder"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0xuhqmg">
           <text>"reviewOrderResponse"</text>
