@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
-             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
-             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-             id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
-             exporter="Camunda Modeler" exporterVersion="5.48.0">
-  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN"
-            camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
+  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_initiation_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="Event Id" camunda:inputVariable="eventId">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -31,16 +26,16 @@
           </text>
         </inputExpression>
       </input>
-      <input id="Input_5" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
-        <inputExpression id="InputExpression_5" typeRef="string">
+      <input id="InputClause_08h74ps" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
+        <inputExpression id="LiteralExpression_0vjryhg" typeRef="string">
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion != null) then additionalData.Data.helpWithFeesQuestion else ""</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Task Id" name="taskId" typeRef="string"/>
-      <output id="Output_2" label="Name" name="name" typeRef="string"/>
-      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer"/>
-      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json"/>
-      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string"/>
+      <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
+      <output id="Output_2" label="Name" name="name" typeRef="string" />
+      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
+      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
       <rule id="Rule_initiation_1">
         <inputEntry id="InputEntry_initiation_1_1">
           <text>"attachScannedDocs"</text>
@@ -54,7 +49,7 @@
         <inputEntry id="UnaryTests_112b9pv">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_1_5">
+        <inputEntry id="UnaryTests_0pglwnj">
           <text></text>
         </inputEntry>
         <outputEntry id="OutputEntry_initiation_1_1">
@@ -68,18 +63,52 @@
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_5">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0u93829">
+        <inputEntry id="UnaryTests_1vtvcmm">
+          <text>"FR_referToJudge"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1da4kc2">
+          <text>"referredToJudge"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18lsde0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lvmtcs">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xwqxip">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1muzry7">
+          <text>"checkResponseReceived"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_04h5jxr">
+          <text>"Check Response Received"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0bidzi7">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1kohys9">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0a4t3fi">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
       <rule id="DecisionRule_1l90mf6">
         <inputEntry id="UnaryTests_0m9ef1y">
-          <text>"FR_referToJudge","FR_assignToJudge","FR_callbackRejectedOrder"</text>
+          <text>"FR_assignToJudge"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0m7ague">
           <text>"awaitingJudiciaryResponse"</text>
@@ -88,6 +117,9 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_08vlsly">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ngkq3z">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1la1dyz">
@@ -101,46 +133,47 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_0w13up9">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0iihxbq">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0x1adg2">
-        <inputEntry id="UnaryTests_1ndj9kr">
-          <text>"FR_generalOrder"</text>
+      <rule id="DecisionRule_0bycp3d">
+        <inputEntry id="UnaryTests_1gnceek">
+          <text>"FR_callbackRejectedOrder","FR_generalOrder"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0d0qeoj">
-          <text>"consentOrderNotApproved"</text>
+        <inputEntry id="UnaryTests_1yyygsm">
+          <text>"orderMade"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0s3fh5e">
+        <inputEntry id="UnaryTests_06ij9vx">
           <text></text>
         </inputEntry>
-        <inputEntry id="UnaryTests_037afq3">
+        <inputEntry id="UnaryTests_01311rx">
           <text></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0hjgpm8">
+        <inputEntry id="UnaryTests_1dvxz48">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fmdmkr">
           <text>"checkResponseReceived"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_0hydwog">
+        <outputEntry id="LiteralExpression_06zqina">
           <text>"Check Response Received"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_0hfyy6m">
+        <outputEntry id="LiteralExpression_154ueqj">
           <text>0</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_05fz4qq">
+        <outputEntry id="LiteralExpression_19nkj5g">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_0c1nylx">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        <outputEntry id="LiteralExpression_0mtlxd0">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"xxx</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1djpls6">
@@ -148,12 +181,15 @@
           <text>"FR_awaitingInfo"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0prcwp3">
-          <text>"infoReceived"</text>
+          <text>"awaitingInfo"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0tuc0dy">
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_1x0nifo">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uq7ccg">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0suj06m">
@@ -167,10 +203,9 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_0tuy2tj">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_16p8dy7">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -189,6 +224,9 @@
         <inputEntry id="UnaryTests_1aa4r70">
           <text></text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1by4rqc">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1bjmiu4">
           <text>"checkResponseReceived"</text>
         </outputEntry>
@@ -200,10 +238,9 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_035098y">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1gp24ok">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -214,12 +251,15 @@
           <text>"FR_listForHearing"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1fpn2s5">
-          <text>"caseFileSubmitted"</text>
+          <text>"readyForHearing"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1n0vdrg">
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_050ysic">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1loim8j">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1ebotyu">
@@ -233,10 +273,9 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_09lms4p">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1g96cqk">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -255,6 +294,9 @@
         <inputEntry id="UnaryTests_0y05rbm">
           <text></text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0pc3e5w">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1pgp241">
           <text>"checkResponseReceived"</text>
         </outputEntry>
@@ -266,10 +308,9 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_0xaosq3">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0v2ekoc">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -288,6 +329,9 @@
         <inputEntry id="UnaryTests_0ut2ixy">
           <text>&gt; 0</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0jo5gsg">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_06lh4yn">
           <text>"processApprovedOrder"</text>
         </outputEntry>
@@ -299,47 +343,46 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_1dbi98u">
           <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1030ooo">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_initiation_3">
-        <inputEntry id="InputEntry_initiation_3_1">
+      <rule id="DecisionRule_0ait711">
+        <inputEntry id="UnaryTests_0ep6wk3">
           <text>"FR_applicationPaymentSubmission"</text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_2">
+        <inputEntry id="UnaryTests_1cc2265">
           <text>"applicationSubmitted"</text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_3">
+        <inputEntry id="UnaryTests_1ml93yr">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_4">
+        <inputEntry id="UnaryTests_1nw66xn">
           <text></text>
         </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_5">
+        <inputEntry id="UnaryTests_1cv1l5n">
           <text>"Yes"</text>
         </inputEntry>
-        <outputEntry id="OutputEntry_initiation_3_1">
+        <outputEntry id="LiteralExpression_14jm0t7">
           <text>"checkHelpWithFees"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_2">
+        <outputEntry id="LiteralExpression_1638etf">
           <text>"Check Help With Fees"</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_4">
+        <outputEntry id="LiteralExpression_02i37i4">
           <text>0</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_5">
+        <outputEntry id="LiteralExpression_1t0zr54">
           <text>{
 "delayUntil": now(),
 "delayUntilIntervalDays": "0"
 }</text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_6">
+        <outputEntry id="LiteralExpression_0vjvmn6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
@@ -348,7 +391,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-initiation-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="150" y="80"/>
+        <dc:Bounds height="80" width="180" x="150" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

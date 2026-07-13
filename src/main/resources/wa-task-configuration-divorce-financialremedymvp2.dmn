@@ -388,7 +388,8 @@ null</text>
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0yrs0kw">
-          <text>"[Check Response Received](/cases/case-details/${[CASE_REFERENCE]}/trigger/checkResponseReceived/checkResponseReceived1)"</text>
+          <text>"[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_referToJudge/FR_referToJudge1)&lt;br&gt;[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_assignToJudge/FR_assignToJudge1)&lt;br&gt;[Create General Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalOrder/FR_generalOrder1)&lt;br&gt;[Call back Rejected Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_callbackRejectedOrder/FR_callbackRejectedOrder1)&lt;br&gt;[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingInfo/FR_awaitingInfo1)&lt;br&gt;[Create General Email](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalEmail/FR_generalEmail1)&lt;br&gt;[List for hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)&lt;br&gt;[Close Case](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_close/FR_close1)&lt;br&gt;[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)&lt;br&gt;"
+</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_102ztng">
           <text>true</text>
