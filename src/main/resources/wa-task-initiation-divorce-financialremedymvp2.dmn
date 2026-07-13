@@ -17,33 +17,163 @@
           <text></text>
         </inputExpression>
       </input>
+      <input id="Input_3" label="Supplementary evidence handled" camunda:inputVariable="evidenceHandled">
+        <inputExpression id="InputExpression_3" typeRef="string">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.evidenceHandled != null) then additionalData.Data.evidenceHandled else ""</text>
+        </inputExpression>
+      </input>
+      <input id="Input_4" label="Pension documents present" camunda:inputVariable="pensionDocumentsCount">
+        <inputExpression id="InputExpression_4" typeRef="integer">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.pensionCollection != null) then count(additionalData.Data.pensionCollection) else 0</text>
+        </inputExpression>
+      </input>
+      <input id="Input_5" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
+        <inputExpression id="InputExpression_5" typeRef="string">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion != null) then additionalData.Data.helpWithFeesQuestion else ""</text>
+        </inputExpression>
+      </input>
       <output id="Output_1" label="Task Id" name="taskId" typeRef="string"/>
       <output id="Output_2" label="Name" name="name" typeRef="string"/>
-      <output id="Output_5" label="Delay Duration" name="delayDuration" typeRef="integer"/>
-      <output id="OutputClause_19j96n6" label="Delay Until" name="delayUntil" typeRef="json"/>
-      <output id="Output_6" label="Process Categories" name="processCategories" typeRef="string"/>
-      <rule id="DecisionRule_1mcolmt">
-        <inputEntry id="UnaryTests_1l9lszk">
-          <text>"FR_issueApplication"</text>
+      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer"/>
+      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json"/>
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string"/>
+      <rule id="Rule_initiation_1">
+        <inputEntry id="InputEntry_initiation_1_1">
+          <text>"attachScannedDocs"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0xyl4bi">
-          <text>"referredToJudge"</text>
+        <inputEntry id="InputEntry_initiation_1_2">
+          <text></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1oq64kj">
-          <text>"reviewApplication"</text>
+        <inputEntry id="InputEntry_initiation_1_3">
+          <text>not("Yes")</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_5">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_1_1">
+          <text>"processScannedDocuments"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1oer7t5">
-          <text>"Review Application"</text>
+        <outputEntry id="OutputEntry_initiation_1_2">
+          <text>"Process Scanned Documents"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1hbpiew">
+        <outputEntry id="OutputEntry_initiation_1_4">
           <text>0</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1b84c8f">
-          <text>{"delayUntil": now(),
-            "delayUntilIntervalDays": "0"}
-          </text>
+        <outputEntry id="OutputEntry_initiation_1_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1q5srok">
+        <outputEntry id="OutputEntry_initiation_1_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_initiation_2">
+        <inputEntry id="InputEntry_initiation_2_1">
+          <text>"FR_approveApplication","FR_uploadApprovedOrder"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_2">
+          <text>"consentOrderApproved"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_5">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_2_1">
+          <text>"processApprovedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_2">
+          <text>"Process Approved Order"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_2_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_initiation_3">
+        <inputEntry id="InputEntry_initiation_3_1">
+          <text>"FR_applicationPaymentSubmission"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_2">
+          <text>"applicationSubmitted"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_5">
+          <text>"Yes"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_3_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_2">
+          <text>"Check Help With Fees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_3_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1f3vf9r">
+        <inputEntry id="UnaryTests_1u1tlt0">
+          <text>"FR_issueApplication"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ff7bhb">
+          <text>"referredToJudge"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wsjv8k">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1s0ltzd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k4rppu">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h2vch4">
+          <text>"reviewApplication"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18i65gh">
+          <text>"Review Application"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1okkbnn">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uh71ys">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1r0to36">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>

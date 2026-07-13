@@ -14,6 +14,39 @@
       </input>
       <output id="Output_1" label="Task Type" name="taskType" typeRef="string"/>
       <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string"/>
+      <rule id="Rule_completion_1">
+        <inputEntry id="InputEntry_completion_1_1">
+          <text>"attachScannedDocs"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_1_1">
+          <text>"processScannedDocuments"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_completion_2">
+        <inputEntry id="InputEntry_completion_2_1">
+          <text>"FR_amendedConsentOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_2_1">
+          <text>"processApprovedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_2_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_completion_hwf_1">
+        <inputEntry id="InputEntry_completion_hwf_1_1">
+          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="DecisionRule_02vgolj">
         <description></description>
         <inputEntry id="UnaryTests_1iyu0vc">
