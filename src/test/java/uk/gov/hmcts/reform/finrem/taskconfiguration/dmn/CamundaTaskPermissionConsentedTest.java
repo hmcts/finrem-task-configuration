@@ -199,7 +199,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "name", "ctsc",
                 "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
                 "roleCategory", "CTSC",
-                "authorisations", "SKILL:ABA2:CheckRefusedOrder",
+                "authorisations", "SKILL:ABA2:CheckOrderResponse",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             ),
@@ -208,7 +208,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
                     + "Claim,Own,Execute,Assign",
                 "roleCategory", "CTSC",
-                "authorisations", "SKILL:ABA2:CheckRefusedOrder",
+                "authorisations", "SKILL:ABA2:CheckOrderResponse",
                 "assignmentPriority", 1,
                 "autoAssignable", false
             )

@@ -280,7 +280,7 @@
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1dkmycf">
-          <text>"SKILL:ABA2:CheckRefusedOrder"</text>
+          <text>"SKILL:ABA2:CheckOrderResponse"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0mdeh42">
           <text>1</text>
@@ -309,7 +309,7 @@
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_10e3tq2">
-          <text>"SKILL:ABA2:CheckRefusedOrder"</text>
+          <text>"SKILL:ABA2:CheckOrderResponse"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0hnuply">
           <text>1</text>
