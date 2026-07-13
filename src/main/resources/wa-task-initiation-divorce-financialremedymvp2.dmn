@@ -28,7 +28,9 @@
       </input>
       <input id="InputClause_08h74ps" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
         <inputExpression id="LiteralExpression_0vjryhg" typeRef="string">
-          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion != null) then additionalData.Data.helpWithFeesQuestion else ""</text>
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion
+            != null) then additionalData.Data.helpWithFeesQuestion else ""
+          </text>
         </inputExpression>
       </input>
       <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
@@ -63,9 +65,10 @@
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_5">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -98,9 +101,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_1kohys9">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0a4t3fi">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -133,9 +137,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_0w13up9">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0iihxbq">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -168,12 +173,13 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_19nkj5g">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0mtlxd0">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"xxx</text>
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1djpls6">
@@ -203,9 +209,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_0tuy2tj">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_16p8dy7">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -238,9 +245,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_035098y">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1gp24ok">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -273,9 +281,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_09lms4p">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1g96cqk">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -308,9 +317,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_0xaosq3">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0v2ekoc">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -343,9 +353,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_1dbi98u">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1030ooo">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
@@ -378,9 +389,10 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_1t0zr54">
           <text>{
-"delayUntil": now(),
-"delayUntilIntervalDays": "0"
-}</text>
+            "delayUntil": now(),
+            "delayUntilIntervalDays": "0"
+            }
+          </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0vjvmn6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>

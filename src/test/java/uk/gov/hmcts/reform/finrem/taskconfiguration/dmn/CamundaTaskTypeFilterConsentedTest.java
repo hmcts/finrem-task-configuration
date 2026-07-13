@@ -26,7 +26,7 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getInputs()).hasSize(1);
         assertThat(logic.getOutputs()).hasSize(2);
-        assertThat(logic.getRules()).hasSize(3);
+        assertThat(logic.getRules()).hasSize(4);
     }
 
     @Test

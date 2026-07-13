@@ -37,7 +37,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(9);
+        assertThat(logic.getRules()).hasSize(10);
     }
 
     @Test
@@ -123,10 +123,34 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenTriggerEventGeneralOrderShouldCreateCheckResponseReceivedTask() {
+    void givenTriggerEventReferToJudgeShouldCreateCheckResponseReceivedTask() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_generalOrder");
-        inputVariables.putValue("postEventState", "consentOrderNotApproved");
+        inputVariables.putValue("eventId", "FR_referToJudge");
+        inputVariables.putValue("postEventState", "referredToJudge");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+
+        assertThat(result.get("taskId")).isEqualTo("checkResponseReceived");
+        assertThat(result.get("name")).isEqualTo("Check Response Received");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @Test
+    void givenTriggerEventAssignToJudgeShouldCreateCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_assignToJudge");
+        inputVariables.putValue("postEventState", "awaitingJudiciaryResponse");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
@@ -150,7 +174,31 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     void givenTriggerEventAwaitingInfoShouldCreateCheckResponseReceivedTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_awaitingInfo");
-        inputVariables.putValue("postEventState", "infoReceived");
+        inputVariables.putValue("postEventState", "awaitingInfo");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+
+        assertThat(result.get("taskId")).isEqualTo("checkResponseReceived");
+        assertThat(result.get("name")).isEqualTo("Check Response Received");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @Test
+    void givenTriggerEventGeneralEmailShouldCreateCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_generalEmail");
+        inputVariables.putValue("postEventState", "");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
@@ -174,7 +222,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     void givenTriggerEventListForHearingShouldCreateCheckResponseReceivedTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_listForHearing");
-        inputVariables.putValue("postEventState", "caseFileSubmitted");
+        inputVariables.putValue("postEventState", "readyForHearing");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
@@ -219,11 +267,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"FR_referToJudge","FR_assignToJudge","FR_callbackRejectedOrder"})
+    @ValueSource(strings = {"FR_callbackRejectedOrder","FR_generalOrder"})
     void givenTriggerEventsShouldCreateCheckResponseReceivedTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
-        inputVariables.putValue("postEventState", "awaitingJudiciaryResponse");
+        inputVariables.putValue("postEventState", "orderMade");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();

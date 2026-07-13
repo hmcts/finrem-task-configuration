@@ -29,7 +29,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
 
-        assertThat(logic.getRules()).hasSize(26);
+        assertThat(logic.getRules()).hasSize(28);
     }
 
     @Test
@@ -555,9 +555,6 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "workType")).isEqualTo("routine_work");
         assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
         assertThat(valueOf(results, "title")).isEqualTo("Check Response Received");
-        assertThat(valueOf(results, "description"))
-            .isEqualTo("[Check Response Received](/cases/case-details/${[CASE_REFERENCE]}"
-                           + "/trigger/checkResponseReceived/checkResponseReceived1)");
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
         assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
@@ -565,6 +562,35 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseName")).isEqualTo("Phoenix Wright v Miles Edgeworth");
         assertThat(valueOf(results, "region")).isEqualTo("2");
         assertThat(valueOf(results, "location")).isEqualTo("765324");
+
+        String description = valueOf(results, "description").toString();
+        assertThat(description).contains(
+            "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_referToJudge/FR_referToJudge1)");
+        assertThat(description).contains(
+            "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_assignToJudge/FR_assignToJudge1)");
+        assertThat(description).contains(
+            "[Create General Order](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_generalOrder/FR_generalOrder1)");
+        assertThat(description).contains(
+            "[Call back Rejected Order](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_callbackRejectedOrder/FR_callbackRejectedOrder1)");
+        assertThat(description).contains(
+            "[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_awaitingInfo/FR_awaitingInfo1)");
+        assertThat(description).contains(
+            "[Create General Email](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_generalEmail/FR_generalEmail1)");
+        assertThat(description).contains(
+            "[List for hearing](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_listForHearing/FR_listForHearing1)");
+        assertThat(description).contains(
+            "[Close Case](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_close/FR_close1)");
+        assertThat(description).contains(
+            "[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)");
     }
 
     @Test
