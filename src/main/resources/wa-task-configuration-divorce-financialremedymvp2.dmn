@@ -286,7 +286,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0m5ivw2">
-          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees"</text>
+          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0c2mqp0">
           <text>"roleCategory"</text>
@@ -320,7 +320,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="InputEntry_config_8_2">
-          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees"</text>
+          <text>"processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder"</text>
         </inputEntry>
         <outputEntry id="OutputEntry_config_8_1">
           <text>"dueDateIntervalDays"</text>
@@ -586,6 +586,57 @@
           <text>"Review Application"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0rrg4fx">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_rro_1">
+        <inputEntry id="Rule_config_rro_1_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_rro_1_in2">
+          <text>"reviewRefusedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_rro_1_out1">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_rro_1_out2">
+          <text>"hearing_work"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_rro_1_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_rro_2">
+        <inputEntry id="Rule_config_rro_2_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_rro_2_in2">
+          <text>"reviewRefusedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_rro_2_out1">
+          <text>"title"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_rro_2_out2">
+          <text>"Review Refused Order"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_rro_2_out3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_config_rro_3">
+        <inputEntry id="Rule_config_rro_3_in1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="Rule_config_rro_3_in2">
+          <text>"reviewRefusedOrder"</text>
+        </inputEntry>
+        <outputEntry id="Rule_config_rro_3_out1">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_rro_3_out2">
+          <text>"[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)"</text>
+        </outputEntry>
+        <outputEntry id="Rule_config_rro_3_out3">
           <text>true</text>
         </outputEntry>
       </rule>

@@ -68,6 +68,17 @@
           <text>"Review Application"</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_types_4">
+        <inputEntry id="InputEntry_types_4_1">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_types_4_1">
+          <text>"reviewRefusedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_types_4_2">
+          <text>"Review Refused Order"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

@@ -39,7 +39,9 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
             Map.of("taskTypeId", "checkResponseReceived", "taskTypeName", "Check Response Received"),
             Map.of("taskTypeId", "processApprovedOrder", "taskTypeName", "Process Approved Order"),
             Map.of("taskTypeId", "checkHelpWithFees", "taskTypeName", "Check Help With Fees"),
-            Map.of("taskTypeId", "reviewApplication", "taskTypeName", "Review Application")
+            Map.of("taskTypeId", "reviewApplication", "taskTypeName", "Review Application"),
+            Map.of("taskTypeId", "reviewRefusedOrder", "taskTypeName", "Review Refused Order")
+
         ));
     }
 }

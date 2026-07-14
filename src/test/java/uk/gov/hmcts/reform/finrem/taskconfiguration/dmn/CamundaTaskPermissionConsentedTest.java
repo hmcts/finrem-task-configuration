@@ -186,4 +186,48 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
             )
         ));
     }
+
+    @Test
+    void givenReviewRefusedOrderTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewRefusedOrder"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckRefusedOrder",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckRefusedOrder",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenReviewRefusedOrderTaskTypeShouldNotGrantUnclaimToCtscCaseworker() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewRefusedOrder"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        String ctscPermissions = dmnDecisionTableResult.getResultList().stream()
+            .filter(permission -> "ctsc".equals(permission.get("name")))
+            .map(permission -> permission.get("value").toString())
+            .findFirst()
+            .orElseThrow();
+
+        // BA confirmed a CTSC caseworker cannot unclaim a task
+        assertThat(ctscPermissions).doesNotContain("Unclaim");
+    }
 }
