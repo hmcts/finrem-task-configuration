@@ -34,8 +34,9 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-
-        assertThat(logic.getRules()).hasSize(10);
+        assertThat(logic.getRules())
+            .as("Number of defined permission rules has changed.")
+            .hasSize(12);
     }
 
     @Test
@@ -229,5 +230,55 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         // BA confirmed a CTSC caseworker cannot unclaim a task
         assertThat(ctscPermissions).doesNotContain("Unclaim");
+    }
+
+    @Test
+    void givenReviewOrderResponseTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewOrderResponse"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckOrderResponse",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckOrderResponse",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenReviewOrderResponseTaskTypeShouldNotReturnPermissionsForOtherRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewOrderResponse"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        List<String> rolesWithPermissions = dmnDecisionTableResult.getResultList().stream()
+            .map(permission -> permission.get("name").toString())
+            .toList();
+
+        assertThat(rolesWithPermissions)
+            .isEqualTo(List.of("ctsc", "ctsc-team-leader"))
+            .doesNotContain(
+                "ctsc-admin",
+                "hearing-centre-admin",
+                "hearing-centre-team-leader",
+                "judge",
+                "tribunal-caseworker",
+                "task-supervisor"
+            );
     }
 }

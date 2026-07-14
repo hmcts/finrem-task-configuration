@@ -37,8 +37,9 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-
-        assertThat(logic.getRules()).hasSize(5);
+        assertThat(logic.getRules())
+            .as("Number of defined task initiation rules has changed.")
+            .hasSize(6);
     }
 
     @Test
@@ -302,7 +303,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
         assertThat(results).hasSize(1);
-        Map<String, Object> result = results.get(0);
+        Map<String, Object> result = results.getFirst();
         assertThat(result.get("taskId")).isEqualTo("reviewRefusedOrder");
         assertThat(result.get("name")).isEqualTo("Review Refused Order");
         assertThat(result.get("delayDuration")).isEqualTo(0);
@@ -328,7 +329,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
         assertThat(results).hasSize(1);
-        assertThat(results.get(0).get("taskId")).isEqualTo("reviewRefusedOrder");
+        assertThat(results.getFirst().get("taskId")).isEqualTo("reviewRefusedOrder");
     }
 
     @Test
@@ -380,5 +381,40 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         value.put("orderRefusalOther", otherText);
         return Map.of("Data", Map.of("orderRefusalCollection",
                                      List.of(Map.of("id", "1", "value", value))));
+    }
+
+    @Test
+    void givenRespondToOrderEventReceivedWithValidPostEventStateCreatesReviewOrderResponseTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_respondToOrder");
+        inputVariables.putValue("postEventState", "responseReceived");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+        assertThat(result).containsEntry("taskId", "reviewOrderResponse");
+        assertThat(result.get("name")).isEqualTo("Review Order Response");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @Test
+    void givenRespondToOrderEventRecievedWithInValidPostEventStateDoesNotCreatesReviewOrderResponseTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_respondToOrder");
+        inputVariables.putValue("postEventState", "");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).isEmpty();
     }
 }

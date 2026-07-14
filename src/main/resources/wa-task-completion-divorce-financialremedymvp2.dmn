@@ -70,6 +70,17 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_completion_4">
+        <inputEntry id="UnaryTests_06hrddo">
+          <text>"FR_referToJudgeFromRespondToOrder"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xuhqmg">
+          <text>"reviewOrderResponse"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1stzwti">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
