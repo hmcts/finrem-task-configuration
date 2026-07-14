@@ -255,10 +255,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
-    @Test
-    void givenIssueApplicationEventIdAndReferredToJudgeState_whenEvaluated_thenInitiatesReviewApplicationTask() {
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_issueApplication", "FR_referToJudgeFromRespondToOrder"})
+    void givenTriggerEventIdsAndReferredToJudgeState_whenEvaluated_thenInitiatesReviewApplicationTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("eventId", eventId);
         inputVariables.putValue("postEventState", "referredToJudge");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -277,10 +278,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
             ));
     }
 
-    @Test
-    void givenIssueApplicationEventIdAndOtherState_whenEvaluated_thenDoesNotInitiateReviewApplicationTask() {
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_issueApplication", "FR_referToJudgeFromRespondToOrder"})
+    void givenTriggerEventIdsAndOtherState_whenEvaluated_thenDoesNotInitiateReviewApplicationTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("eventId", eventId);
         inputVariables.putValue("postEventState", "someState");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
