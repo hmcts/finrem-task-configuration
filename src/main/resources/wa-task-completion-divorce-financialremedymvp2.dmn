@@ -25,6 +25,51 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_completion_2">
+        <inputEntry id="InputEntry_completion_2_1">
+          <text>"FR_amendedConsentOrder"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_2_1">
+          <text>"processApprovedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_2_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_completion_hwf_1">
+        <inputEntry id="InputEntry_completion_hwf_1_1">
+          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_1">
+          <text>"checkHelpWithFees"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_hwf_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_02vgolj">
+        <description></description>
+        <inputEntry id="UnaryTests_1iyu0vc">
+          <text>"FR_approveApplication","FR_uploadApprovedOrder","FR_orderRefusal"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cvxwds">
+          <text>"reviewApplication"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ytdsft">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_completion_rro_1">
+        <inputEntry id="InputEntry_completion_rro_1_1">
+          <text>"FR_listForHearing"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_rro_1_1">
+          <text>"reviewRefusedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_rro_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="DecisionRule_106mk7o">
         <inputEntry id="UnaryTests_1g7oy9m">
           <text>"FR_issueApplication"</text>

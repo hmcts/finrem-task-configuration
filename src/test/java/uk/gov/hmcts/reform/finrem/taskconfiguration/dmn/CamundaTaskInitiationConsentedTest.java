@@ -13,6 +13,7 @@ import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,7 +37,8 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(2);
+
+        assertThat(logic.getRules()).hasSize(6);
     }
 
     @Test
@@ -49,7 +51,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
 
         assertThat(results).hasSize(1);
-        Map<String, Object> result = results.get(0);
+        Map<String, Object> result = results.getFirst();
         assertThat(result.get("taskId")).isEqualTo("processScannedDocuments");
         assertThat(result.get("name")).isEqualTo("Process Scanned Documents");
         assertThat(result.get("delayDuration")).isEqualTo(0);
@@ -70,7 +72,21 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList()).hasSize(1);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+
+        assertThat(result.get("taskId")).isEqualTo("processScannedDocuments");
+        assertThat(result.get("name")).isEqualTo("Process Scanned Documents");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
     }
 
     @Test
@@ -105,6 +121,249 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
+    @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
+    void givenTriggerEventWithPensionDocumentsShouldCreateProcessApprovedOrderTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "consentOrderApproved");
+        inputVariables.putValue("additionalData", additionalDataWithPensionDocuments(1));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+
+        assertThat(result.get("taskId")).isEqualTo("processApprovedOrder");
+        assertThat(result.get("name")).isEqualTo("Process Approved Order");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
+    void givenTriggerEventWithNoPensionDocumentsShouldNotCreateTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "consentOrderApproved");
+        inputVariables.putValue("additionalData", additionalDataWithPensionDocuments(0));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
+    void givenTriggerEventWithAdditionalDataButNoPensionCollectionShouldNotCreateTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "consentOrderApproved");
+        // additionalData.Data is present but has no pensionCollection key, so the gate falls
+        // through its null-guard to 0 documents and no task is created
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("someOtherField", "value")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
+    void givenTriggerEventWithNoAdditionalDataShouldNotCreateTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "consentOrderApproved");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
+    void givenTriggerEventWithUnexpectedPostStateShouldNotCreateTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "consentOrderMade");
+        inputVariables.putValue("additionalData", additionalDataWithPensionDocuments(1));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenCaseSubmissionWithHelpWithFeesYesShouldCreateCheckHelpWithFeesTask() {
+        // BA confirmed the Case Submission event (FR_applicationPaymentSubmission ->
+        // applicationSubmitted) triggers the task, gated by helpWithFeesQuestion = "Yes"
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("postEventState", "awaitingHWFDecision");
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "Yes")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+
+        assertThat(result.get("taskId")).isEqualTo("checkHelpWithFees");
+        assertThat(result.get("name")).isEqualTo("Check Help With Fees");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @Test
+    void givenCaseSubmissionWithHelpWithFeesNoShouldNotCreateTask() {
+        // A non-HWF submission reaches the same post state, so the helpWithFeesQuestion gate is
+        // what distinguishes it - "No" must not create the task
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("postEventState", "awaitingHWFDecision");
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "No")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenCaseSubmissionWithHelpWithFeesAbsentShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("postEventState", "awaitingHWFDecision");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenCaseSubmissionWithHelpWithFeesYesButUnexpectedPostStateShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("postEventState", "caseAdded");
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "Yes")));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenIssueApplicationEventIdAndReferredToJudgeState_whenEvaluated_thenInitiatesReviewApplicationTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("postEventState", "referredToJudge");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList())
+            .satisfies(result -> assertThat(result.getFirst().get("delayUntil")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("delayUntil")
+            .isEqualTo(List.of(
+                Map.of(
+                    "taskId", "reviewApplication",
+                    "name", "Review Application",
+                    "delayDuration", 0,
+                    "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
+                )
+            ));
+    }
+
+    @Test
+    void givenIssueApplicationEventIdAndOtherState_whenEvaluated_thenDoesNotInitiateReviewApplicationTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("postEventState", "someState");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenOrderRefusalWithHearingReasonShouldCreateReviewRefusedOrderTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_orderRefusal");
+        inputVariables.putValue("postEventState", "orderMade");
+        inputVariables.putValue("additionalData",
+            additionalDataWithOrderRefusal(List.of("Hearing fixed for first available date"), ""));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.get(0);
+        assertThat(result.get("taskId")).isEqualTo("reviewRefusedOrder");
+        assertThat(result.get("name")).isEqualTo("Review Refused Order");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @Test
+    void givenOrderRefusalWithManualFreeTextReasonShouldCreateReviewRefusedOrderTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_orderRefusal");
+        inputVariables.putValue("postEventState", "orderMade");
+        // a non-hearing standard reason, but a manual free-text reason has been entered
+        inputVariables.putValue("additionalData",
+            additionalDataWithOrderRefusal(List.of("The D81 incomplete"),
+                "Please clarify the pension figures"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).get("taskId")).isEqualTo("reviewRefusedOrder");
+    }
+
+    @Test
+    void givenOrderRefusalWithOnlyOtherReasonsAndNoFreeTextShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_orderRefusal");
+        inputVariables.putValue("postEventState", "orderMade");
+        inputVariables.putValue("additionalData",
+            additionalDataWithOrderRefusal(List.of("The D81 incomplete"), ""));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenOrderRefusalWithNoRefusalCollectionShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_orderRefusal");
+        inputVariables.putValue("postEventState", "orderMade");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenOrderRefusalWithHearingReasonButUnexpectedPostStateShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_orderRefusal");
+        inputVariables.putValue("postEventState", "readyForHearing");
+        inputVariables.putValue(
+            "additionalData",
+            additionalDataWithOrderRefusal(List.of("Hearing fixed for first available date"), "")
+        );
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
     @ParameterizedTest
     @ValueSource(strings = { "FR_HWFDecisionMade", "FR_paymentMadeFromHWF", "FR_applicationPaymentSubmission" })
     void givenCheckApplicationTriggerEventIds_whenEvaluated_thenInitiatesCheckApplicationTask(String eventId) {
@@ -126,5 +385,20 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
                     "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
                 )
             ));
+    }
+
+    private static Map<String, Object> additionalDataWithPensionDocuments(int numberOfDocuments) {
+        List<Map<String, Object>> pensionCollection = IntStream.range(0, numberOfDocuments)
+            .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))
+            .toList();
+        return Map.of("Data", Map.of("pensionCollection", pensionCollection));
+    }
+
+    private static Map<String, Object> additionalDataWithOrderRefusal(List<String> reasons, String otherText) {
+        Map<String, Object> value = new java.util.HashMap<>();
+        value.put("orderRefusal", reasons);
+        value.put("orderRefusalOther", otherText);
+        return Map.of("Data", Map.of("orderRefusalCollection",
+                                     List.of(Map.of("id", "1", "value", value))));
     }
 }

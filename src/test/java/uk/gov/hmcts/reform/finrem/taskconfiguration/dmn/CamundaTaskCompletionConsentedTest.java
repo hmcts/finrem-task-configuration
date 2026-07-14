@@ -6,6 +6,8 @@ import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.impl.VariableMapImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
@@ -33,7 +35,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(2);
+
+        assertThat(logic.getRules()).hasSize(6);
     }
 
     @Test
@@ -44,6 +47,54 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "processScannedDocuments", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenAmendedConsentOrderShouldAutoCompleteProcessApprovedOrderTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_amendedConsentOrder");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "processApprovedOrder", "completionMode", "Auto")
+        ));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_HWFDecisionMade", "FR_paymentMadeFromHWF", "FR_awaitingPaymentResponseFromHWF"})
+    void givenHelpWithFeesEvents_whenEvaluated_thenCompletesTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
+        ));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "FR_approveApplication", "FR_uploadApprovedOrder", "FR_orderRefusal" })
+    void givenReviewApplicationTaskIds_whenDMNIsEvaluated_thenTaskIsCompleted(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "reviewApplication", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenListForHearingShouldAutoCompleteReviewRefusedOrderTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_listForHearing");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "reviewRefusedOrder", "completionMode", "Auto")
         ));
     }
 

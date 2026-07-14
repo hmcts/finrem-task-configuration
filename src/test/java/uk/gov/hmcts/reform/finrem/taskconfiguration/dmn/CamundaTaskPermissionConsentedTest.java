@@ -27,40 +27,15 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("taskAttributes", Map.of("taskType", "unknownTaskType"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
     @Test
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
-        assertThat(logic.getRules()).hasSize(4);
-    }
 
-    @Test
-    void givenProcessScannedDocumentsTaskTypeShouldReturnPermissionsForCtscRoles() {
-        VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
-
-        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
-        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of(
-                "name", "ctsc",
-                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
-                "roleCategory", "CTSC",
-                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
-                "assignmentPriority", 1,
-                "autoAssignable", false
-            ),
-            Map.of(
-                "name", "ctsc-team-leader",
-                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
-                    + "Claim,Own,Execute,Assign",
-                "roleCategory", "CTSC",
-                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
-                "assignmentPriority", 1,
-                "autoAssignable", false
-            )
-        ));
+        assertThat(logic.getRules()).hasSize(12);
     }
 
     @Test
@@ -86,11 +61,183 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
+    void givenProcessScannedDocumentsTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "processScannedDocuments"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ManageScannedDocuments",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenProcessApprovedOrderTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "processApprovedOrder"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ProcessApprovedOrders",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:ProcessApprovedOrders",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenCheckHelpWithFeesTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "checkHelpWithFees"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckingHWF",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckingHWF",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenCheckHelpWithFeesTaskTypeShouldNotGrantUnclaimToCtscCaseworker() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "checkHelpWithFees"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        String ctscPermissions = dmnDecisionTableResult.getResultList().stream()
+            .filter(permission -> "ctsc".equals(permission.get("name")))
+            .map(permission -> permission.get("value").toString())
+            .findFirst()
+            .orElseThrow();
+
+        // BA confirmed a CTSC caseworker cannot unclaim a task
+        assertThat(ctscPermissions).doesNotContain("Unclaim");
+    }
+
+    @Test
+    void givenReviewApplicationTaskType_WhenEvaluated_ThenReturnsAuthorisation() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewApplication"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "leadership-judge",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,Claim,Own,Execute,Assign",
+                "roleCategory", "JUDICIAL",
+                "authorisations", "410",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "judge",
+                "value", "Read,CancelOwn, CompleteOwn,Claim,Unclaim,Execute",
+                "roleCategory", "JUDICIAL",
+                "authorisations", "410",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenReviewRefusedOrderTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewRefusedOrder"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckRefusedOrder",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckRefusedOrder",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenReviewRefusedOrderTaskTypeShouldNotGrantUnclaimToCtscCaseworker() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewRefusedOrder"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        String ctscPermissions = dmnDecisionTableResult.getResultList().stream()
+            .filter(permission -> "ctsc".equals(permission.get("name")))
+            .map(permission -> permission.get("value").toString())
+            .findFirst()
+            .orElseThrow();
+
+        // BA confirmed a CTSC caseworker cannot unclaim a task
+        assertThat(ctscPermissions).doesNotContain("Unclaim");
+    }
+
+    @Test
     void givenCheckApplicationTaskType_whenEvaluated_thenReturnsThePermissionsForCtscRoles() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("taskAttributes", Map.of("taskType", "checkApplication"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of(
                 "name", "ctsc",
