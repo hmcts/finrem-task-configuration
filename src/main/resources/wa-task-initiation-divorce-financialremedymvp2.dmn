@@ -27,8 +27,14 @@
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.pensionCollection != null) then count(additionalData.Data.pensionCollection) else 0</text>
         </inputExpression>
       </input>
-      <input id="Input_5" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
-        <inputExpression id="InputExpression_5" typeRef="string">
+      <input id="Input_5" label="Hearing to be listed or manual refusal reason entered"
+             camunda:inputVariable="reviewRefusedHearingOrManualReason">
+        <inputExpression id="InputExpression_5" typeRef="boolean">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.orderRefusalCollection != null) then (some refusal in additionalData.Data.orderRefusalCollection satisfies ((refusal.value.orderRefusal != null and list contains(refusal.value.orderRefusal, "Hearing fixed for first available date")) or (refusal.value.orderRefusalOther != null and refusal.value.orderRefusalOther != ""))) else false</text>
+        </inputExpression>
+      </input>
+      <input id="Input_6" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
+        <inputExpression id="InputExpression_6" typeRef="string">
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion != null) then additionalData.Data.helpWithFeesQuestion else ""</text>
         </inputExpression>
       </input>
@@ -51,6 +57,9 @@
           <text></text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_1_5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_1_6">
           <text></text>
         </inputEntry>
         <outputEntry id="OutputEntry_initiation_1_1">
@@ -88,6 +97,9 @@
         <inputEntry id="InputEntry_initiation_2_5">
           <text></text>
         </inputEntry>
+        <inputEntry id="InputEntry_initiation_2_6">
+          <text></text>
+        </inputEntry>
         <outputEntry id="OutputEntry_initiation_2_1">
           <text>"processApprovedOrder"</text>
         </outputEntry>
@@ -121,6 +133,9 @@
           <text></text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_3_5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_3_6">
           <text>"Yes"</text>
         </inputEntry>
         <outputEntry id="OutputEntry_initiation_3_1">
@@ -142,38 +157,79 @@
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_1f3vf9r">
-        <inputEntry id="UnaryTests_1u1tlt0">
+      <rule id="Rule_initiation_4">
+        <inputEntry id="InputEntry_initiation_4_1">
           <text>"FR_issueApplication"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0ff7bhb">
+        <inputEntry id="InputEntry_initiation_4_2">
           <text>"referredToJudge"</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0wsjv8k">
+        <inputEntry id="InputEntry_initiation_4_3">
           <text></text>
         </inputEntry>
-        <inputEntry id="UnaryTests_1s0ltzd">
+        <inputEntry id="InputEntry_initiation_4_4">
           <text></text>
         </inputEntry>
-        <inputEntry id="UnaryTests_1k4rppu">
+        <inputEntry id="InputEntry_initiation_4_5">
           <text></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1h2vch4">
+        <inputEntry id="InputEntry_initiation_4_6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_4_1">
           <text>"reviewApplication"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_18i65gh">
+        <outputEntry id="OutputEntry_initiation_4_2">
           <text>"Review Application"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1okkbnn">
+        <outputEntry id="OutputEntry_initiation_4_3">
           <text>0</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_0uh71ys">
+        <outputEntry id="OutputEntry_initiation_4_4">
           <text>{
 "delayUntil": now(),
 "delayUntilIntervalDays": "0"
 }</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1r0to36">
+        <outputEntry id="OutputEntry_initiation_4_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_initiation_5">
+        <inputEntry id="InputEntry_initiation_5_1">
+          <text>"FR_orderRefusal"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_2">
+          <text>"orderMade"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_5">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_5_6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_5_1">
+          <text>"reviewRefusedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_2">
+          <text>"Review Refused Order"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_5_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>

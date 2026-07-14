@@ -26,7 +26,7 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getInputs()).hasSize(1);
         assertThat(logic.getOutputs()).hasSize(2);
-        assertThat(logic.getRules()).hasSize(4);
+        assertThat(logic.getRules()).hasSize(5);
     }
 
     @Test
@@ -38,7 +38,9 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
             Map.of("taskTypeId", "processScannedDocuments", "taskTypeName", "Process Scanned Documents"),
             Map.of("taskTypeId", "processApprovedOrder", "taskTypeName", "Process Approved Order"),
             Map.of("taskTypeId", "checkHelpWithFees", "taskTypeName", "Check Help With Fees"),
-            Map.of("taskTypeId", "reviewApplication", "taskTypeName", "Review Application")
+            Map.of("taskTypeId", "reviewApplication", "taskTypeName", "Review Application"),
+            Map.of("taskTypeId", "reviewRefusedOrder", "taskTypeName", "Review Refused Order")
+
         ));
     }
 }
