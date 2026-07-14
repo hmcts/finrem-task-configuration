@@ -30,7 +30,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task configuration rules has changed.")
-            .hasSize(34);
+            .hasSize(37);
     }
 
     @Test
@@ -52,7 +52,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("calculatedDates", "nextHearingDate,dueDate,priorityDate"),
                 entry("priorityDateOriginRef", "nextHearingDate,dueDate"),
                 entry("nextHearingDate", ""),
-                entry("dueDateNonWorkingCalendar","https://www.gov.uk/bank-holidays/england-and-wales.json"),
+                entry("dueDateNonWorkingCalendar", "https://www.gov.uk/bank-holidays/england-and-wales.json"),
                 entry("dueDateNonWorkingDaysOfWeek", "SATURDAY,SUNDAY"),
                 entry("dueDateSkipNonWorkingDays", "true"),
                 entry("dueDateMustBeWorkingDay", "No"),
@@ -631,6 +631,39 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 ),
                 entry("title", "Review Application")
             ));
+    }
+
+    @Test
+    void givenReviewRefusedOrderTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Peter Parker v Mary Jane",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
+        ));
+        inputVariables.putValue("taskType", "reviewRefusedOrder");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(20);
+        assertThat(valueOf(results, "workType")).isEqualTo("hearing_work");
+        assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
+        assertThat(valueOf(results, "title")).isEqualTo("Review Refused Order");
+        assertThat(valueOf(results, "description"))
+            .isEqualTo("[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_listForHearing/FR_listForHearing1)");
+        assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Peter Parker v Mary Jane");
+        assertThat(valueOf(results, "region")).isEqualTo("2");
+        assertThat(valueOf(results, "location")).isEqualTo("366796");
+
+        // SLA = 5 working days: weekends and gov.uk bank holidays are skipped
+        assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
+        assertThat(valueOf(results, "dueDateSkipNonWorkingDays")).isEqualTo("true");
+        assertThat(valueOf(results, "dueDateNonWorkingDaysOfWeek")).isEqualTo("SATURDAY,SUNDAY");
+        assertThat(valueOf(results, "dueDateNonWorkingCalendar"))
+            .isEqualTo("https://www.gov.uk/bank-holidays/england-and-wales.json");
+        assertThat(valueOf(results, "dueDateTime")).isEqualTo("14:00");
     }
 
     @Test

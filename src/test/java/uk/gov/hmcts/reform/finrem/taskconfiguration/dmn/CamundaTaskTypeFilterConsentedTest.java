@@ -28,7 +28,7 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(logic.getOutputs()).hasSize(2);
         assertThat(logic.getRules())
             .as("Number of defined task type rules has changed.")
-            .hasSize(5);
+            .hasSize(6);
     }
 
     @Test
@@ -41,7 +41,9 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
             Map.of("taskTypeId", "processApprovedOrder", "taskTypeName", "Process Approved Order"),
             Map.of("taskTypeId", "checkHelpWithFees", "taskTypeName", "Check Help With Fees"),
             Map.of("taskTypeId", "reviewApplication", "taskTypeName", "Review Application"),
+            Map.of("taskTypeId", "reviewRefusedOrder", "taskTypeName", "Review Refused Order"),
             Map.of("taskTypeId", "reviewOrderResponse", "taskTypeName", "Review Order Response")
+
         ));
     }
 }

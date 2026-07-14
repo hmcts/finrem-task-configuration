@@ -59,6 +59,17 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="Rule_completion_rro_1">
+        <inputEntry id="InputEntry_completion_rro_1_1">
+          <text>"FR_listForHearing"</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_completion_rro_1_1">
+          <text>"reviewRefusedOrder"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_completion_rro_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_completion_4">
         <inputEntry id="UnaryTests_06hrddo">
           <text>"FR_referToJudgeFromRespondToOrder"</text>
