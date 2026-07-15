@@ -199,7 +199,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         // BA confirmed the Case Submission event (FR_applicationPaymentSubmission ->
         // applicationSubmitted) triggers the task, gated by helpWithFeesQuestion = "Yes"
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("eventId", "FR_applicationPaymentSubmission");
         inputVariables.putValue("postEventState", "awaitingHWFDecision");
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "Yes")));
 
@@ -225,7 +225,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         // A non-HWF submission reaches the same post state, so the helpWithFeesQuestion gate is
         // what distinguishes it - "No" must not create the task
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("eventId", "FR_applicationPaymentSubmission");
         inputVariables.putValue("postEventState", "awaitingHWFDecision");
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "No")));
 
@@ -236,7 +236,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void givenCaseSubmissionWithHelpWithFeesAbsentShouldNotCreateTask() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("eventId", "FR_applicationPaymentSubmission");
         inputVariables.putValue("postEventState", "awaitingHWFDecision");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -246,7 +246,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     @Test
     void givenCaseSubmissionWithHelpWithFeesYesButUnexpectedPostStateShouldNotCreateTask() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_HWFDecision");
+        inputVariables.putValue("eventId", "FR_applicationPaymentSubmission");
         inputVariables.putValue("postEventState", "caseAdded");
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "Yes")));
 
@@ -254,10 +254,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
-    @Test
-    void givenIssueApplicationEventIdAndReferredToJudgeState_whenEvaluated_thenInitiatesReviewApplicationTask() {
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_issueApplication", "FR_referToJudgeFromRespondToOrder"})
+    void givenTriggerEventIdsAndReferredToJudgeState_whenEvaluated_thenInitiatesReviewApplicationTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("eventId", eventId);
         inputVariables.putValue("postEventState", "referredToJudge");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -276,10 +277,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
             ));
     }
 
-    @Test
-    void givenIssueApplicationEventIdAndOtherState_whenEvaluated_thenDoesNotInitiateReviewApplicationTask() {
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_issueApplication", "FR_referToJudgeFromRespondToOrder"})
+    void givenTriggerEventIdsAndOtherState_whenEvaluated_thenDoesNotInitiateReviewApplicationTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_issueApplication");
+        inputVariables.putValue("eventId", eventId);
         inputVariables.putValue("postEventState", "someState");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
