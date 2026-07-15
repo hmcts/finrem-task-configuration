@@ -124,7 +124,7 @@
           <text>"FR_applicationPaymentSubmission"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_3_2">
-          <text>"applicationSubmitted"</text>
+          <text>"awaitingHWFDecision"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_3_3">
           <text></text>
@@ -230,6 +230,44 @@
 }</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_5_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_initiation_6">
+        <inputEntry id="InputEntry_initiation_6_1">
+          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_applicationPaymentSubmission"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_6_2">
+          <text>"applicationSubmitted"</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_6_3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_6_4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_6_5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="InputEntry_initiation_6_6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_initiation_6_1">
+          <text>"checkApplication"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_6_2">
+          <text>"Check Application"</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_6_4">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_6_5">
+          <text>{
+"delayUntil": now(),
+"delayUntilIntervalDays": "0"
+}</text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_6_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>

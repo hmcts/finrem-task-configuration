@@ -38,7 +38,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
 
-        assertThat(logic.getRules()).hasSize(5);
+        assertThat(logic.getRules()).hasSize(6);
     }
 
     @Test
@@ -121,7 +121,6 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
-    @ParameterizedTest
     @ValueSource(strings = {"FR_approveApplication", "FR_uploadApprovedOrder"})
     void givenTriggerEventWithPensionDocumentsShouldCreateProcessApprovedOrderTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
@@ -201,7 +200,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         // applicationSubmitted) triggers the task, gated by helpWithFeesQuestion = "Yes"
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_applicationPaymentSubmission");
-        inputVariables.putValue("postEventState", "applicationSubmitted");
+        inputVariables.putValue("postEventState", "awaitingHWFDecision");
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "Yes")));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -227,7 +226,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         // what distinguishes it - "No" must not create the task
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_applicationPaymentSubmission");
-        inputVariables.putValue("postEventState", "applicationSubmitted");
+        inputVariables.putValue("postEventState", "awaitingHWFDecision");
         inputVariables.putValue("additionalData", Map.of("Data", Map.of("helpWithFeesQuestion", "No")));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -238,7 +237,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     void givenCaseSubmissionWithHelpWithFeesAbsentShouldNotCreateTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_applicationPaymentSubmission");
-        inputVariables.putValue("postEventState", "applicationSubmitted");
+        inputVariables.putValue("postEventState", "awaitingHWFDecision");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
@@ -365,6 +364,29 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "FR_HWFDecisionMade", "FR_paymentMadeFromHWF", "FR_applicationPaymentSubmission" })
+    void givenCheckApplicationTriggerEventIds_whenEvaluated_thenInitiatesCheckApplicationTask(String eventId) {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("postEventState", "applicationSubmitted");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList())
+            .satisfies(result -> assertThat(result.getFirst().get("delayUntil")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("delayUntil")
+            .isEqualTo(List.of(
+                Map.of(
+                    "taskId", "checkApplication",
+                    "name", "Check Application",
+                    "delayDuration", 0,
+                    "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
+                )
+            ));
     }
 
     private static Map<String, Object> additionalDataWithPensionDocuments(int numberOfDocuments) {
