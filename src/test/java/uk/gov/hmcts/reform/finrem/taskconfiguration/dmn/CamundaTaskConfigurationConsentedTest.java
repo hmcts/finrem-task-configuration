@@ -569,9 +569,6 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_referToJudge/FR_referToJudge1)");
         assertThat(description).contains(
-            "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_assignToJudge/FR_assignToJudge1)");
-        assertThat(description).contains(
             "[Create General Order](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_generalOrder/FR_generalOrder1)");
         assertThat(description).contains(
