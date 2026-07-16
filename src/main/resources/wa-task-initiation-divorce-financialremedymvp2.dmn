@@ -132,45 +132,6 @@
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
-      <rule id="Rule_initiation_3">
-        <inputEntry id="InputEntry_initiation_3_1">
-          <text>"FR_assignToJudge"</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_2">
-          <text>"awaitingJudiciaryResponse"</text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_3">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_4">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_5">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="InputEntry_initiation_3_6">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="OutputEntry_initiation_3_1">
-          <text>"checkResponseReceived"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_2">
-          <text>"Check Response Received"</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_3">
-          <text>0</text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_4">
-          <text>{
-            "delayUntil": now(),
-            "delayUntilIntervalDays": "0"
-            }
-          </text>
-        </outputEntry>
-        <outputEntry id="OutputEntry_initiation_3_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
-        </outputEntry>
-      </rule>
       <rule id="Rule_initiation_4">
         <inputEntry id="InputEntry_initiation_4_1">
           <text>"FR_callbackRejectedOrder","FR_generalOrder"</text>
