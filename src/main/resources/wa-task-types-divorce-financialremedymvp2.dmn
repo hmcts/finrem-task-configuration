@@ -79,6 +79,17 @@
           <text>"Review Refused Order"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0hd1l6b">
+        <inputEntry id="UnaryTests_16nswdi">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1055pxs">
+          <text>"checkApplication"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_15rdcpg">
+          <text>"Check Application"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

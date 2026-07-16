@@ -29,7 +29,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
 
-        assertThat(logic.getRules()).hasSize(35);
+        assertThat(logic.getRules()).hasSize(37);
     }
 
     @Test
@@ -718,6 +718,47 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "dueDateNonWorkingCalendar"))
             .isEqualTo("https://www.gov.uk/bank-holidays/england-and-wales.json");
         assertThat(valueOf(results, "dueDateTime")).isEqualTo("14:00");
+    }
+
+    @Test
+    void givenCheckApplicationTaskType_whenEvaluated_thenReturnsCorrectConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of());
+        inputVariables.putValue("taskType", "checkApplication");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        Map<String, Object> results = dmnDecisionTableResult.getResultList()
+            .stream().collect(Collectors.toMap(map -> (String) map.get("name"), map -> map.get("value")));
+
+        assertThat(results)
+            .satisfies(result -> assertThat(result.get("dueDateOrigin")).isNotNull())
+            .usingRecursiveComparison()
+            .ignoringFields("dueDateOrigin")
+            .isEqualTo(Map.ofEntries(
+                entry("calculatedDates", "nextHearingDate,dueDate,priorityDate"),
+                entry("priorityDateOriginRef", "nextHearingDate,dueDate"),
+                entry("nextHearingDate", ""),
+                entry("dueDateNonWorkingCalendar","https://www.gov.uk/bank-holidays/england-and-wales.json"),
+                entry("dueDateNonWorkingDaysOfWeek", "SATURDAY,SUNDAY"),
+                entry("dueDateSkipNonWorkingDays", "true"),
+                entry("dueDateMustBeWorkingDay", "No"),
+                entry("dueDateTime", "14:00"),
+                entry("majorPriority", "5000"),
+                entry("minorPriority", "500"),
+                entry("caseName", "Financial Remedy"),
+                entry("region", ""),
+                entry("location", ""),
+                entry("caseManagementCategory", "FR Consented"),
+                entry("roleCategory", "CTSC"),
+                entry("dueDateIntervalDays", "5"),
+                entry("workType", "applications"),
+                entry("description",
+                       "[Issue Application]"
+                           + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
+                           + "FR_issueApplication/FR_issueApplication1)"),
+                entry("title", "Check Application")
+            ));
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {

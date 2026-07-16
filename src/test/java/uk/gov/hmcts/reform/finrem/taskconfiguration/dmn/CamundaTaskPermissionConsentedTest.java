@@ -35,7 +35,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
 
-        assertThat(logic.getRules()).hasSize(10);
+        assertThat(logic.getRules()).hasSize(12);
     }
 
     @Test
@@ -229,5 +229,33 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         // BA confirmed a CTSC caseworker cannot unclaim a task
         assertThat(ctscPermissions).doesNotContain("Unclaim");
+    }
+
+    @Test
+    void givenCheckApplicationTaskType_whenEvaluated_thenReturnsThePermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "checkApplication"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "ctsc",
+                "value", "Read,Own,Claim,CancelOwn,CompleteOwn,Execute",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckingApplications",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            ),
+            Map.of(
+                "name", "ctsc-team-leader",
+                "value", "Read,Manage,Cancel,Complete,Unclaim,Unassign,"
+                    + "Claim,Own,Execute,Assign",
+                "roleCategory", "CTSC",
+                "authorisations", "SKILL:ABA2:CheckingApplications",
+                "assignmentPriority", 1,
+                "autoAssignable", false
+            )
+        ));
     }
 }
