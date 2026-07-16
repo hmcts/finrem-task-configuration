@@ -36,7 +36,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined permission rules has changed.")
-            .hasSize(14);
+            .hasSize(16);
     }
 
     @Test

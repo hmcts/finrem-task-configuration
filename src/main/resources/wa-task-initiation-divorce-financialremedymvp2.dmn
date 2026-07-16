@@ -14,15 +14,13 @@
       </input>
       <input id="Input_3" label="Supplementary evidence handled" camunda:inputVariable="evidenceHandled">
         <inputExpression id="InputExpression_3" typeRef="string">
-          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.evidenceHandled !=
-            null) then additionalData.Data.evidenceHandled else ""
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.evidenceHandled != null) then additionalData.Data.evidenceHandled else ""
           </text>
         </inputExpression>
       </input>
       <input id="InputClause_0prpqwj" label="Pension documents present" camunda:inputVariable="pensionDocumentsCount">
         <inputExpression id="LiteralExpression_1yika90" typeRef="integer">
-          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.pensionCollection !=
-            null) then count(additionalData.Data.pensionCollection) else 0
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.pensionCollection != null) then count(additionalData.Data.pensionCollection) else 0
           </text>
         </inputExpression>
       </input>
@@ -42,11 +40,11 @@
           </text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Task Id" name="taskId" typeRef="string"/>
-      <output id="Output_2" label="Name" name="name" typeRef="string"/>
-      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer"/>
-      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json"/>
-      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string"/>
+      <output id="Output_1" label="Task Id" name="taskId" typeRef="string" />
+      <output id="Output_2" label="Name" name="name" typeRef="string" />
+      <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
+      <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
       <rule id="Rule_initiation_1">
         <inputEntry id="InputEntry_initiation_1_1">
           <text>"attachScannedDocs"</text>
@@ -364,7 +362,7 @@
           <text>"FR_applicationPaymentSubmission"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_10_2">
-          <text>"applicationSubmitted"</text>
+          <text>"awaitingHWFDecision"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_10_3">
           <text></text>
@@ -559,7 +557,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-initiation-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="150" y="80"/>
+        <dc:Bounds height="80" width="180" x="150" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

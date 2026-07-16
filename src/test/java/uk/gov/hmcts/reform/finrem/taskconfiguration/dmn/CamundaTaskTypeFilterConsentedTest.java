@@ -28,7 +28,7 @@ class CamundaTaskTypeFilterConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(logic.getOutputs()).hasSize(2);
         assertThat(logic.getRules())
             .as("Number of defined task type rules has changed.")
-            .hasSize(7);
+            .hasSize(8);
     }
 
     @Test
