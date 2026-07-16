@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
-             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
-             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-             id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
-             exporter="Camunda Modeler" exporterVersion="5.48.0">
-  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN"
-            camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
+  <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_initiation_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="Event Id" camunda:inputVariable="eventId">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -31,13 +26,11 @@
           </text>
         </inputExpression>
       </input>
-      <input id="Input_5" label="Hearing to be listed or manual refusal reason entered"
-             camunda:inputVariable="reviewRefusedHearingOrManualReason">
+      <input id="Input_5" label="Hearing to be listed or manual refusal reason entered" camunda:inputVariable="reviewRefusedHearingOrManualReason">
         <inputExpression id="InputExpression_5" typeRef="boolean">
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.orderRefusalCollection
             != null) then (some refusal in additionalData.Data.orderRefusalCollection satisfies
-            ((refusal.value.orderRefusal != null and list contains(refusal.value.orderRefusal, "Hearing fixed for first
-            available date")) or (refusal.value.orderRefusalOther != null and refusal.value.orderRefusalOther != "")))
+            ((refusal.value.orderRefusal != null and list contains(refusal.value.orderRefusal, "Hearing fixed for first available date")) or (refusal.value.orderRefusalOther != null and refusal.value.orderRefusalOther != "")))
             else false
           </text>
         </inputExpression>
@@ -557,7 +550,7 @@
             }
           </text>
         </outputEntry>
-        <outputEntry id="OutputEntry_initiation_7_6">
+        <outputEntry id="OutputEntry_initiation_14_6">
           <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
