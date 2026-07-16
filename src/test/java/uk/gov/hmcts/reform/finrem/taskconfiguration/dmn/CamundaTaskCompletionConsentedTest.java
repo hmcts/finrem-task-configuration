@@ -36,7 +36,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     void ifThisTestFailsNeedsUpdatingWithYourChanges() {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
 
-        assertThat(logic.getRules()).hasSize(6);
+        assertThat(logic.getRules()).hasSize(7);
     }
 
     @Test
@@ -63,7 +63,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"FR_referToJudge", "FR_assignToJudge", "FR_generalOrder", "FR_callbackRejectedOrder",
-        "FR_awaitingInfo","FR_generalEmail","FR_listForHearing", "FR_close"})
+        "FR_awaitingInfo","FR_generalEmail", "FR_close"})
     void givenCheckResponseEvents_whenEvaluated_thenCompletesTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
