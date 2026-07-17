@@ -62,12 +62,10 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         ));
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"FR_referToJudge", "FR_generalOrder", "FR_callbackRejectedOrder",
-        "FR_awaitingInfo","FR_generalEmail", "FR_close"})
-    void givenCheckResponseEvents_whenEvaluated_thenCompletesTask(String eventId) {
+    @Test
+    void givenReferToJudgeShouldAutoCompleteCheckResponseReceivedTask() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", eventId);
+        inputVariables.putValue("eventId", "FR_referToJudge");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(

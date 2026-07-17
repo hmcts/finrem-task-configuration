@@ -39,7 +39,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task initiation rules has changed.")
-            .hasSize(13);
+            .hasSize(8);
     }
 
     @Test
@@ -433,6 +433,41 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     void givenRespondToOrderEventRecievedWithInValidPostEventStateDoesNotCreatesReviewOrderResponseTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_respondToOrder");
+        inputVariables.putValue("postEventState", "");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).isEmpty();
+    }
+
+    @Test
+    void givenSubmitResponseEventReceivedWithValidPostEventStateCreatesCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_solCompleteUploadDocument");
+        inputVariables.putValue("postEventState", "infoReceived");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+        assertThat(result).containsEntry("taskId", "checkResponseReceived");
+        assertThat(result.get("name")).isEqualTo("Check Response Received");
+        assertThat(result.get("delayDuration")).isEqualTo(0);
+        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+
+        // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
+        @SuppressWarnings("unchecked")
+        Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
+        assertThat(delayUntil.get("delayUntilIntervalDays")).isEqualTo("0");
+        assertThat(delayUntil.get("delayUntil")).isNotNull();
+    }
+
+    @Test
+    void givenSubmitResponseEventReceivedWithInValidPostEventStateDoesNotCreateCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "checkResponseReceived");
         inputVariables.putValue("postEventState", "");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);

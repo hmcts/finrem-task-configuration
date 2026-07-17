@@ -569,26 +569,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_referToJudge/FR_referToJudge1)");
         assertThat(description).contains(
-            "[Create General Order](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_generalOrder/FR_generalOrder1)");
-        assertThat(description).contains(
-            "[Call back Rejected Order](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_callbackRejectedOrder/FR_callbackRejectedOrder1)");
-        assertThat(description).contains(
-            "[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_awaitingInfo/FR_awaitingInfo1)");
-        assertThat(description).contains(
-            "[Create General Email](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_generalEmail/FR_generalEmail1)");
-        assertThat(description).contains(
-            "[List for hearing](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_listForHearing/FR_listForHearing1)");
-        assertThat(description).contains(
-            "[Close Case](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_close/FR_close1)");
-        assertThat(description).contains(
-            "[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)");
+            "[Submit response](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_solCompleteUploadDocument/FR_solCompleteUploadDocument1)");
     }
 
     @Test
