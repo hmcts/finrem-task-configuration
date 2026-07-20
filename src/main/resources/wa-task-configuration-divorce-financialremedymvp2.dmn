@@ -241,7 +241,7 @@
           <text>"region"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_13_out2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""</text>
+          <text>2</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_13_out3">
           <text>true</text>
@@ -258,7 +258,7 @@
           <text>"location"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_14_out2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else ""</text>
+          <text>4281</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_14_out3">
           <text>true</text>
