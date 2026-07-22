@@ -224,7 +224,7 @@
           <text>"caseName"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_12_out2">
-          <text>if (caseData != null and caseData.applicantLName != null and caseData.appRespondentLName != null) then caseData.applicantLName + " vs " + caseData.appRespondentLName else "Financial Remedy"</text>
+          <text>if (caseData != null and caseData.applicantLName != null and caseData.appRespondentLName != null) then (caseData.applicantLName + " vs " + caseData.appRespondentLName) else "Financial Remedy"</text>
         </outputEntry>
         <outputEntry id="Rule_config_generic_12_out3">
           <text>true</text>
