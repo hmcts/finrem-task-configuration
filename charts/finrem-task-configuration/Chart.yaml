@@ -3,7 +3,7 @@ appVersion: "1.0"
 description: A Helm chart for finrem-task-configuration
 name: finrem-task-configuration
 home: https://github.com/hmcts/finrem-task-configuration
-version: ~1.1.0
+version: 0.0.1
 maintainers:
   - name: HMCTS FinRem team
 dependencies:
