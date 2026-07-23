@@ -3,7 +3,7 @@
              xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
              xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
              id="Definitions_task-types-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
-             exporter="Camunda Modeler" exporterVersion="5.48.0">
+             exporter="Camunda Modeler" exporterVersion="5.32.0">
   <decision id="wa-task-types-divorce-financialremedymvp2" name="Task Types DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_task_types_consented" hitPolicy="COLLECT">
       <input id="Input_1">
@@ -24,25 +24,14 @@
           <text>"Process Scanned Documents"</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0tvvfwr">
-        <inputEntry id="UnaryTests_198wpds">
+      <rule id="Rule_types_2">
+        <inputEntry id="InputEntry_types_2_1">
           <text></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_02y0xb3">
-          <text>"checkResponseReceived"</text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_0kkmagq">
-          <text>"Check Response Received"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0n0y7mz">
-        <inputEntry id="UnaryTests_01lq6vv">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_14fh61k">
+        <outputEntry id="OutputEntry_types_2_1">
           <text>"processApprovedOrder"</text>
         </outputEntry>
-        <outputEntry id="LiteralExpression_1fbgpi7">
+        <outputEntry id="OutputEntry_types_2_2">
           <text>"Process Approved Order"</text>
         </outputEntry>
       </rule>
