@@ -30,7 +30,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task configuration rules has changed.")
-            .hasSize(40);
+            .hasSize(42);
     }
 
     @Test
@@ -537,6 +537,40 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseName")).isEqualTo("Tony Stark v Pepper Potts");
         assertThat(valueOf(results, "region")).isEqualTo("2");
         assertThat(valueOf(results, "location")).isEqualTo("765324");
+    }
+
+    @Test
+    void givenCheckResponseReceivedTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of(
+            "caseNameHmctsInternal", "Phoenix Wright v Miles Edgeworth",
+            "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
+        ));
+        inputVariables.putValue("taskType", "checkResponseReceived");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(20);
+
+        assertThat(valueOf(results, "workType")).isEqualTo("routine_work");
+        assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
+        assertThat(valueOf(results, "title")).isEqualTo("Check Response Received");
+        assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
+        assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
+        assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
+            "https://www.gov.uk/bank-holidays/england-and-wales.json");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Phoenix Wright v Miles Edgeworth");
+        assertThat(valueOf(results, "region")).isEqualTo("2");
+        assertThat(valueOf(results, "location")).isEqualTo("765324");
+
+        String description = valueOf(results, "description").toString();
+        assertThat(description).contains(
+            "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_referToJudge/FR_referToJudge1)");
+        assertThat(description).contains(
+            "[Submit response](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_solCompleteUploadDocument/FR_solCompleteUploadDocument1)");
     }
 
     @Test

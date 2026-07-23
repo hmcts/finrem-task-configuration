@@ -37,7 +37,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task completion rules has changed.")
-            .hasSize(7);
+            .hasSize(8);
     }
 
     @Test
@@ -59,6 +59,17 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "processApprovedOrder", "completionMode", "Auto")
+        ));
+    }
+
+    @Test
+    void givenReferToJudgeShouldAutoCompleteCheckResponseReceivedTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_referToJudge");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
         ));
     }
 
