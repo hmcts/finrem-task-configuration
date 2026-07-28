@@ -439,7 +439,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0yrs0kw">
-          <text>"[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_referToJudge/FR_referToJudge1)&lt;br&gt;[Submit response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_solCompleteUploadDocument/FR_solCompleteUploadDocument1)"
+          <text>"[Submit response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_solCompleteUploadDocument/FR_solCompleteUploadDocument1)"
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_102ztng">
