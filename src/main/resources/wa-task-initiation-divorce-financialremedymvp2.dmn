@@ -281,7 +281,7 @@
       </rule>
       <rule id="Rule_initiation_13">
         <inputEntry id="InputEntry_initiation_13_1">
-          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_applicationPaymentSubmission"</text>
+          <text>"FR_applicationPaymentSubmission","FR_caseSubmissionFromAwaitingInfo","FR_caseSubmissionFromInfoReceived","FR_paymentMadeFromHWF","FR_paymenetMade","FR_paymentMadeFromAwaitingPayment","FR_HWFDecisionMade","FR_HWFDecisionMadeFromAwaitingPayment"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_13_2">
           <text>"applicationSubmitted"</text>
@@ -302,7 +302,7 @@
           <text>"checkApplication"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_13_2">
-          <text>"Check Application"</text>
+          <text>"Check and Issue Application"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_13_3">
           <text>0</text>

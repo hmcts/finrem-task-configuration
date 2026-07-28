@@ -369,7 +369,15 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "FR_HWFDecisionMade", "FR_paymentMadeFromHWF", "FR_applicationPaymentSubmission" })
+    @ValueSource(strings = {
+        "FR_applicationPaymentSubmission",
+        "FR_caseSubmissionFromAwaitingInfo",
+        "FR_caseSubmissionFromInfoReceived",
+        "FR_paymentMadeFromHWF",
+        "FR_paymenetMade",
+        "FR_paymentMadeFromAwaitingPayment",
+        "FR_HWFDecisionMade",
+        "FR_HWFDecisionMadeFromAwaitingPayment" })
     void givenCheckApplicationTriggerEventIds_whenEvaluated_thenInitiatesCheckApplicationTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
@@ -384,7 +392,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
             .isEqualTo(List.of(
                 Map.of(
                     "taskId", "checkApplication",
-                    "name", "Check Application",
+                    "name", "Check and Issue Application",
                     "delayDuration", 0,
                     "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
                 )
