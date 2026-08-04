@@ -378,7 +378,8 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         "FR_paymentMadeFromAwaitingPayment",
         "FR_HWFDecisionMade",
         "FR_HWFDecisionMadeFromAwaitingPayment" })
-    void givenCheckAndIssueApplicationTriggerEventIds_whenEvaluated_thenInitiatesCheckAndIssueApplicationTask(String eventId) {
+    void givenCheckAndIssueApplicationTriggerEventIds_whenEvaluated_thenInitiatesCheckAndIssueApplicationTask(
+        String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
         inputVariables.putValue("postEventState", "applicationSubmitted");
