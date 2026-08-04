@@ -378,7 +378,7 @@
       </rule>
       <rule id="DecisionRule_048nbev">
         <inputEntry id="UnaryTests_1w8qb2c">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0pn3b41">
           <text></text>
@@ -407,7 +407,7 @@
       </rule>
       <rule id="DecisionRule_1frf0q8">
         <inputEntry id="UnaryTests_1e7p87y">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_03gcn1q">
           <text></text>
