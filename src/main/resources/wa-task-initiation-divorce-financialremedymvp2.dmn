@@ -299,7 +299,7 @@
           <text></text>
         </inputEntry>
         <outputEntry id="OutputEntry_initiation_13_1">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_13_2">
           <text>"Check and Issue Application"</text>

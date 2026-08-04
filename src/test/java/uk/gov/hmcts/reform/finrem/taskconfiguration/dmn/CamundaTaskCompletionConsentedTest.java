@@ -111,13 +111,13 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckApplicationTask() {
+    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckAndIssueApplicationTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_issueApplication");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "checkApplication", "completionMode", "Auto")
+            Map.of("taskType", "checkAndIssueApplication", "completionMode", "Auto")
         ));
     }
 

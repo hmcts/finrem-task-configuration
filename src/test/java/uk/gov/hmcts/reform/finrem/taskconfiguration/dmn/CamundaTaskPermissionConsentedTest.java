@@ -283,9 +283,9 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenCheckApplicationTaskType_whenEvaluated_thenReturnsThePermissionsForCtscRoles() {
+    void givenCheckAndIssueApplicationTaskType_whenEvaluated_thenReturnsThePermissionsForCtscRoles() {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("taskAttributes", Map.of("taskType", "checkApplication"));
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "checkAndIssueApplication"));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 

@@ -293,7 +293,7 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0m5ivw2">
           <text>
-            "processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder","checkApplication","reviewOrderResponse"
+            "processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder","checkAndIssueApplication","reviewOrderResponse"
           </text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0c2mqp0">
@@ -329,7 +329,7 @@
         </inputEntry>
         <inputEntry id="InputEntry_config_8_2">
           <text>
-            "processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder","checkApplication","reviewOrderResponse"
+            "processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder","checkAndIssueApplication","reviewOrderResponse"
           </text>
         </inputEntry>
         <outputEntry id="OutputEntry_config_8_1">
@@ -657,7 +657,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0nvhpnj">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_04ke4nc">
           <text>"workType"</text>
@@ -674,7 +674,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_05r4xq4">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0tg1vve">
           <text>"description"</text>
@@ -692,7 +692,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0oz5o2c">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1rc08h6">
           <text>"title"</text>

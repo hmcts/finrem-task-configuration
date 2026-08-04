@@ -701,10 +701,10 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
-    void givenCheckApplicationTaskType_whenEvaluated_thenReturnsCorrectConfiguration() {
+    void givenCheckAndIssueApplicationTaskType_whenEvaluated_thenReturnsCorrectConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
-        inputVariables.putValue("taskType", "checkApplication");
+        inputVariables.putValue("taskType", "checkAndIssueApplication");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 
