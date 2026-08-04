@@ -737,7 +737,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                        "[Issue Application]"
                            + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
                            + "FR_issueApplication/FR_issueApplication1)"),
-                entry("title", "Check Application")
+                entry("title", "Check and Issue Application")
             ));
     }
 
