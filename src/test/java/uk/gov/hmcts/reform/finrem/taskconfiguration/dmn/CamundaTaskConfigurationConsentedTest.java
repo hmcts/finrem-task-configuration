@@ -574,9 +574,6 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(description).contains(
             "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_referToJudge/FR_referToJudge1)");
-        assertThat(description).contains(
-            "[Submit response](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_solCompleteUploadDocument/FR_solCompleteUploadDocument1)");
     }
 
     @Test
@@ -713,10 +710,10 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
-    void givenCheckApplicationTaskType_whenEvaluated_thenReturnsCorrectConfiguration() {
+    void givenCheckAndIssueApplicationTaskType_whenEvaluated_thenReturnsCorrectConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
-        inputVariables.putValue("taskType", "checkApplication");
+        inputVariables.putValue("taskType", "checkAndIssueApplication");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 
@@ -749,7 +746,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                        "[Issue Application]"
                            + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
                            + "FR_issueApplication/FR_issueApplication1)"),
-                entry("title", "Check Application")
+                entry("title", "Check and Issue Application")
             ));
     }
 

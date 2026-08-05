@@ -84,10 +84,10 @@
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1055pxs">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_15rdcpg">
-          <text>"Check Application"</text>
+          <text>"Check and Issue Application"</text>
         </outputEntry>
       </rule>
       <rule id="Rule_types_5">
