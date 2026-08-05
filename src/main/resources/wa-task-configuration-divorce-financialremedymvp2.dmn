@@ -223,9 +223,7 @@
           <text>"caseName"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_15_2">
-          <text>if (caseData != null and caseData.caseNameHmctsInternal != null) then caseData.caseNameHmctsInternal
-            else "Financial Remedy"
-          </text>
+          <text>if (caseData != null and caseData.applicantLName != null and caseData.appRespondentLName != null) then (caseData.applicantLName + " vs " + caseData.appRespondentLName) else "Financial Remedy"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_15_3">
           <text>true</text>
@@ -242,9 +240,7 @@
           <text>"region"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_16_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and
-            caseData.caseManagementLocation.region != null) then caseData.caseManagementLocation.region else ""
-          </text>
+          <text>2</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_16_3">
           <text>true</text>
@@ -261,10 +257,7 @@
           <text>"location"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_17_2">
-          <text>if (caseData != null and caseData.caseManagementLocation != null and
-            caseData.caseManagementLocation.baseLocation != null) then caseData.caseManagementLocation.baseLocation else
-            ""
-          </text>
+          <text>4281</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_17_3">
           <text>true</text>

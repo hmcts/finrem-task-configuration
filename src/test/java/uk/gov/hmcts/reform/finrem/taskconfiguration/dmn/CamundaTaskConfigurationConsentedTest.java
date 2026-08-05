@@ -60,8 +60,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("majorPriority", "5000"),
                 entry("minorPriority", "500"),
                 entry("caseName", "Financial Remedy"),
-                entry("region", ""),
-                entry("location", ""),
+                entry("region", "2"),
+                entry("location", "4281"),
                 entry("caseManagementCategory", "FR Consented")
             ));
     }
@@ -420,8 +420,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         // caseName falls back to a default; region and location fall back to empty
         // strings, which fail task initiation downstream in the same way as null
         assertThat(valueOf(results, "caseName")).isEqualTo("Financial Remedy");
-        assertThat(valueOf(results, "region")).isEqualTo("");
-        assertThat(valueOf(results, "location")).isEqualTo("");
+        assertThat(valueOf(results, "region")).isEqualTo("2");
+        assertThat(valueOf(results, "location")).isEqualTo("4281");
     }
 
     @Test
@@ -451,6 +451,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
             "caseNameHmctsInternal", "Applicant v Respondent",
+            "applicantLName", "Doe",
+            "appRespondentLName", "Kirk",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
         ));
         inputVariables.putValue("taskType", "processScannedDocuments");
@@ -476,9 +478,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
             Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
             Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
-            Map.of("name", "caseName", "value", "Applicant v Respondent", "canReconfigure", true),
+            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", true),
             Map.of("name", "region", "value", "2", "canReconfigure", true),
-            Map.of("name", "location", "value", "366796", "canReconfigure", true),
+            Map.of("name", "location", "value", "4281", "canReconfigure", true),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
                    "canReconfigure", true),
             Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
@@ -514,6 +516,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         inputVariables.putValue(
             "caseData", Map.of(
                 "caseNameHmctsInternal", "Tony Stark v Pepper Potts",
+                "applicantLName", "Stark",
+                "appRespondentLName", "Potts",
                 "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
             )
         );
@@ -534,9 +538,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
         assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
             "https://www.gov.uk/bank-holidays/england-and-wales.json");
-        assertThat(valueOf(results, "caseName")).isEqualTo("Tony Stark v Pepper Potts");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Stark vs Potts");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("765324");
+        assertThat(valueOf(results, "location")).isEqualTo("4281");
     }
 
     @Test
@@ -544,6 +548,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
             "caseNameHmctsInternal", "Phoenix Wright v Miles Edgeworth",
+            "applicantLName", "Wright",
+            "appRespondentLName", "Edgeworth",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
         ));
         inputVariables.putValue("taskType", "checkResponseReceived");
@@ -560,9 +566,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
         assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
             "https://www.gov.uk/bank-holidays/england-and-wales.json");
-        assertThat(valueOf(results, "caseName")).isEqualTo("Phoenix Wright v Miles Edgeworth");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Wright vs Edgeworth");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("765324");
+        assertThat(valueOf(results, "location")).isEqualTo("4281");
 
         String description = valueOf(results, "description").toString();
         assertThat(description).contains(
@@ -575,6 +581,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
             "caseNameHmctsInternal", "Bruce Wayne v Selina Kyle",
+            "applicantLName", "Wayne",
+            "appRespondentLName", "Kyle",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
         ));
         inputVariables.putValue("taskType", "checkHelpWithFees");
@@ -588,9 +596,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
         assertThat(valueOf(results, "title")).isEqualTo("Check Help With Fees");
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
-        assertThat(valueOf(results, "caseName")).isEqualTo("Bruce Wayne v Selina Kyle");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Wayne vs Kyle");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("366796");
+        assertThat(valueOf(results, "location")).isEqualTo("4281");
 
         // SLA = 5 working days (BA confirmed): weekends and gov.uk bank holidays are skipped
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
@@ -619,6 +627,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         inputVariables.putValue(
             "caseData", Map.of(
                 "caseNameHmctsInternal", "Applicant v Respondent",
+                "applicantLName", "Doe",
+                "appRespondentLName", "Kirk",
                 "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
             )
         );
@@ -644,9 +654,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("dueDateTime", "14:00"),
                 entry("majorPriority", "5000"),
                 entry("minorPriority", "500"),
-                entry("caseName", "Applicant v Respondent"),
+                entry("caseName", "Doe vs Kirk"),
                 entry("region", "2"),
-                entry("location", "366796"),
+                entry("location", "4281"),
                 entry("caseManagementCategory", "FR Consented"),
                 entry("workType", "decision_making_work"),
                 entry("roleCategory", "JUDICIAL"),
@@ -669,6 +679,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
             "caseNameHmctsInternal", "Peter Parker v Mary Jane",
+            "applicantLName", "Parker",
+            "appRespondentLName", "Jane",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
         ));
         inputVariables.putValue("taskType", "reviewRefusedOrder");
@@ -684,9 +696,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             .isEqualTo("[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_listForHearing/FR_listForHearing1)");
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
-        assertThat(valueOf(results, "caseName")).isEqualTo("Peter Parker v Mary Jane");
+        assertThat(valueOf(results, "caseName")).isEqualTo("Parker vs Jane");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("366796");
+        assertThat(valueOf(results, "location")).isEqualTo("4281");
 
         // SLA = 5 working days: weekends and gov.uk bank holidays are skipped
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
@@ -724,8 +736,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("majorPriority", "5000"),
                 entry("minorPriority", "500"),
                 entry("caseName", "Financial Remedy"),
-                entry("region", ""),
-                entry("location", ""),
+                entry("region", "2"),
+                entry("location", "4281"),
                 entry("caseManagementCategory", "FR Consented"),
                 entry("roleCategory", "CTSC"),
                 entry("dueDateIntervalDays", "5"),
@@ -743,6 +755,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
             "caseNameHmctsInternal", "Applicant v Respondent",
+            "applicantLName", "Doe",
+            "appRespondentLName", "Kirk",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
         ));
         inputVariables.putValue("taskType", "reviewOrderResponse");
@@ -769,9 +783,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
             Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
             Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
-            Map.of("name", "caseName", "value", "Applicant v Respondent", "canReconfigure", true),
+            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", true),
             Map.of("name", "region", "value", "2", "canReconfigure", true),
-            Map.of("name", "location", "value", "366796", "canReconfigure", true),
+            Map.of("name", "location", "value", "4281", "canReconfigure", true),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
                    "canReconfigure", true),
             Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
