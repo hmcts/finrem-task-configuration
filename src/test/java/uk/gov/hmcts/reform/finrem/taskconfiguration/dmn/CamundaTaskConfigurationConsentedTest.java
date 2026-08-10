@@ -578,6 +578,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             "[Issue Application](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_issueApplication/FR_issueApplication1)");
         assertThat(description).contains(
+            "[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_awaitingInfo/FR_awaitingInfo1)");
+        assertThat(description).contains(
             "[Create General Email](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_generalEmail/FR_generalEmail1)");
         assertThat(description).contains(
