@@ -81,7 +81,7 @@
           <text>"FR_issueApplication"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1n9humn">
-          <text>"checkApplication"</text>
+          <text>"checkAndIssueApplication"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0jrq5xy">
           <text>"Auto"</text>
