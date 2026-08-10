@@ -103,7 +103,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenListForHearing_whenEvaluated_thenCompletesReviewRefusedOrderTask_andCompletesCheckResponseReceivedTask() {
+    void givenListForHearing_whenEvaluated_thenCompletesReviewRefusedOrder_andCheckResponseReceivedTasks() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_listForHearing");
 
@@ -115,7 +115,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckApplicationTask_andCompletesCheckResponseReceivedTask() {
+    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckApplication_andCheckResponseReceivedTasks() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_issueApplication");
 
