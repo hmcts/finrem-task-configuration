@@ -23,13 +23,13 @@
       <output id="Output_4" label="Process Categories" name="processCategories" typeRef="string" />
       <rule id="DecisionRule_11oajg1">
         <inputEntry id="UnaryTests_1dhqt25">
-          <text></text>
+          <text>"applicationSubmitted"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_19kwc5v">
           <text>"FR_close"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1m9mvw8">
-          <text></text>
+          <text>"close"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_17e731r">
           <text>"Cancel"</text>
