@@ -29,7 +29,7 @@
           <text>"FR_close"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1m9mvw8">
-          <text>"close"</text>
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_17e731r">
           <text>"Cancel"</text>
