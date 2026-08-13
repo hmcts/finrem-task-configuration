@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="wa-cancellation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-cancellation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
   <decision id="wa-task-cancellation-divorce-financialremedymvp2" name="Task cancellation DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_cancellation_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="From State">
@@ -21,6 +21,29 @@
       <output id="Output_2" label="Warning Code" name="warningCode" typeRef="string" />
       <output id="Output_3" label="Warning Text" name="warningText" typeRef="string" />
       <output id="Output_4" label="Process Categories" name="processCategories" typeRef="string" />
+      <rule id="DecisionRule_11oajg1">
+        <inputEntry id="UnaryTests_1dhqt25">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19kwc5v">
+          <text>"FR_close"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m9mvw8">
+          <text>"close"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17e731r">
+          <text>"Cancel"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1sjo06k">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1wwiriu">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_184cuay">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
