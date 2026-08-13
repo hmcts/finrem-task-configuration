@@ -34,6 +34,6 @@ class CamundaTaskCancellationConsentedTest extends DmnDecisionTableBaseUnitTest 
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getInputs()).hasSize(3);
         assertThat(logic.getOutputs()).hasSize(4);
-        assertThat(logic.getRules()).isEmpty();
+        assertThat(logic.getRules()).hasSize(1);
     }
 }
