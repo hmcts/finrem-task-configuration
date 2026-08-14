@@ -22,14 +22,15 @@
       <output id="Output_3" label="Warning Text" name="warningText" typeRef="string" />
       <output id="Output_4" label="Process Categories" name="processCategories" typeRef="string" />
       <rule id="DecisionRule_11oajg1">
+        <description></description>
         <inputEntry id="UnaryTests_1dhqt25">
-          <text>"applicationSubmitted"</text>
+          <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_19kwc5v">
           <text>"FR_close"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1m9mvw8">
-          <text>"close"</text>
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_17e731r">
           <text>"Cancel"</text>
@@ -41,7 +42,7 @@
           <text></text>
         </outputEntry>
         <outputEntry id="LiteralExpression_184cuay">
-          <text></text>
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
     </decisionTable>
