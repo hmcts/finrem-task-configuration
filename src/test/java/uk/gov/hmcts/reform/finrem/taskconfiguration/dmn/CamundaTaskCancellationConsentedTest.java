@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskCancellationConsentedTest extends DmnDecisionTableBaseUnitTest {
@@ -27,6 +30,24 @@ class CamundaTaskCancellationConsentedTest extends DmnDecisionTableBaseUnitTest 
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenCloseEventShouldReturnCancel() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("fromState", "");
+        inputVariables.putValue("event", "FR_close");
+        inputVariables.putValue("state", "");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(1);
+        Map<String, Object> result = results.getFirst();
+        assertThat(result).containsEntry("action", "Cancel");
+        assertThat(result.get("warningCode")).isEqualTo(null);
+        assertThat(result.get("warningText")).isEqualTo(null);
+        assertThat(result.get("processCategories")).isEqualTo(null);
     }
 
     @Test
