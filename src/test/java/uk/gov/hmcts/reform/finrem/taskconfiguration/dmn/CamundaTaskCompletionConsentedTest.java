@@ -62,12 +62,15 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         ));
     }
 
-    @Test
-    void givenReferToJudgeShouldAutoCompleteCheckResponseReceivedTask() {
+    @ParameterizedTest
+    @ValueSource(strings = {"FR_referToJudge", "FR_awaitingInfo", "FR_generalEmail",
+        "FR_generalLetter", "FR_generalOrderFromAwaitingInfo","FR_close"})
+    void givenCheckResponseReceivedEvents_whenEvaluated_thenCompletesTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
-        inputVariables.putValue("eventId", "FR_referToJudge");
+        inputVariables.putValue("eventId", eventId);
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
         ));
@@ -100,23 +103,25 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenListForHearingShouldAutoCompleteReviewRefusedOrderTask() {
+    void givenListForHearing_whenEvaluated_thenCompletesReviewRefusedOrder_andCheckResponseReceivedTasks() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_listForHearing");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto"),
             Map.of("taskType", "reviewRefusedOrder", "completionMode", "Auto")
         ));
     }
 
     @Test
-    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckAndIssueApplicationTask() {
+    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckApplication_andCheckResponseReceivedTasks() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_issueApplication");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto"),
             Map.of("taskType", "checkAndIssueApplication", "completionMode", "Auto")
         ));
     }

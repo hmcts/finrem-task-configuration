@@ -574,6 +574,27 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(description).contains(
             "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_referToJudge/FR_referToJudge1)");
+        assertThat(description).contains(
+            "[Issue Application](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_issueApplication/FR_issueApplication1)");
+        assertThat(description).contains(
+            "[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_awaitingInfo/FR_awaitingInfo1)");
+        assertThat(description).contains(
+            "[Create General Email](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_generalEmail/FR_generalEmail1)");
+        assertThat(description).contains(
+            "[Create General Letter](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_generalLetter/FR_generalLetter1)");
+        assertThat(description).contains(
+            "[General Order](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_generalOrderFromAwaitingInfo/FR_generalOrderFromAwaitingInfo1)");
+        assertThat(description).contains(
+            "[List for hearing](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_listForHearing/FR_listForHearing1)");
+        assertThat(description).contains(
+            "[Close Case](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_close/FR_close1)");
     }
 
     @Test
