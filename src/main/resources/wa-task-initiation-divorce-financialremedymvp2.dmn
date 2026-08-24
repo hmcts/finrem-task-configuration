@@ -86,10 +86,10 @@
       </rule>
       <rule id="Rule_initiation_4">
         <inputEntry id="InputEntry_initiation_4_1">
-          <text>"FR_solCompleteUploadDocument"</text>
+          <text>"FR_uploadDocument"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_2">
-          <text>"infoReceived"</text>
+          <text>"awaitingInfo"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_3">
           <text></text>
