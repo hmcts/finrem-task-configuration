@@ -240,7 +240,7 @@
           <text>"region"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_16_2">
-          <text>2</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null and number(caseData.caseManagementLocation.region) != null) then number(caseData.caseManagementLocation.region) else 2</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_16_3">
           <text>true</text>
@@ -257,7 +257,7 @@
           <text>"location"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_17_2">
-          <text>4281</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null and number(caseData.caseManagementLocation.baseLocation) != null) then number(caseData.caseManagementLocation.baseLocation) else 283922</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_17_3">
           <text>true</text>
