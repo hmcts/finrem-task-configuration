@@ -70,7 +70,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "attachScannedDocs");
         inputVariables.putValue("postEventState", "");
-        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", false)));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
@@ -95,7 +95,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "attachScannedDocs");
         inputVariables.putValue("postEventState", "");
-        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "Yes")));
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", true)));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
@@ -106,7 +106,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "someOtherEvent");
         inputVariables.putValue("postEventState", "");
-        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", "No")));
+        inputVariables.putValue("additionalData", Map.of("Data", Map.of("evidenceHandled", false)));
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
