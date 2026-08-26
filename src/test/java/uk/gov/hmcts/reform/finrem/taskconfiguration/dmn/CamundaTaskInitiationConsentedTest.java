@@ -454,7 +454,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     void givenSubmitResponseEventReceivedWithValidPostEventStateCreatesCheckResponseReceivedTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_solUploadDocumentv2");
-        inputVariables.putValue("postEventState", "awaitingInfo");
+        inputVariables.putValue("postEventState", "");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
