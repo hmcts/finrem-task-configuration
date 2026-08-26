@@ -89,7 +89,7 @@
           <text>"FR_solUploadDocumentv2"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_2">
-          <text></text>
+          <text>"infoReceived"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_4_3">
           <text></text>
