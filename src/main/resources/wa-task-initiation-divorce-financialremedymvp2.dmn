@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-initiation-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.44.0">
   <decision id="wa-task-initiation-divorce-financialremedymvp2" name="Task initiation DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_initiation_consented" hitPolicy="COLLECT">
       <input id="Input_1" label="Event Id" camunda:inputVariable="eventId">
@@ -13,8 +13,8 @@
         </inputExpression>
       </input>
       <input id="Input_3" label="Supplementary evidence handled" camunda:inputVariable="evidenceHandled">
-        <inputExpression id="InputExpression_3" typeRef="string">
-          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.evidenceHandled != null) then additionalData.Data.evidenceHandled else ""
+        <inputExpression id="InputExpression_3" typeRef="boolean">
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.evidenceHandled != null) then additionalData.Data.evidenceHandled else false
           </text>
         </inputExpression>
       </input>
@@ -53,7 +53,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_1_3">
-          <text>not("Yes")</text>
+          <text>false</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_1_4">
           <text></text>
