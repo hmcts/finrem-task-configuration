@@ -21,6 +21,29 @@
       <output id="Output_2" label="Warning Code" name="warningCode" typeRef="string" />
       <output id="Output_3" label="Warning Text" name="warningText" typeRef="string" />
       <output id="Output_4" label="Process Categories" name="processCategories" typeRef="string" />
+      <rule id="DecisionRule_1xdocrv">
+        <inputEntry id="UnaryTests_0mo38oa">
+          <text>DummyChange</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19irmou">
+          <text>DummyChange</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0eg0ycn">
+          <text>DummyChange</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kuu9j4">
+          <text>DummyChange</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18kcsyy">
+          <text>DummyChange</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_16ltjta">
+          <text>DummyChange</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_13tr5a5">
+          <text>DummyChange</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
