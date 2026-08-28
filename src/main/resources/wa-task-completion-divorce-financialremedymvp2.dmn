@@ -22,7 +22,7 @@
       </rule>
       <rule id="DecisionRule_0l0u2dt">
         <inputEntry id="UnaryTests_0zv6amo">
-          <text>"FR_referToJudge","FR_issueApplicationFromInfoReceived","FR_awaitingInfo","FR_generalEmail","FR_generalLetter","FR_generalOrderFromInfoReceived","FR_listForHearing","FR_close"</text>
+          <text>"FR_referToJudge","FR_issueApplicationFromInfoReceived","FR_awaitingInfo","FR_generalEmail","FR_generalLetter","FR_generalOrderFromInfoReceived","FR_listForHearing"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_00yfwtk">
           <text>"checkResponseReceived"</text>
