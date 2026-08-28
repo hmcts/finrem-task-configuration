@@ -63,8 +63,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"FR_referToJudge", "FR_awaitingInfo", "FR_generalEmail",
-        "FR_generalLetter", "FR_generalOrderFromAwaitingInfo","FR_close"})
+    @ValueSource(strings = {"FR_referToJudge", "FR_awaitingInfo", "FR_generalEmail", "FR_issueApplicationFromInfoReceived",
+        "FR_generalLetter", "FR_generalOrderFromInfoReceived","FR_close"})
     void givenCheckResponseReceivedEvents_whenEvaluated_thenCompletesTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
@@ -115,13 +115,12 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckApplication_andCheckResponseReceivedTasks() {
+    void givenIssueApplicationEvent_whenEvaluated_thenCompletesCheckApplication() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_issueApplication");
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto"),
             Map.of("taskType", "checkAndIssueApplication", "completionMode", "Auto")
         ));
     }
