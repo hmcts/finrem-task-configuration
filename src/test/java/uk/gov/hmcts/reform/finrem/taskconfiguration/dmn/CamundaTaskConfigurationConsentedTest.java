@@ -572,9 +572,6 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         String description = valueOf(results, "description").toString();
         assertThat(description).contains(
-            "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_referToJudge/FR_referToJudge1)");
-        assertThat(description).contains(
             "[Issue Application](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_issueApplication/FR_issueApplication1)");
         assertThat(description).contains(
