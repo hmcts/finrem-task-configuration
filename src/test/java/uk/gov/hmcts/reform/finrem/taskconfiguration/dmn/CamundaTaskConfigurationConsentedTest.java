@@ -592,6 +592,9 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(description).contains(
             "[List for hearing](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_listForHearing/FR_listForHearing1)");
+        assertThat(description).contains(
+            "[Close Case](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_close/FR_close1)");
     }
 
     @Test
