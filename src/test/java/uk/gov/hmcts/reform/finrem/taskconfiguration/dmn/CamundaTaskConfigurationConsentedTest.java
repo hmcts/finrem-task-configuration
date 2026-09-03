@@ -576,7 +576,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 + "/trigger/FR_referToJudge/FR_referToJudge1)");
         assertThat(description).contains(
             "[Issue Application](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_issueApplication/FR_issueApplication1)");
+                + "/trigger/FR_issueApplicationFromInfoReceived/FR_issueApplicationFromInfoReceived1)");
         assertThat(description).contains(
             "[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_awaitingInfo/FR_awaitingInfo1)");
@@ -588,7 +588,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 + "/trigger/FR_generalLetter/FR_generalLetter1)");
         assertThat(description).contains(
             "[General Order](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_generalOrderFromAwaitingInfo/FR_generalOrderFromAwaitingInfo1)");
+                + "/trigger/FR_generalOrderFromInfoReceived/FR_generalOrderFromInfoReceived1)");
         assertThat(description).contains(
             "[List for hearing](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_listForHearing/FR_listForHearing1)");
