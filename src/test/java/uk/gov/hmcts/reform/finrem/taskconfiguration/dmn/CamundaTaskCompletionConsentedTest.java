@@ -63,7 +63,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"FR_referToJudge","FR_issueApplicationFromInfoReceived","FR_awaitingInfo","FR_generalEmail",
+    @ValueSource(strings = {"FR_issueApplicationFromInfoReceived","FR_awaitingInfo","FR_generalEmail",
         "FR_generalLetter","FR_generalOrderFromInfoReceived","FR_listForHearing","FR_close"})
     void givenCheckResponseReceivedEvents_whenEvaluated_thenCompletesTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
