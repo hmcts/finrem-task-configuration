@@ -37,7 +37,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task completion rules has changed.")
-            .hasSize(8);
+            .hasSize(9);
     }
 
     @Test
