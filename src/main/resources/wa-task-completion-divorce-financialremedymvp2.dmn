@@ -38,7 +38,7 @@
       </rule>
       <rule id="DecisionRule_0kdqd6e">
         <inputEntry id="UnaryTests_0p6gbhi">
-          <text>"FR_amendedConsentOrder"</text>
+          <text>"FR_amendFinalOrder"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1uss2qt">
           <text>"processApprovedOrder"</text>

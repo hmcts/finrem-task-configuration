@@ -472,8 +472,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0qe2ibg">
-          <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"
-          </text>
+          <text>"[Amend Final Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendFinalOrder/FR_amendFinalOrder1)"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_11b77qt">
           <text>true</text>
