@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
-             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
-             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-             id="wa-permissions-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn"
-             exporter="Camunda Modeler" exporterVersion="5.48.0">
-  <decision id="wa-task-permissions-divorce-financialremedymvp2" name="Permissions DMN"
-            camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-permissions-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.44.0">
+  <decision id="wa-task-permissions-divorce-financialremedymvp2" name="Permissions DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_permissions_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="Task Type" camunda:inputVariable="taskType">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -21,13 +16,13 @@
           <text></text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Case Access Category" name="caseAccessCategory" typeRef="string"/>
-      <output id="Output_2" label="name" name="name" typeRef="string"/>
-      <output id="Output_3" label="value" name="value" typeRef="string"/>
-      <output id="Output_4" label="RoleCategory" name="roleCategory" typeRef="string"/>
-      <output id="Output_5" label="Authorisations" name="authorisations" typeRef="string"/>
-      <output id="Output_6" label="Assignment Priority" name="assignmentPriority" typeRef="integer"/>
-      <output id="Output_7" label="Auto Assignable" name="autoAssignable" typeRef="boolean"/>
+      <output id="Output_1" label="Case Access Category" name="caseAccessCategory" typeRef="string" />
+      <output id="Output_2" label="name" name="name" typeRef="string" />
+      <output id="Output_3" label="value" name="value" typeRef="string" />
+      <output id="Output_4" label="RoleCategory" name="roleCategory" typeRef="string" />
+      <output id="Output_5" label="Authorisations" name="authorisations" typeRef="string" />
+      <output id="Output_6" label="Assignment Priority" name="assignmentPriority" typeRef="integer" />
+      <output id="Output_7" label="Auto Assignable" name="autoAssignable" typeRef="boolean" />
       <rule id="Rule_permissions_1">
         <inputEntry id="InputEntry_permissions_1_1">
           <text>"processScannedDocuments"</text>
@@ -492,12 +487,132 @@
           <text>false</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0bhutjd">
+        <description>Judicial specic access permissions</description>
+        <inputEntry id="UnaryTests_0fk6cz1">
+          <text>"reviewSpecificAccessRequestJudiciary"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1al467s">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kqgknl">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1jdk11y">
+          <text>"specific-access-approver-judiciary"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0k3j2mz">
+          <text>"Read,Own,UnclaimAssign,Claim,Unclaim,UnassignClaim,CompleteOwn"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0q49kk5">
+          <text>"JUDICIAL"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09opvw2">
+          <text>315</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cdcumz">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ob2b15">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14r3cgf">
+        <description>TLegal operations specic access permissions</description>
+        <inputEntry id="UnaryTests_0spog5t">
+          <text>"reviewSpecificAccessRequestLegalOps"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e7a2mq">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0w4eb1s">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ygm8ww">
+          <text>"specific-access-approver-legal-ops"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1gsx1vm">
+          <text>"Read,Own,UnclaimAssign,Claim,Unclaim,UnassignClaim,CompleteOwn"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0z6igej">
+          <text>"LEGAL_OPERATIONS"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0gpjd0u">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wfby3o">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zeay08">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01yzaqd">
+        <description>Admin specic access permissions</description>
+        <inputEntry id="UnaryTests_06wzfnt">
+          <text>"reviewSpecificAccessRequestAdmin"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1btdf6y">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05ow0ns">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_080gl53">
+          <text>"specific-access-approver-admin"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0l4hep8">
+          <text>"Read,Own,UnclaimAssign,Claim,Unclaim,UnassignClaim,CompleteOwn"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1n34fhu">
+          <text>"ADMIN"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ikg133">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1iso22i">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11pp3sm">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rz54l8">
+        <description>CTSC specic access permissions</description>
+        <inputEntry id="UnaryTests_00tv8y6">
+          <text>"reviewSpecificAccessRequestCTSC"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kiaui9">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0i1vx3s">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_08u8ykg">
+          <text>"specific-access-approver-ctsc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1214bw2">
+          <text>"Read,Own,UnclaimAssign,Claim,Unclaim,UnassignClaim,CompleteOwn"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_01o3kzt">
+          <text>"CTSC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f2pzm3">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0syub3d">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0jwmq2l">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-permissions-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="160" y="80"/>
+        <dc:Bounds height="80" width="180" x="160" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

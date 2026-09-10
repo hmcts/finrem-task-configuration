@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
-             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
-             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0"
-             xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD"
-             namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
-  <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN"
-            camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.44.0">
+  <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_configuration_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="CCD Case Data" camunda:inputVariable="caseData">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -23,9 +18,9 @@
           </text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Name" name="name" typeRef="string"/>
-      <output id="Output_2" label="Value" name="value" typeRef="string"/>
-      <output id="Output_3" label="Can Reconfigure?" name="canReconfigure" typeRef="boolean" biodi:width="190"/>
+      <output id="Output_1" label="Name" name="name" typeRef="string" />
+      <output id="Output_2" label="Value" name="value" typeRef="string" />
+      <output id="Output_3" label="Can Reconfigure?" name="canReconfigure" typeRef="boolean" biodi:width="190" />
       <rule id="Rule_config_5">
         <inputEntry id="InputEntry_config_5_1">
           <text></text>
@@ -291,7 +286,7 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0m5ivw2">
           <text>
-            "processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder","checkAndIssueApplication","reviewOrderResponse"
+            "processScannedDocuments","checkResponseReceived","processApprovedOrder","checkHelpWithFees","reviewRefusedOrder","checkAndIssueApplication","reviewOrderResponse","reviewSpecificAccessRequestCTSC"
           </text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0c2mqp0">
@@ -309,7 +304,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_06p10v3">
-          <text>"reviewApplication"</text>
+          <text>"reviewApplication","reviewSpecificAccessRequestJudiciary"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_13hevwm">
           <text>"roleCategory"</text>
@@ -753,12 +748,97 @@
           <text>true</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0udtxhw">
+        <inputEntry id="UnaryTests_0yz7cbp">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xx0boh">
+          <text>"reviewSpecificAccessRequestJudiciary", "reviewSpecificAccessRequestLegalOps", "reviewSpecificAccessRequestAdmin","reviewSpecificAccessRequestCTSC"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xs5lxi">
+          <text>"workType"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1vt68hc">
+          <text>"access_requests"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1jvfse0">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_174x5zf">
+        <inputEntry id="UnaryTests_1s3eeu4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ecliim">
+          <text>"reviewSpecificAccessRequestJudiciary", "reviewSpecificAccessRequestLegalOps", "reviewSpecificAccessRequestAdmin","reviewSpecificAccessRequestCTSC"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kyzqy7">
+          <text>"additionalProperties_roleAssignmentId"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1pqdnxj">
+          <text>if (taskAttributes !=null and taskAttributes.roleAssignmentId != null) then taskAttributes.roleAssignmentId else "1234"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_08vyils">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0r7c5ct">
+        <inputEntry id="UnaryTests_07tv3l2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0oqq4ih">
+          <text>"reviewSpecificAccessRequestLegalOps"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10izq5j">
+          <text>"roleCategory"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1dn7x1x">
+          <text>"LEGAL_OPERATIONS"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19118y2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xpt1b9">
+        <inputEntry id="UnaryTests_016t8jd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mtmgcw">
+          <text>"reviewSpecificAccessRequestCTSC", "reviewSpecificAccessRequestAdmin", "reviewSpecificAccessRequestJudiciary", "reviewSpecificAccessRequestLegalOps"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19x1xlj">
+          <text>"description"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ubi3gq">
+          <text>if (taskAttributes != null and taskAttributes.taskId != null and taskAttributes.roleAssignmentId != null) then "[Review Access Request](/role-access/" + taskAttributes.taskId+ "/assignment/" + taskAttributes.roleAssignmentId + "/specific-access)" else ""</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fg7c6m">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1i3mvf6">
+        <inputEntry id="UnaryTests_05wvs4p">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12oqz9w">
+          <text>"reviewSpecificAccessRequestAdmin"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bz9gq5">
+          <text>"roleCategory"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1soq4qx">
+          <text>"ADMIN"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0okbq1w">
+          <text>true</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-configuration-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="160" y="80"/>
+        <dc:Bounds height="80" width="180" x="160" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

@@ -30,7 +30,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task configuration rules has changed.")
-            .hasSize(42);
+            .hasSize(47);
     }
 
     @Test
