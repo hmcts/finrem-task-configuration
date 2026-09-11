@@ -450,7 +450,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenProcessScannedDocumentsTaskTypeShouldReturnConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
-            "caseNameHmctsInternal", "Applicant v Respondent",
+            "caseNameHmctsInternal", "Doe vs Kirk",
             "applicantLName", "Doe",
             "appRespondentLName", "Kirk",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
@@ -515,7 +515,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue(
             "caseData", Map.of(
-                "caseNameHmctsInternal", "Tony Stark v Pepper Potts",
+                "caseNameHmctsInternal", "Stark vs Potts",
                 "applicantLName", "Stark",
                 "appRespondentLName", "Potts",
                 "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
@@ -547,7 +547,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenCheckResponseReceivedTaskTypeShouldReturnConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
-            "caseNameHmctsInternal", "Phoenix Wright v Miles Edgeworth",
+            "caseNameHmctsInternal", "Wright vs Edgeworth",
             "applicantLName", "Wright",
             "appRespondentLName", "Edgeworth",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "765324")
@@ -598,7 +598,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenCheckHelpWithFeesTaskTypeShouldReturnConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
-            "caseNameHmctsInternal", "Bruce Wayne v Selina Kyle",
+            "caseNameHmctsInternal", "Wayne vs Kyle",
             "applicantLName", "Wayne",
             "appRespondentLName", "Kyle",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
@@ -644,7 +644,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue(
             "caseData", Map.of(
-                "caseNameHmctsInternal", "Applicant v Respondent",
+                "caseNameHmctsInternal", "Doe vs Kirk",
                 "applicantLName", "Doe",
                 "appRespondentLName", "Kirk",
                 "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
@@ -696,7 +696,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenReviewRefusedOrderTaskTypeShouldReturnConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
-            "caseNameHmctsInternal", "Peter Parker v Mary Jane",
+            "caseNameHmctsInternal", "Parker vs Jane",
             "applicantLName", "Parker",
             "appRespondentLName", "Jane",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
@@ -772,7 +772,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenReviewOrderResponseTaskTypeShouldReturnConfiguration() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of(
-            "caseNameHmctsInternal", "Applicant v Respondent",
+            "caseNameHmctsInternal", "Doe vs Kirk",
             "applicantLName", "Doe",
             "appRespondentLName", "Kirk",
             "caseManagementLocation", Map.of("region", "2", "baseLocation", "366796")
