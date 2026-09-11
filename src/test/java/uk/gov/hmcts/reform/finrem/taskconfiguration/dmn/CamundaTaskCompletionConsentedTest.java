@@ -37,7 +37,7 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task completion rules has changed.")
-            .hasSize(9);
+            .hasSize(16);
     }
 
     @Test
@@ -47,7 +47,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "processScannedDocuments", "completionMode", "Auto")
+            Map.of("taskType", "processScannedDocuments", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 
@@ -58,7 +59,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "processApprovedOrder", "completionMode", "Auto")
+            Map.of("taskType", "processApprovedOrder", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 
@@ -72,7 +74,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 
@@ -85,7 +88,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto")
+            Map.of("taskType", "checkHelpWithFees", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 
@@ -98,7 +102,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "reviewApplication", "completionMode", "Auto")
+            Map.of("taskType", "reviewApplication", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 
@@ -110,7 +115,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "checkResponseReceived", "completionMode", "Auto"),
-            Map.of("taskType", "reviewRefusedOrder", "completionMode", "Auto")
+            Map.of("completionMode", "Auto"),
+            Map.of("taskType", "reviewRefusedOrder", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 
@@ -122,7 +129,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
             Map.of("taskType", "checkResponseReceived", "completionMode", "Auto"),
-            Map.of("taskType", "checkAndIssueApplication", "completionMode", "Auto")
+            Map.of("completionMode", "Auto"),
+            Map.of("taskType", "checkAndIssueApplication", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 
@@ -133,7 +142,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
-            Map.of("taskType", "reviewOrderResponse", "completionMode", "Auto")
+            Map.of("taskType", "reviewOrderResponse", "completionMode", "Auto"),
+            Map.of("completionMode", "Auto")
         ));
     }
 }
