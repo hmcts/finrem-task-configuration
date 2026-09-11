@@ -42,6 +42,17 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0vxhv0q">
+        <inputEntry id="UnaryTests_1786lcd">
+          <text>"FR_referToJudge","FR_issueApplication","FR_awaitingInfo","FR_generalEmail","FR_generalLetter","FR_generalOrderFromAwaitingInfo","FR_listForHearing","FR_close"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wxqcbi">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0gzffrh">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="DecisionRule_0kdqd6e">
         <inputEntry id="UnaryTests_0p6gbhi">
           <text>"FR_amendedConsentOrder"</text>
@@ -53,6 +64,17 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0atipx0">
+        <inputEntry id="UnaryTests_18rqsrv">
+          <text>"FR_amendedConsentOrder"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ceo432">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0nce707">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="DecisionRule_1qfkvar">
         <inputEntry id="UnaryTests_0nfdnpk">
           <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
@@ -61,6 +83,17 @@
           <text>"checkHelpWithFees"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0lvogeo">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16h2qvj">
+        <inputEntry id="UnaryTests_1ptn2s0">
+          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1b67w39">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uzrmay">
           <text>"Auto"</text>
         </outputEntry>
       </rule>
@@ -76,6 +109,17 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_1ou6tsn">
+        <inputEntry id="UnaryTests_0fd53n6">
+          <text>"FR_approveApplication","FR_uploadApprovedOrder","FR_orderRefusal"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ioyu79">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wbhwxv">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_completion_rro_1">
         <inputEntry id="InputEntry_completion_rro_1_1">
           <text>"FR_listForHearing"</text>
@@ -84,6 +128,17 @@
           <text>"reviewRefusedOrder"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_completion_rro_1_2">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17mcpky">
+        <inputEntry id="UnaryTests_14k3qa3">
+          <text>"FR_listForHearing"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xf5hjn">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0932ahv">
           <text>"Auto"</text>
         </outputEntry>
       </rule>
@@ -98,6 +153,17 @@
           <text>"Auto"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0trmmyw">
+        <inputEntry id="UnaryTests_0rflsz1">
+          <text>"FR_issueApplication"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lglyni">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1u6g3rg">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
       <rule id="Rule_completion_4">
         <inputEntry id="UnaryTests_06hrddo">
           <text>"FR_referToJudgeFromRespondToOrder"</text>
@@ -106,6 +172,17 @@
           <text>"reviewOrderResponse"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1stzwti">
+          <text>"Auto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01kubth">
+        <inputEntry id="UnaryTests_1ob21xv">
+          <text>"FR_referToJudgeFromRespondToOrder"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ubjg78">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0efg6di">
           <text>"Auto"</text>
         </outputEntry>
       </rule>
