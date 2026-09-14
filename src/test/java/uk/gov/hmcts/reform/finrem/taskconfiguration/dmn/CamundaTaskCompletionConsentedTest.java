@@ -73,10 +73,9 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
 
-        assertThat(dmnDecisionTableResult.getResultList().getFirst()).isEqualTo(List.of(
-            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto"),
-            Map.of("completionMode", "Auto")
-        ));
+        assertThat(dmnDecisionTableResult.getResultList().getFirst()).isEqualTo(
+            Map.of("taskType", "checkResponseReceived", "completionMode", "Auto")
+        );
     }
 
     @ParameterizedTest
