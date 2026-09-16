@@ -373,14 +373,13 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "value", "Read,Own,UnclaimAssign,Claim,Manage,Unclaim,UnassignClaim,CompleteOwn",
                 "roleCategory", "JUDICIAL",
                 "autoAssignable", false,
-                "assignmentPriority", 1,
-                "authorisations", "315"
+                "assignmentPriority", 1
             )
         ));
     }
 
     @Test
-    void givenReviewSpecificAccessRequestJudiciaryTaskTypeShouldReturnPermissionsForLegalOpsRoles() {
+    void givenReviewSpecificAccessRequestLegalOpsTaskTypeShouldReturnPermissionsForLegalOpsRoles() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestLegalOps"));
 
@@ -397,7 +396,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenReviewSpecificAccessRequestJudiciaryTaskTypeShouldReturnPermissionsForAdminRoles() {
+    void givenReviewSpecificAccessRequestAdminTaskTypeShouldReturnPermissionsForAdminRoles() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestAdmin"));
 
@@ -414,7 +413,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenReviewSpecificAccessRequestJudiciaryTaskTypeShouldReturnPermissionsForCtscRoles() {
+    void givenReviewSpecificAccessRequestCtscTaskTypeShouldReturnPermissionsForCtscRoles() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestCTSC"));
 
