@@ -414,7 +414,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @Test
-    void givenReviewSpecificAccessRequestJudiciaryTaskTypeShouldReturnPermissionsForCTSCRoles() {
+    void givenReviewSpecificAccessRequestJudiciaryTaskTypeShouldReturnPermissionsForCtscRoles() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestCTSC"));
 
