@@ -850,7 +850,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(results).hasSize(19);
         assertThat(valueOf(results, "workType")).isEqualTo("access_requests");
         assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
-        assertThat(valueOf(results, "description")).isEqualTo("[Review Access Request](/role-access/4444t/assignment/99999/specific-access)");
+        assertThat(valueOf(results, "description")).isEqualTo(
+            "[Review Access Request](/role-access/4444t/assignment/99999/specific-access)");
         assertThat(valueOf(results, "additionalProperties_roleAssignmentId")).isEqualTo("99999");
     }
 
