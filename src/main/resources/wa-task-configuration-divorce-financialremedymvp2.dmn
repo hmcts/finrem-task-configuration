@@ -380,7 +380,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_3_2">
-          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)"
+          <text>"[Attach scanned document](/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs)"
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_3_3">
@@ -432,7 +432,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0yrs0kw">
-          <text>"[Issue Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_issueApplicationFromInfoReceived/FR_issueApplicationFromInfoReceived1)&lt;br&gt;[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingInfo/FR_awaitingInfo1)&lt;br&gt;[Create General Email](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalEmail/FR_generalEmail1)&lt;br&gt;[Create General Letter](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalLetter/FR_generalLetter1)&lt;br&gt;[General Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalOrderFromInfoReceived/FR_generalOrderFromInfoReceived1)&lt;br&gt;[List for hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)&lt;br&gt;[Close Case](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_close/FR_close1)"
+          <text>"[Issue Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_issueApplicationFromInfoReceived)&lt;br&gt;[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingInfo)&lt;br&gt;[Create General Email](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalEmail)&lt;br&gt;[Create General Letter](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalLetter)&lt;br&gt;[General Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_generalOrderFromInfoReceived)&lt;br&gt;[List for hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing)&lt;br&gt;[Close Case](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_close)"
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_102ztng">
@@ -467,7 +467,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0qe2ibg">
-          <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)"
+          <text>"[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_amendedConsentOrder)"
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_11b77qt">
@@ -536,7 +536,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out2">
-          <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
+          <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out3">
           <text>true</text>
@@ -570,7 +570,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0zga3nh">
-          <text>"[Approve Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_approveApplication/FR_approveApplication1)&lt;br&gt;[Upload Approved Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_uploadApprovedOrder/FR_uploadApprovedOrder1)&lt;br&gt;[Application Not Approved](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_orderRefusal/FR_orderRefusal1)"</text>
+          <text>"[Approve Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_approveApplication)&lt;br&gt;[Upload Approved Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_uploadApprovedOrder)&lt;br&gt;[Application Not Approved](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_orderRefusal)"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_054d91y">
           <text>true</text>
@@ -638,7 +638,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="Rule_config_rro_3_out2">
-          <text>"[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)"
+          <text>"[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing)"
           </text>
         </outputEntry>
         <outputEntry id="Rule_config_rro_3_out3">
@@ -673,7 +673,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_03icpmu">
-          <text>"[Issue Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_issueApplication/FR_issueApplication1)"
+          <text>"[Issue Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_issueApplication)"
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0a62h9h">
@@ -725,7 +725,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0d2plfm">
-          <text>"[Assign to Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_assignToJudgeConsent/FR_assignToJudgeConsent1)"</text>
+          <text>"[Assign to Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_referToJudgeFromRespondToOrder)"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0sxa534">
           <text>true</text>
