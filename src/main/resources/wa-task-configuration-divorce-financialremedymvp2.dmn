@@ -776,7 +776,7 @@
           <text>"additionalProperties_roleAssignmentId"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1pqdnxj">
-          <text>if (taskAttributes !=null and taskAttributes.roleAssignmentId != null) then taskAttributes.roleAssignmentId else "1234"</text>
+          <text>if (taskAttributes !=null and taskAttributes.roleAssignmentId != null) then taskAttributes.roleAssignmentId else ""</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_08vyils">
           <text>true</text>
