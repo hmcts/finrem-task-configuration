@@ -79,7 +79,8 @@ class CamundaTaskCompletionConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"FR_HWFDecisionMade", "FR_paymentMadeFromHWF", "FR_awaitingPaymentResponseFromHWF"})
+    @ValueSource(strings = {"FR_HWFAcceptedAndIssue", "FR_feeAccountDebitedAndIssue",
+        "FR_awaitingPaymentResponseFromHWF"})
     void givenHelpWithFeesEvents_whenEvaluated_thenCompletesTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
