@@ -725,7 +725,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0d2plfm">
-          <text>"[Assign to Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_assignToJudgeConsent/FR_assignToJudgeConsent1)"</text>
+          <text>"[Assign to Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_referToJudgeFromRespondToOrder/FR_referToJudgeFromRespondToOrder1)"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0sxa534">
           <text>true</text>

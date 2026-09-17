@@ -812,7 +812,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "description", "value",
                    "[Assign to Judge]"
                        + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
-                       + "FR_assignToJudgeConsent/FR_assignToJudgeConsent1)",
+                       + "FR_referToJudgeFromRespondToOrder/FR_referToJudgeFromRespondToOrder1)",
                    "canReconfigure", true),
             Map.of("name", "workType", "value", "review_case", "canReconfigure", true)
 
