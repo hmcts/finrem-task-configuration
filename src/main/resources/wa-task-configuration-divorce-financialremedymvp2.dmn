@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.44.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
   <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_configuration_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="CCD Case Data" camunda:inputVariable="caseData">
@@ -536,7 +536,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out2">
-          <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
+          <text>"[HWF Accepted &amp; Issue](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFAcceptedAndIssue/FR_HWFAcceptedAndIssue1)&lt;br&gt;[Fee Account Debited &amp; Issue](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_feeAccountDebitedAndIssue/FR_feeAccountDebitedAndIssue1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out3">
           <text>true</text>
