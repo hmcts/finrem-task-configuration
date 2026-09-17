@@ -35,7 +35,7 @@
           <text>"nextHearingDate,dueDate,priorityDate"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_5_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_6">
@@ -52,7 +52,7 @@
           <text>"nextHearingDate,dueDate"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_6_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_7">
@@ -73,7 +73,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_7_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_9">
@@ -90,7 +90,7 @@
           <text>"https://www.gov.uk/bank-holidays/england-and-wales.json"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_9_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_10">
@@ -107,7 +107,7 @@
           <text>"SATURDAY,SUNDAY"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_10_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_11">
@@ -124,7 +124,7 @@
           <text>true</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_11_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_12">
@@ -141,7 +141,7 @@
           <text>"No"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_12_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_12a">
@@ -158,7 +158,7 @@
           <text>now()</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_12a_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_12b">
@@ -175,7 +175,7 @@
           <text>time("14:00")</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_12b_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_13">
@@ -192,7 +192,7 @@
           <text>5000</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_13_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_14">
@@ -209,7 +209,7 @@
           <text>500</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_14_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_15">
@@ -226,7 +226,7 @@
           <text>if (caseData != null and caseData.applicantLName != null and caseData.appRespondentLName != null) then (caseData.applicantLName + " vs " + caseData.appRespondentLName) else "Financial Remedy"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_15_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_16">
@@ -243,7 +243,7 @@
           <text>2</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_16_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_17">
@@ -260,7 +260,7 @@
           <text>4281</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_17_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_18">
@@ -277,7 +277,7 @@
           <text>"FR Consented"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_18_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1bm4090">
@@ -296,7 +296,7 @@
           <text>"CTSC"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0vit077">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_03xc8jx">
@@ -313,7 +313,7 @@
           <text>"JUDICIAL"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_19g70s2">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_8">
@@ -332,7 +332,7 @@
           <text>5</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_8_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_043cb84">
@@ -349,7 +349,7 @@
           <text>10</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_13t6orw">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_1">
@@ -366,7 +366,7 @@
           <text>"evidence"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_1_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_3">
@@ -384,7 +384,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_3_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_4">
@@ -401,7 +401,7 @@
           <text>"Process Scanned Documents"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_4_3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0nbt97x">
@@ -418,7 +418,7 @@
           <text>"routine_work"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1m5372l">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_17m60w9">
@@ -436,7 +436,7 @@
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_102ztng">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0jtnkcb">
@@ -453,7 +453,7 @@
           <text>"Check Response Received"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0a6nflp">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0pzeluz">
@@ -471,7 +471,7 @@
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_11b77qt">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0q2r2z4">
@@ -488,7 +488,7 @@
           <text>"Process Approved Order"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1ahb30u">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_1">
@@ -505,7 +505,7 @@
           <text>"applications"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_1_out3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_2">
@@ -522,7 +522,7 @@
           <text>"Check Help With Fees"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_2_out3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_hwf_3">
@@ -539,7 +539,7 @@
           <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1yhfbc2">
@@ -556,7 +556,7 @@
           <text>"decision_making_work"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1eukgly">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_038ptnk">
@@ -573,7 +573,7 @@
           <text>"[Approve Application](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_approveApplication/FR_approveApplication1)&lt;br&gt;[Upload Approved Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_uploadApprovedOrder/FR_uploadApprovedOrder1)&lt;br&gt;[Application Not Approved](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_orderRefusal/FR_orderRefusal1)"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_054d91y">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0tb8282">
@@ -590,7 +590,7 @@
           <text>"Review Application"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0rrg4fx">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_rro_1">
@@ -607,7 +607,7 @@
           <text>"hearing_work"</text>
         </outputEntry>
         <outputEntry id="Rule_config_rro_1_out3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_rro_2">
@@ -624,7 +624,7 @@
           <text>"Review Refused Order"</text>
         </outputEntry>
         <outputEntry id="Rule_config_rro_2_out3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_rro_3">
@@ -642,7 +642,7 @@
           </text>
         </outputEntry>
         <outputEntry id="Rule_config_rro_3_out3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0cxdwbd">
@@ -659,7 +659,7 @@
           <text>"applications"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_06lyla3">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1kmzm02">
@@ -677,7 +677,7 @@
           </text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0a62h9h">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1spbn4a">
@@ -694,7 +694,7 @@
           <text>"Check and Issue Application"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0bskgch">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_ror_1">
@@ -711,7 +711,7 @@
           <text>"Review Order Response"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1rygnoz">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_ror_2">
@@ -728,7 +728,7 @@
           <text>"[Assign to Judge](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_referToJudgeFromRespondToOrder/FR_referToJudgeFromRespondToOrder1)"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0sxa534">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="Rule_config_ror_3">
@@ -745,7 +745,7 @@
           <text>"review_case"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1fjfz98">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0udtxhw">
@@ -762,7 +762,7 @@
           <text>"access_requests"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1jvfse0">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_174x5zf">
@@ -779,7 +779,7 @@
           <text>if (taskAttributes !=null and taskAttributes.roleAssignmentId != null) then taskAttributes.roleAssignmentId else ""</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_08vyils">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0r7c5ct">
@@ -796,7 +796,7 @@
           <text>"LEGAL_OPERATIONS"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_19118y2">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0xpt1b9">
@@ -813,7 +813,7 @@
           <text>if (taskAttributes != null and taskAttributes.taskId != null and taskAttributes.roleAssignmentId != null) then "[Review Access Request](/role-access/" + taskAttributes.taskId+ "/assignment/" + taskAttributes.roleAssignmentId + "/specific-access)" else ""</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1fg7c6m">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1i3mvf6">
@@ -830,7 +830,7 @@
           <text>"ADMIN"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0okbq1w">
-          <text>true</text>
+          <text>false</text>
         </outputEntry>
       </rule>
     </decisionTable>
