@@ -36,7 +36,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined permission rules has changed.")
-            .hasSize(16);
+            .hasSize(20);
     }
 
     @Test
@@ -358,5 +358,74 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
                 "tribunal-caseworker",
                 "task-supervisor"
             );
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestJudiciaryTaskTypeShouldReturnPermissionsForJudiciaryRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestJudiciary"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "specific-access-approver-judiciary",
+                "value", "Read,Own,UnclaimAssign,Claim,Manage,Unclaim,UnassignClaim,CompleteOwn",
+                "roleCategory", "JUDICIAL",
+                "autoAssignable", false,
+                "assignmentPriority", 1
+            )
+        ));
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestLegalOpsTaskTypeShouldReturnPermissionsForLegalOpsRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestLegalOps"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "specific-access-approver-legal-ops",
+                "value", "Read,Own,UnclaimAssign,Claim,Manage,Unclaim,UnassignClaim,CompleteOwn",
+                "roleCategory", "LEGAL_OPERATIONS",
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestAdminTaskTypeShouldReturnPermissionsForAdminRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestAdmin"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "specific-access-approver-admin",
+                "value", "Read,Own,UnclaimAssign,Claim,Manage,Unclaim,UnassignClaim,CompleteOwn",
+                "roleCategory", "ADMIN",
+                "autoAssignable", false
+            )
+        ));
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestCtscTaskTypeShouldReturnPermissionsForCtscRoles() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of("taskType", "reviewSpecificAccessRequestCTSC"));
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+
+        assertThat(dmnDecisionTableResult.getResultList()).isEqualTo(List.of(
+            Map.of(
+                "name", "specific-access-approver-ctsc",
+                "value", "Read,Own,UnclaimAssign,Claim,Manage,Unclaim,UnassignClaim,CompleteOwn",
+                "roleCategory", "CTSC",
+                "autoAssignable", false
+            )
+        ));
     }
 }
