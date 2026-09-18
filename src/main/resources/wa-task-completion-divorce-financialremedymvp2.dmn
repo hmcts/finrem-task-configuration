@@ -88,7 +88,7 @@
       </rule>
       <rule id="DecisionRule_16h2qvj">
         <inputEntry id="UnaryTests_1ptn2s0">
-          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
+          <text>"FR_HWFAcceptedAndIssue","FR_feeAccountDebitedAndIssue","FR_awaitingPaymentResponseFromHWF"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1b67w39">
           <text></text>
