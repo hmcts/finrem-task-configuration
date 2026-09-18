@@ -536,7 +536,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out2">
-          <text>"[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)&lt;br&gt;[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
+          <text>"[HWF Accepted &amp; Issue](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_HWFAcceptedAndIssue/FR_HWFAcceptedAndIssue1)&lt;br&gt;[Fee Account Debited &amp; Issue](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_feeAccountDebitedAndIssue/FR_feeAccountDebitedAndIssue1)&lt;br&gt;[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)"</text>
         </outputEntry>
         <outputEntry id="Rule_config_hwf_3_out3">
           <text>true</text>

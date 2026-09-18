@@ -7,8 +7,8 @@
           <text>eventId</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Task Type" name="taskType" typeRef="string"/>
-      <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string"/>
+      <output id="Output_1" label="Task Type" name="taskType" typeRef="string" />
+      <output id="Output_2" label="Completion Mode" name="completionMode" typeRef="string" />
       <rule id="Rule_completion_1">
         <inputEntry id="InputEntry_completion_1_1">
           <text>"attachScannedDocs"</text>
@@ -77,7 +77,7 @@
       </rule>
       <rule id="DecisionRule_1qfkvar">
         <inputEntry id="UnaryTests_0nfdnpk">
-          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
+          <text>"FR_HWFAcceptedAndIssue","FR_feeAccountDebitedAndIssue","FR_awaitingPaymentResponseFromHWF"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_18dv72s">
           <text>"checkHelpWithFees"</text>
@@ -88,7 +88,7 @@
       </rule>
       <rule id="DecisionRule_16h2qvj">
         <inputEntry id="UnaryTests_1ptn2s0">
-          <text>"FR_HWFDecisionMade","FR_paymentMadeFromHWF","FR_awaitingPaymentResponseFromHWF"</text>
+          <text>"FR_HWFAcceptedAndIssue","FR_feeAccountDebitedAndIssue","FR_awaitingPaymentResponseFromHWF"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1b67w39">
           <text></text>
@@ -191,7 +191,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-completion-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="160" y="80"/>
+        <dc:Bounds height="80" width="180" x="160" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
