@@ -464,33 +464,33 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         // dueDateOrigin is now() so its value is asserted against the evaluation time below
         List<Map<String, Object>> expectedResults = List.of(
-            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
+            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", false),
             Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
-                   "canReconfigure", true),
-            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", false),
             Map.of("name", "dueDateNonWorkingCalendar", "value",
                    "https://www.gov.uk/bank-holidays/england-and-wales.json",
-                   "canReconfigure", true),
-            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
-            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
-            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
-            Map.of("name", "dueDateOrigin", "canReconfigure", true),
-            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
-            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
-            Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
-            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", true),
-            Map.of("name", "region", "value", "2", "canReconfigure", true),
-            Map.of("name", "location", "value", "4281", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", false),
+            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", false),
+            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", false),
+            Map.of("name", "dueDateOrigin", "canReconfigure", false),
+            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", false),
+            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", false),
+            Map.of("name", "minorPriority", "value", "500", "canReconfigure", false),
+            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", false),
+            Map.of("name", "region", "value", "2", "canReconfigure", false),
+            Map.of("name", "location", "value", "4281", "canReconfigure", false),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
-                   "canReconfigure", true),
-            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
-            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
-            Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", false),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", false),
+            Map.of("name", "workType", "value", "evidence", "canReconfigure", false),
             Map.of("name", "description", "value",
                    "[Attach scanned document]"
                        + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
-                   "canReconfigure", true),
-            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true)
+                   "canReconfigure", false),
+            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", false)
         );
 
         assertThat(actualResults).hasSameSizeAs(expectedResults);
@@ -787,34 +787,34 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         // dueDateOrigin is now() so its value is asserted against the evaluation time below
         List<Map<String, Object>> expectedResults = List.of(
 
-            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
+            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", false),
             Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
-                   "canReconfigure", true),
-            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", false),
             Map.of("name", "dueDateNonWorkingCalendar", "value",
                    "https://www.gov.uk/bank-holidays/england-and-wales.json",
-                   "canReconfigure", true),
-            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
-            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
-            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
-            Map.of("name", "dueDateOrigin", "canReconfigure", true),
-            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
-            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
-            Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
-            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", true),
-            Map.of("name", "region", "value", "2", "canReconfigure", true),
-            Map.of("name", "location", "value", "4281", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", false),
+            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", false),
+            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", false),
+            Map.of("name", "dueDateOrigin", "canReconfigure", false),
+            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", false),
+            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", false),
+            Map.of("name", "minorPriority", "value", "500", "canReconfigure", false),
+            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", false),
+            Map.of("name", "region", "value", "2", "canReconfigure", false),
+            Map.of("name", "location", "value", "4281", "canReconfigure", false),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
-                   "canReconfigure", true),
-            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
-            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
-            Map.of("name", "title", "value", "Review Order Response", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", false),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", false),
+            Map.of("name", "title", "value", "Review Order Response", "canReconfigure", false),
             Map.of("name", "description", "value",
                    "[Assign to Judge]"
                        + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
                        + "FR_referToJudgeFromRespondToOrder/FR_referToJudgeFromRespondToOrder1)",
-                   "canReconfigure", true),
-            Map.of("name", "workType", "value", "review_case", "canReconfigure", true)
+                   "canReconfigure", false),
+            Map.of("name", "workType", "value", "review_case", "canReconfigure", false)
 
         );
 
