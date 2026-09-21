@@ -532,8 +532,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
         assertThat(valueOf(results, "title")).isEqualTo("Process Approved Order");
         assertThat(valueOf(results, "description"))
-            .isEqualTo("[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}"
-                           + "/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)");
+            .isEqualTo("[Amend Final Order](/cases/case-details/${[CASE_REFERENCE]}"
+                           + "/trigger/FR_amendFinalOrder/FR_amendFinalOrder1)");
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
         assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
