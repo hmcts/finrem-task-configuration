@@ -71,7 +71,7 @@
       </rule>
       <rule id="DecisionRule_0atipx0">
         <inputEntry id="UnaryTests_18rqsrv">
-          <text>"FR_amendedConsentOrder"</text>
+          <text>"FR_amendFinalOrder"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1ceo432">
           <text></text>
