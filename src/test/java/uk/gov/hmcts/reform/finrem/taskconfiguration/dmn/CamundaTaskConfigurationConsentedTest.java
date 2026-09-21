@@ -30,7 +30,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         DmnDecisionTableImpl logic = (DmnDecisionTableImpl) decision.getDecisionLogic();
         assertThat(logic.getRules())
             .as("Number of defined task configuration rules has changed.")
-            .hasSize(42);
+            .hasSize(47);
     }
 
     @Test
@@ -572,11 +572,8 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         String description = valueOf(results, "description").toString();
         assertThat(description).contains(
-            "[Assign To Judge](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_referToJudge/FR_referToJudge1)");
-        assertThat(description).contains(
             "[Issue Application](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_issueApplication/FR_issueApplication1)");
+                + "/trigger/FR_issueApplicationFromInfoReceived/FR_issueApplicationFromInfoReceived1)");
         assertThat(description).contains(
             "[Awaiting Information](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_awaitingInfo/FR_awaitingInfo1)");
@@ -588,7 +585,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 + "/trigger/FR_generalLetter/FR_generalLetter1)");
         assertThat(description).contains(
             "[General Order](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_generalOrderFromAwaitingInfo/FR_generalOrderFromAwaitingInfo1)");
+                + "/trigger/FR_generalOrderFromInfoReceived/FR_generalOrderFromInfoReceived1)");
         assertThat(description).contains(
             "[List for hearing](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_listForHearing/FR_listForHearing1)");
@@ -815,7 +812,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             Map.of("name", "description", "value",
                    "[Assign to Judge]"
                        + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
-                       + "FR_assignToJudgeConsent/FR_assignToJudgeConsent1)",
+                       + "FR_referToJudgeFromRespondToOrder/FR_referToJudgeFromRespondToOrder1)",
                    "canReconfigure", true),
             Map.of("name", "workType", "value", "review_case", "canReconfigure", true)
 
@@ -836,6 +833,71 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 assertThat(actual.get("value")).isEqualTo(expected.get("value"));
             }
         }
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestCtscTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskAttributes", Map.of(
+            "taskId", "4444t",
+            "roleAssignmentId", "99999"
+        ));
+        inputVariables.putValue("taskType", "reviewSpecificAccessRequestCTSC");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(19);
+        assertThat(valueOf(results, "workType")).isEqualTo("access_requests");
+        assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
+        assertThat(valueOf(results, "description")).isEqualTo(
+            "[Review Access Request](/role-access/4444t/assignment/99999/specific-access)");
+        assertThat(valueOf(results, "additionalProperties_roleAssignmentId")).isEqualTo("99999");
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestLegalOpsTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskType", "reviewSpecificAccessRequestLegalOps");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(19);
+        assertThat(valueOf(results, "workType")).isEqualTo("access_requests");
+        assertThat(valueOf(results, "roleCategory")).isEqualTo("LEGAL_OPERATIONS");
+        assertThat(valueOf(results, "description")).isEqualTo("");
+        assertThat(valueOf(results, "additionalProperties_roleAssignmentId")).isEqualTo("");
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestAdminTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskType", "reviewSpecificAccessRequestAdmin");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(19);
+        assertThat(valueOf(results, "workType")).isEqualTo("access_requests");
+        assertThat(valueOf(results, "roleCategory")).isEqualTo("ADMIN");
+        assertThat(valueOf(results, "description")).isEqualTo("");
+        assertThat(valueOf(results, "additionalProperties_roleAssignmentId")).isEqualTo("");
+    }
+
+    @Test
+    void givenReviewSpecificAccessRequestJudiciaryTaskTypeShouldReturnConfiguration() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("taskType", "reviewSpecificAccessRequestJudiciary");
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
+
+        assertThat(results).hasSize(19);
+        assertThat(valueOf(results, "workType")).isEqualTo("access_requests");
+        assertThat(valueOf(results, "roleCategory")).isEqualTo("JUDICIAL");
+        assertThat(valueOf(results, "description")).isEqualTo("");
+        assertThat(valueOf(results, "additionalProperties_roleAssignmentId")).isEqualTo("");
     }
 
     private static Object valueOf(List<Map<String, Object>> results, String name) {
