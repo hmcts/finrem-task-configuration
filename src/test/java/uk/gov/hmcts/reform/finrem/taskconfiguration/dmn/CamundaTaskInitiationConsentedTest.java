@@ -419,18 +419,18 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_orderRefusal");
         inputVariables.putValue("postEventState", "orderMade");
 
-        OrderRefusal orderRefusal1_validForTask = new OrderRefusal(
+        OrderRefusal orderRefusalValidForTask = new OrderRefusal(
             List.of("The D81 incomplete"),
             "Please clarify the pension figures"
         );
-        OrderRefusal orderRefusal2_notValidForTask = new OrderRefusal(
+        OrderRefusal orderRefusalNotValidForTask = new OrderRefusal(
             List.of("The D81 incomplete"),
             ""
         );
 
         inputVariables.putValue("additionalData", Map.of(
             "Data", populateOrderRefusalCollectionAdditionalData(
-                List.of(orderRefusal1_validForTask, orderRefusal2_notValidForTask)))
+                List.of(orderRefusalValidForTask, orderRefusalNotValidForTask)))
         );
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
