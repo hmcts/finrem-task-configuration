@@ -8,11 +8,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import scala.Tuple2;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -291,13 +295,39 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
+    private Map<String, Object> populateOrderRefusalCollectionAdditionalData(List<OrderRefusal> orderRefusalList) {
+        List<Map<String, Object>> orderRefusalCollection = new ArrayList<>(orderRefusalList.size());
+        for (OrderRefusal orderRefusal : orderRefusalList) {
+            String id = Integer.toString(orderRefusalList.indexOf(orderRefusal));
+
+            Map<String, Object> value = Map.of(
+                "orderRefusal", orderRefusal.orderRefusal,
+                "orderRefusalOther", orderRefusal.orderRefusalOther
+            );
+
+            orderRefusalCollection.add(Map.of("id", id, "value", value));
+        }
+
+        return Map.of("orderRefusalCollection", orderRefusalCollection);
+    }
+
+
+    record OrderRefusal(List<String> orderRefusal, String orderRefusalOther) {}
+
     @Test
     void givenOrderRefusalWithHearingReasonShouldCreateReviewRefusedOrderTask() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_orderRefusal");
         inputVariables.putValue("postEventState", "orderMade");
-        inputVariables.putValue("additionalData",
-            additionalDataWithOrderRefusal(List.of("Hearing fixed for first available date"), ""));
+
+        OrderRefusal orderRefusal = new OrderRefusal(
+            List.of("Hearing fixed for first available date"),
+            ""
+        );
+
+        inputVariables.putValue("additionalData", Map.of(
+            "Data", populateOrderRefusalCollectionAdditionalData(List.of(orderRefusal)))
+        );
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
@@ -321,9 +351,15 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         inputVariables.putValue("eventId", "FR_orderRefusal");
         inputVariables.putValue("postEventState", "orderMade");
         // a non-hearing standard reason, but a manual free-text reason has been entered
-        inputVariables.putValue("additionalData",
-            additionalDataWithOrderRefusal(List.of("The D81 incomplete"),
-                "Please clarify the pension figures"));
+
+        OrderRefusal orderRefusal = new OrderRefusal(
+            List.of("The D81 incomplete"),
+            "Please clarify the pension figures"
+        );
+
+        inputVariables.putValue("additionalData", Map.of(
+            "Data", populateOrderRefusalCollectionAdditionalData(List.of(orderRefusal)))
+        );
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         List<Map<String, Object>> results = dmnDecisionTableResult.getResultList();
@@ -337,8 +373,15 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_orderRefusal");
         inputVariables.putValue("postEventState", "orderMade");
-        inputVariables.putValue("additionalData",
-            additionalDataWithOrderRefusal(List.of("The D81 incomplete"), ""));
+
+        OrderRefusal orderRefusal = new OrderRefusal(
+            List.of("The D81 incomplete"),
+            ""
+        );
+
+        inputVariables.putValue("additionalData", Map.of(
+            "Data", populateOrderRefusalCollectionAdditionalData(List.of(orderRefusal)))
+        );
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
@@ -359,9 +402,38 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", "FR_orderRefusal");
         inputVariables.putValue("postEventState", "readyForHearing");
-        inputVariables.putValue(
-            "additionalData",
-            additionalDataWithOrderRefusal(List.of("Hearing fixed for first available date"), "")
+
+        OrderRefusal orderRefusal = new OrderRefusal(
+            List.of("Hearing fixed for first available date"),
+            ""
+        );
+
+        inputVariables.putValue("additionalData", Map.of(
+            "Data", populateOrderRefusalCollectionAdditionalData(List.of(orderRefusal)))
+        );
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
+    }
+
+    @Test
+    void givenOrderRefusalWithTaskCreatedFromPreviousRecordButNotValidForMostRecentShouldNotCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_orderRefusal");
+        inputVariables.putValue("postEventState", "orderMade");
+
+        OrderRefusal orderRefusal1_validForTask = new OrderRefusal(
+            List.of("The D81 incomplete"),
+            "Please clarify the pension figures"
+        );
+        OrderRefusal orderRefusal2_notValidForTask = new OrderRefusal(
+            List.of("The D81 incomplete"),
+            ""
+        );
+
+        inputVariables.putValue("additionalData", Map.of(
+            "Data", populateOrderRefusalCollectionAdditionalData(
+                List.of(orderRefusal1_validForTask, orderRefusal2_notValidForTask)))
         );
 
         DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
@@ -405,14 +477,6 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
             .mapToObj(i -> Map.<String, Object>of("id", String.valueOf(i)))
             .toList();
         return Map.of("Data", Map.of("pensionCollection", pensionCollection));
-    }
-
-    private static Map<String, Object> additionalDataWithOrderRefusal(List<String> reasons, String otherText) {
-        Map<String, Object> value = new java.util.HashMap<>();
-        value.put("orderRefusal", reasons);
-        value.put("orderRefusalOther", otherText);
-        return Map.of("Data", Map.of("orderRefusalCollection",
-                                     List.of(Map.of("id", "1", "value", value))));
     }
 
     @Test
