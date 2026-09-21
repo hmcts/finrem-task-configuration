@@ -437,6 +437,31 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(dmnDecisionTableResult.getResultList()).isEmpty();
     }
 
+    @Test
+    void givenOrderRefusalWithNoTaskCreatedFromPreviousRecordButValidForMostRecentShouldCreateTask() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("eventId", "FR_orderRefusal");
+        inputVariables.putValue("postEventState", "orderMade");
+
+        OrderRefusal orderRefusalValidForTask = new OrderRefusal(
+            List.of("The D81 incomplete"),
+            "Please clarify the pension figures"
+        );
+        OrderRefusal orderRefusalNotValidForTask = new OrderRefusal(
+            List.of("The D81 incomplete"),
+            ""
+        );
+
+        inputVariables.putValue("additionalData", Map.of(
+            "Data", populateOrderRefusalCollectionAdditionalData(
+                List.of(orderRefusalNotValidForTask, orderRefusalValidForTask)))
+        );
+
+        DmnDecisionTableResult dmnDecisionTableResult = evaluateDmnTable(inputVariables);
+        assertThat(dmnDecisionTableResult).hasSize(1);
+        assertThat(dmnDecisionTableResult.getFirst().get("taskId")).isEqualTo("reviewRefusedOrder");
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
         "FR_applicationPaymentSubmission",
