@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
-             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
-             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0"
-             xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD"
-             namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.48.0">
-  <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN"
-            camunda:historyTimeToLive="P90D">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="wa-configuration-consented" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.44.0">
+  <decision id="wa-task-configuration-divorce-financialremedymvp2" name="Task configuration DMN" camunda:historyTimeToLive="P90D">
     <decisionTable id="DecisionTable_configuration_consented" hitPolicy="RULE ORDER">
       <input id="Input_1" label="CCD Case Data" camunda:inputVariable="caseData">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -23,9 +18,9 @@
           </text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Name" name="name" typeRef="string"/>
-      <output id="Output_2" label="Value" name="value" typeRef="string"/>
-      <output id="Output_3" label="Can Reconfigure?" name="canReconfigure" typeRef="boolean" biodi:width="190"/>
+      <output id="Output_1" label="Name" name="name" typeRef="string" />
+      <output id="Output_2" label="Value" name="value" typeRef="string" />
+      <output id="Output_3" label="Can Reconfigure?" name="canReconfigure" typeRef="boolean" biodi:width="190" />
       <rule id="Rule_config_5">
         <inputEntry id="InputEntry_config_5_1">
           <text></text>
@@ -245,7 +240,7 @@
           <text>"region"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_16_2">
-          <text>2</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null) then caseData.caseManagementLocation.region else 2</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_16_3">
           <text>true</text>
@@ -262,7 +257,7 @@
           <text>"location"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_17_2">
-          <text>4281</text>
+          <text>if (caseData != null and caseData.caseManagementLocation != null) then caseData.caseManagementLocation.baseLocation else 195496</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_17_3">
           <text>true</text>
@@ -842,7 +837,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="wa-task-configuration-divorce-financialremedymvp2">
-        <dc:Bounds height="80" width="180" x="160" y="80"/>
+        <dc:Bounds height="80" width="180" x="160" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
