@@ -36,7 +36,7 @@
       <input id="Input_6" label="Help with fees" camunda:inputVariable="helpWithFeesQuestion">
         <inputExpression id="InputExpression_6" typeRef="boolean">
           <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.helpWithFeesQuestion
-            != null) then additionalData.Data.helpWithFeesQuestion else ""
+            != null) then additionalData.Data.helpWithFeesQuestion else false
           </text>
         </inputExpression>
       </input>
