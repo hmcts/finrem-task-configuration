@@ -61,7 +61,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("minorPriority", "500"),
                 entry("caseName", "Financial Remedy"),
                 entry("region", "2"),
-                entry("location", "4281"),
+                entry("location", "195496"),
                 entry("caseManagementCategory", "FR Consented")
             ));
     }
@@ -421,7 +421,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         // strings, which fail task initiation downstream in the same way as null
         assertThat(valueOf(results, "caseName")).isEqualTo("Financial Remedy");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("195496");
     }
 
     @Test
@@ -532,15 +532,15 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
         assertThat(valueOf(results, "title")).isEqualTo("Process Approved Order");
         assertThat(valueOf(results, "description"))
-            .isEqualTo("[Amended Consent Order](/cases/case-details/${[CASE_REFERENCE]}"
-                           + "/trigger/FR_amendedConsentOrder/FR_amendedConsentOrder1)");
+            .isEqualTo("[Amend Final Order](/cases/case-details/${[CASE_REFERENCE]}"
+                           + "/trigger/FR_amendFinalOrder/FR_amendFinalOrder1)");
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
         assertThat(valueOf(results, "dueDateNonWorkingCalendar")).isEqualTo(
             "https://www.gov.uk/bank-holidays/england-and-wales.json");
         assertThat(valueOf(results, "caseName")).isEqualTo("Stark vs Potts");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("765324");
     }
 
     @Test
@@ -568,7 +568,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             "https://www.gov.uk/bank-holidays/england-and-wales.json");
         assertThat(valueOf(results, "caseName")).isEqualTo("Wright vs Edgeworth");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("765324");
 
         String description = valueOf(results, "description").toString();
         assertThat(description).contains(
@@ -616,7 +616,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "caseName")).isEqualTo("Wayne vs Kyle");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("366796");
 
         // SLA = 5 working days (BA confirmed): weekends and gov.uk bank holidays are skipped
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
@@ -674,7 +674,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("minorPriority", "500"),
                 entry("caseName", "Doe vs Kirk"),
                 entry("region", "2"),
-                entry("location", "4281"),
+                entry("location", "366796"),
                 entry("caseManagementCategory", "FR Consented"),
                 entry("workType", "decision_making_work"),
                 entry("roleCategory", "JUDICIAL"),
@@ -716,7 +716,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "caseName")).isEqualTo("Parker vs Jane");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("366796");
 
         // SLA = 5 working days: weekends and gov.uk bank holidays are skipped
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
@@ -755,7 +755,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("minorPriority", "500"),
                 entry("caseName", "Financial Remedy"),
                 entry("region", "2"),
-                entry("location", "4281"),
+                entry("location", "195496"),
                 entry("caseManagementCategory", "FR Consented"),
                 entry("roleCategory", "CTSC"),
                 entry("dueDateIntervalDays", "5"),
