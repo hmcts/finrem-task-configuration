@@ -26,10 +26,7 @@
       </input>
       <input id="Input_5" label="Hearing to be listed or manual refusal reason entered" camunda:inputVariable="reviewRefusedHearingOrManualReason">
         <inputExpression id="InputExpression_5" typeRef="boolean">
-          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.orderRefusalCollection
-            != null) then (some refusal in additionalData.Data.orderRefusalCollection satisfies
-            ((refusal.value.orderRefusal != null and list contains(refusal.value.orderRefusal, "Hearing fixed for first available date")) or (refusal.value.orderRefusalOther != null and refusal.value.orderRefusalOther != "")))
-            else false
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.orderRefusalCollection != null and count(additionalData.Data.orderRefusalCollection) > 0) then ((additionalData.Data.orderRefusalCollection[-1].value.orderRefusal != null and list contains(additionalData.Data.orderRefusalCollection[-1].value.orderRefusal, "Hearing fixed for first available date")) or (additionalData.Data.orderRefusalCollection[-1].value.orderRefusalOther != null and additionalData.Data.orderRefusalCollection[-1].value.orderRefusalOther != "")) else false
           </text>
         </inputExpression>
       </input>

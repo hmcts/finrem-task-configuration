@@ -61,7 +61,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("minorPriority", "500"),
                 entry("caseName", "Financial Remedy"),
                 entry("region", "2"),
-                entry("location", "4281"),
+                entry("location", "195496"),
                 entry("caseManagementCategory", "FR Consented")
             ));
     }
@@ -421,7 +421,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         // strings, which fail task initiation downstream in the same way as null
         assertThat(valueOf(results, "caseName")).isEqualTo("Financial Remedy");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("195496");
     }
 
     @Test
@@ -464,33 +464,33 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
 
         // dueDateOrigin is now() so its value is asserted against the evaluation time below
         List<Map<String, Object>> expectedResults = List.of(
-            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
+            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", false),
             Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
-                   "canReconfigure", true),
-            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", false),
             Map.of("name", "dueDateNonWorkingCalendar", "value",
                    "https://www.gov.uk/bank-holidays/england-and-wales.json",
-                   "canReconfigure", true),
-            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
-            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
-            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
-            Map.of("name", "dueDateOrigin", "canReconfigure", true),
-            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
-            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
-            Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
-            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", true),
-            Map.of("name", "region", "value", "2", "canReconfigure", true),
-            Map.of("name", "location", "value", "4281", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", false),
+            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", false),
+            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", false),
+            Map.of("name", "dueDateOrigin", "canReconfigure", false),
+            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", false),
+            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", false),
+            Map.of("name", "minorPriority", "value", "500", "canReconfigure", false),
+            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", false),
+            Map.of("name", "region", "value", "2", "canReconfigure", false),
+            Map.of("name", "location", "value", "366796", "canReconfigure", false),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
-                   "canReconfigure", true),
-            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
-            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
-            Map.of("name", "workType", "value", "evidence", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", false),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", false),
+            Map.of("name", "workType", "value", "evidence", "canReconfigure", false),
             Map.of("name", "description", "value",
                    "[Attach scanned document]"
                        + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/attachScannedDocs/attachScannedDocs1)",
-                   "canReconfigure", true),
-            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", true)
+                   "canReconfigure", false),
+            Map.of("name", "title", "value", "Process Scanned Documents", "canReconfigure", false)
         );
 
         assertThat(actualResults).hasSameSizeAs(expectedResults);
@@ -540,7 +540,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             "https://www.gov.uk/bank-holidays/england-and-wales.json");
         assertThat(valueOf(results, "caseName")).isEqualTo("Stark vs Potts");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("765324");
     }
 
     @Test
@@ -568,7 +568,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
             "https://www.gov.uk/bank-holidays/england-and-wales.json");
         assertThat(valueOf(results, "caseName")).isEqualTo("Wright vs Edgeworth");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("765324");
 
         String description = valueOf(results, "description").toString();
         assertThat(description).contains(
@@ -616,7 +616,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "caseName")).isEqualTo("Wayne vs Kyle");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("366796");
 
         // SLA = 5 working days (BA confirmed): weekends and gov.uk bank holidays are skipped
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
@@ -674,7 +674,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("minorPriority", "500"),
                 entry("caseName", "Doe vs Kirk"),
                 entry("region", "2"),
-                entry("location", "4281"),
+                entry("location", "366796"),
                 entry("caseManagementCategory", "FR Consented"),
                 entry("workType", "decision_making_work"),
                 entry("roleCategory", "JUDICIAL"),
@@ -716,7 +716,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "caseName")).isEqualTo("Parker vs Jane");
         assertThat(valueOf(results, "region")).isEqualTo("2");
-        assertThat(valueOf(results, "location")).isEqualTo("4281");
+        assertThat(valueOf(results, "location")).isEqualTo("366796");
 
         // SLA = 5 working days: weekends and gov.uk bank holidays are skipped
         assertThat(valueOf(results, "dueDateIntervalDays")).isEqualTo("5");
@@ -755,7 +755,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
                 entry("minorPriority", "500"),
                 entry("caseName", "Financial Remedy"),
                 entry("region", "2"),
-                entry("location", "4281"),
+                entry("location", "195496"),
                 entry("caseManagementCategory", "FR Consented"),
                 entry("roleCategory", "CTSC"),
                 entry("dueDateIntervalDays", "5"),
@@ -787,34 +787,34 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         // dueDateOrigin is now() so its value is asserted against the evaluation time below
         List<Map<String, Object>> expectedResults = List.of(
 
-            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", true),
+            Map.of("name", "calculatedDates", "value", "nextHearingDate,dueDate,priorityDate", "canReconfigure", false),
             Map.of("name", "priorityDateOriginRef", "value", "nextHearingDate,dueDate",
-                   "canReconfigure", true),
-            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "nextHearingDate", "value", "", "canReconfigure", false),
             Map.of("name", "dueDateNonWorkingCalendar", "value",
                    "https://www.gov.uk/bank-holidays/england-and-wales.json",
-                   "canReconfigure", true),
-            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", true),
-            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", true),
-            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", true),
-            Map.of("name", "dueDateOrigin", "canReconfigure", true),
-            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", true),
-            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", true),
-            Map.of("name", "minorPriority", "value", "500", "canReconfigure", true),
-            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", true),
-            Map.of("name", "region", "value", "2", "canReconfigure", true),
-            Map.of("name", "location", "value", "4281", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "dueDateNonWorkingDaysOfWeek", "value", "SATURDAY,SUNDAY", "canReconfigure", false),
+            Map.of("name", "dueDateSkipNonWorkingDays", "value", "true", "canReconfigure", false),
+            Map.of("name", "dueDateMustBeWorkingDay", "value", "No", "canReconfigure", false),
+            Map.of("name", "dueDateOrigin", "canReconfigure", false),
+            Map.of("name", "dueDateTime", "value", "14:00", "canReconfigure", false),
+            Map.of("name", "majorPriority", "value", "5000", "canReconfigure", false),
+            Map.of("name", "minorPriority", "value", "500", "canReconfigure", false),
+            Map.of("name", "caseName", "value", "Doe vs Kirk", "canReconfigure", false),
+            Map.of("name", "region", "value", "2", "canReconfigure", false),
+            Map.of("name", "location", "value", "366796", "canReconfigure", false),
             Map.of("name", "caseManagementCategory", "value", "FR Consented",
-                   "canReconfigure", true),
-            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", true),
-            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", true),
-            Map.of("name", "title", "value", "Review Order Response", "canReconfigure", true),
+                   "canReconfigure", false),
+            Map.of("name", "roleCategory", "value", "CTSC", "canReconfigure", false),
+            Map.of("name", "dueDateIntervalDays", "value", "5", "canReconfigure", false),
+            Map.of("name", "title", "value", "Review Order Response", "canReconfigure", false),
             Map.of("name", "description", "value",
                    "[Assign to Judge]"
                        + "(/cases/case-details/${[CASE_REFERENCE]}/trigger/"
                        + "FR_referToJudgeFromRespondToOrder/FR_referToJudgeFromRespondToOrder1)",
-                   "canReconfigure", true),
-            Map.of("name", "workType", "value", "review_case", "canReconfigure", true)
+                   "canReconfigure", false),
+            Map.of("name", "workType", "value", "review_case", "canReconfigure", false)
 
         );
 
