@@ -637,6 +637,12 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(description).contains(
             "[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)");
+        assertThat(description).contains(
+            "[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)");
+        assertThat(description).contains(
+            "[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)");
     }
 
     @Test
