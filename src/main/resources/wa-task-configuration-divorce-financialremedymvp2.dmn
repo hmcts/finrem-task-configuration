@@ -189,7 +189,7 @@
           <text>"majorPriority"</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_13_2">
-          <text>5000</text>
+          <text>if (caseData = null or caseData.listForHearings = null) then 5000 else if some item in caseData.listForHearings satisfies (if (item.value.hearingDate = null) then false else (date(item.value.hearingDate) >= today() and not(date(item.value.hearingDate) > today() + duration("P1D")))) then 2000 else 5000</text>
         </outputEntry>
         <outputEntry id="OutputEntry_config_13_3">
           <text>false</text>

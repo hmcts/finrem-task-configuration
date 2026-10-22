@@ -409,6 +409,69 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     }
 
     @Test
+    void givenNoHearingDateTaskPriorityShouldNotBeUrgent() {
+        VariableMap inputVariables = new VariableMapImpl();
+        inputVariables.putValue("caseData", Map.of("listForHearings", List.of()));
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "majorPriority")).isEqualTo("5000");
+    }
+
+    @Test
+    void givenNoHearingDateTodayOrTomorrowTaskPriorityShouldNotBeUrgent() {
+        VariableMap inputVariables = new VariableMapImpl();
+
+        String upcomingHearingAfterTomorrow = LocalDate.now().plusDays(2).toString();
+        String upcomingHearingPast = LocalDate.now().minusDays(1).toString();
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", upcomingHearingPast)),
+                                       Map.of("value", Map.of("hearingDate", upcomingHearingAfterTomorrow)))
+        ));
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "majorPriority")).isEqualTo("5000");
+    }
+
+    @Test
+    void givenHearingDateCurrentDayTaskPriorityShouldBeUrgent() {
+        VariableMap inputVariables = new VariableMapImpl();
+
+        String upcomingHearingToday = LocalDate.now().toString();
+        String upcomingHearingAfterTomorrow = LocalDate.now().plusDays(2).toString();
+        String upcomingHearingPast = LocalDate.now().minusDays(1).toString();
+
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", upcomingHearingPast)),
+                                       Map.of("value", Map.of("hearingDate", upcomingHearingToday)),
+                                       Map.of("value", Map.of("hearingDate", upcomingHearingAfterTomorrow)))
+        ));
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "majorPriority")).isEqualTo("2000");
+    }
+
+    @Test
+    void givenHearingDateNextDayTaskPriorityShouldBeUrgent() {
+        VariableMap inputVariables = new VariableMapImpl();
+
+        String upcomingHearingTomorrow = LocalDate.now().plusDays(1).toString();
+        String upcomingHearingAfterTomorrow = LocalDate.now().plusDays(2).toString();
+        String upcomingHearingPast = LocalDate.now().minusDays(1).toString();
+
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", upcomingHearingPast)),
+                                       Map.of("value", Map.of("hearingDate", upcomingHearingTomorrow)),
+                                       Map.of("value", Map.of("hearingDate", upcomingHearingAfterTomorrow)))
+        ));
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "majorPriority")).isEqualTo("2000");
+    }
+
+    @Test
     void givenCaseDataWithoutMandatoryFieldsShouldReturnDefaultCaseNameRegionAndLocation() {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("caseData", Map.of());
