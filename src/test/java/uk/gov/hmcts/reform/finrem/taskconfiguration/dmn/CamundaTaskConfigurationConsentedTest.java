@@ -4,8 +4,8 @@ import org.camunda.bpm.dmn.engine.DmnDecisionTableResult;
 import org.camunda.bpm.dmn.engine.impl.DmnDecisionTableImpl;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.impl.VariableMapImpl;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTable;
 import uk.gov.hmcts.reform.finrem.taskconfiguration.DmnDecisionTableBaseUnitTest;
@@ -22,12 +22,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest {
 
+    /* Tuesday with no bank holiday the next day. */
+    private static final LocalDate MID_WEEK_DATE_NO_BANK_HOLIDAY = LocalDate.parse("2026-10-06");
+
+    /* Friday with no bank holiday on the Monday. */
+    private static final LocalDate END_WEEK_DATE_NO_BANK_HOLIDAY = LocalDate.parse("2026-10-09");
+
     @BeforeAll
     static void initialization() {
         currentDmnDecisionTable = DmnDecisionTable.WA_TASK_CONFIGURATION_DIVORCE_FINANCIALREMEDYMVP2;
     }
 
-    @BeforeEach
+    @AfterEach
     void tearDown() {
         MockFeelClock.reset();
     }
@@ -428,8 +434,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenNoHearingDateTodayOrTomorrowTaskPriorityShouldNotBeUrgent() {
         VariableMap inputVariables = new VariableMapImpl();
 
-        /* Mid-week day with no bank holiday. */
-        LocalDate currentDate = LocalDate.parse("2026-10-22");
+        LocalDate currentDate = MID_WEEK_DATE_NO_BANK_HOLIDAY;
         MockFeelClock.setDate(currentDate);
 
         String upcomingHearingPast = currentDate.minusDays(1).toString();
@@ -449,8 +454,7 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenHearingDateCurrentDayTaskPriorityShouldBeUrgent() {
         VariableMap inputVariables = new VariableMapImpl();
 
-        /* Mid-week day with no bank holiday. */
-        LocalDate currentDate = LocalDate.parse("2026-10-06");
+        LocalDate currentDate = MID_WEEK_DATE_NO_BANK_HOLIDAY;
         MockFeelClock.setDate(currentDate);
 
         String upcomingHearingPast = currentDate.minusDays(1).toString();
@@ -472,13 +476,34 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
     void givenHearingDateNextDayTaskPriorityShouldBeUrgent() {
         VariableMap inputVariables = new VariableMapImpl();
 
-        /* Mid-week day with no bank holiday. */
-        LocalDate currentDate = LocalDate.parse("2026-10-06");
+        LocalDate currentDate = MID_WEEK_DATE_NO_BANK_HOLIDAY;
         MockFeelClock.setDate(currentDate);
 
         String upcomingHearingPast = currentDate.minusDays(1).toString();
         String upcomingHearingTomorrow = currentDate.plusDays(1).toString();
         String upcomingHearingAfterTomorrow = currentDate.plusDays(2).toString();
+
+        inputVariables.putValue("caseData", Map.of(
+            "listForHearings", List.of(Map.of("value", Map.of("hearingDate", upcomingHearingPast)),
+                                       Map.of("value", Map.of("hearingDate", upcomingHearingTomorrow)),
+                                       Map.of("value", Map.of("hearingDate", upcomingHearingAfterTomorrow)))
+        ));
+
+        List<Map<String, Object>> results = evaluateDmnTable(inputVariables).getResultList();
+
+        assertThat(valueOf(results, "majorPriority")).isEqualTo("2000");
+    }
+
+    @Test
+    void givenTaskCreatedOnFridayAndHearingDateOnMondayTaskPriorityShouldBeUrgent() {
+        VariableMap inputVariables = new VariableMapImpl();
+
+        LocalDate currentDate = END_WEEK_DATE_NO_BANK_HOLIDAY; // Friday
+        MockFeelClock.setDate(currentDate);
+
+        String upcomingHearingPast = currentDate.minusDays(1).toString(); // Thursday
+        String upcomingHearingTomorrow = currentDate.plusDays(3).toString(); // Monday
+        String upcomingHearingAfterTomorrow = currentDate.plusDays(4).toString(); // Tuesday
 
         inputVariables.putValue("caseData", Map.of(
             "listForHearings", List.of(Map.of("value", Map.of("hearingDate", upcomingHearingPast)),
