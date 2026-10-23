@@ -28,22 +28,11 @@ public abstract class DmnDecisionTableBaseUnitTest {
         DefaultDmnEngineConfiguration defaultDmnEngineConfiguration
             = (DefaultDmnEngineConfiguration) DmnEngineConfiguration.createDefaultDmnEngineConfiguration();
 
-        // Setting a ScalaFeelEngineFactory adapter so that the engine can be created to use the MockFeelClock.
+        /* Setting a ScalaFeelEngineFactory with an override for the creation of the FeelEngine so that it can be created to use the MockFeelClock. */
         defaultDmnEngineConfiguration.setFeelEngineFactory(new org.camunda.bpm.dmn.feel.impl.scala.ScalaFeelEngineFactory() {
             @Override
             public org.camunda.bpm.dmn.feel.impl.FeelEngine createInstance() {
                 return new ScalaFeelEngine(this.customFunctionProviders){
-
-                    @Override
-                    public <T> T evaluateSimpleExpression(String s, VariableContext variableContext) {
-                        return super.evaluateSimpleExpression(s, variableContext);
-                    }
-
-                    @Override
-                    public boolean evaluateSimpleUnaryTests(String s, String s1, VariableContext variableContext) {
-                        return super.evaluateSimpleUnaryTests(s, s1, variableContext);
-                    }
-
                     @Override
                     protected org.camunda.feel.FeelEngine buildFeelEngine(CustomFunctionTransformer transformer, ValueMapper.CompositeValueMapper valueMapper) {
                         return new org.camunda.feel.FeelEngine.Builder()
