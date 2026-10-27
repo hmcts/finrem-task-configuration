@@ -278,7 +278,7 @@
       </rule>
       <rule id="Rule_initiation_13">
         <inputEntry id="InputEntry_initiation_13_1">
-          <text>"FR_applicationPaymentSubmission","FR_caseSubmissionFromAwaitingInfo","FR_caseSubmissionFromInfoReceived","FR_paymentMadeFromHWF","FR_paymenetMade","FR_paymentMadeFromAwaitingPayment","FR_HWFDecisionMade","FR_HWFDecisionMadeFromAwaitingPayment"</text>
+          <text>"FR_applicationPaymentSubmission","FR_caseSubmissionFromAwaitingInfo","FR_caseSubmissionFromInfoReceived","FR_paymentMadeFromHWF","FR_paymenetMade","FR_paymentMadeFromAwaitingPayment","FR_HWFDecisionMade","FR_HWFDecisionMadeFromAwaitingPayment","FR_HWFAcceptedAndIssue","FR_feeAccountDebitedAndIssue","FR_awaitingPaymentResponseFromHWF"</text>
         </inputEntry>
         <inputEntry id="InputEntry_initiation_13_2">
           <text>"applicationSubmitted"</text>
