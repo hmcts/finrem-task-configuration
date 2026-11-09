@@ -26,7 +26,7 @@
       </input>
       <input id="Input_5" label="Hearing to be listed or manual refusal reason entered" camunda:inputVariable="reviewRefusedHearingOrManualReason">
         <inputExpression id="InputExpression_5" typeRef="boolean">
-          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.orderRefusalCollection != null and count(additionalData.Data.orderRefusalCollection) &gt; 0) then ((additionalData.Data.orderRefusalCollection[-1].value.orderRefusal != null and list contains(additionalData.Data.orderRefusalCollection[-1].value.orderRefusal, "Hearing fixed for first available date")) or (additionalData.Data.orderRefusalCollection[-1].value.orderRefusalOther != null and additionalData.Data.orderRefusalCollection[-1].value.orderRefusalOther != "")) else false
+          <text>if(additionalData != null and additionalData.Data != null and additionalData.Data.orderRefusalCollection != null and count(additionalData.Data.orderRefusalCollection) > 0) then ((additionalData.Data.orderRefusalCollection[-1].value.orderRefusal != null and list contains(additionalData.Data.orderRefusalCollection[-1].value.orderRefusal, "Hearing fixed for first available date")) or (additionalData.Data.orderRefusalCollection[-1].value.orderRefusalOther != null and additionalData.Data.orderRefusalCollection[-1].value.orderRefusalOther != "")) else false
           </text>
         </inputExpression>
       </input>
@@ -41,6 +41,7 @@
       <output id="Output_2" label="Name" name="name" typeRef="string" />
       <output id="Output_4" label="Delay Duration" name="delayDuration" typeRef="integer" />
       <output id="Output_6" label="Delay Until" name="delayUntil" typeRef="json" />
+      <output id="Output_7" label="Process Categories" name="processCategories" typeRef="string" />
       <rule id="Rule_initiation_1">
         <inputEntry id="InputEntry_initiation_1_1">
           <text>"attachScannedDocs"</text>
@@ -75,6 +76,9 @@
             "delayUntilIntervalDays": "0"
             }
           </text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_1_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_4">
@@ -112,6 +116,9 @@
             }
           </text>
         </outputEntry>
+        <outputEntry id="OutputEntry_initiation_4_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
       </rule>
       <rule id="Rule_initiation_9">
         <inputEntry id="InputEntry_initiation_9_1">
@@ -147,6 +154,9 @@
             "delayUntilIntervalDays": "0"
             }
           </text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_9_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_10">
@@ -184,6 +194,9 @@
             }
           </text>
         </outputEntry>
+        <outputEntry id="OutputEntry_initiation_10_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
       </rule>
       <rule id="Rule_initiation_11">
         <inputEntry id="InputEntry_initiation_11_1">
@@ -219,6 +232,9 @@
             "delayUntilIntervalDays": "0"
             }
           </text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_11_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_12">
@@ -256,6 +272,9 @@
             }
           </text>
         </outputEntry>
+        <outputEntry id="OutputEntry_initiation_12_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
       </rule>
       <rule id="Rule_initiation_13">
         <inputEntry id="InputEntry_initiation_13_1">
@@ -292,6 +311,9 @@
             }
           </text>
         </outputEntry>
+        <outputEntry id="OutputEntry_initiation_13_5">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+        </outputEntry>
       </rule>
       <rule id="Rule_initiation_14">
         <inputEntry id="InputEntry_initiation_14_1">
@@ -327,6 +349,9 @@
             "delayUntilIntervalDays": "0"
             }
           </text>
+        </outputEntry>
+        <outputEntry id="OutputEntry_initiation_14_6">
+          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
         </outputEntry>
       </rule>
     </decisionTable>
