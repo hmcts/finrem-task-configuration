@@ -20,7 +20,6 @@
       <output id="Output_1" label="Action" name="action" typeRef="string" />
       <output id="Output_2" label="Warning Code" name="warningCode" typeRef="string" />
       <output id="Output_3" label="Warning Text" name="warningText" typeRef="string" />
-      <output id="Output_4" label="Process Categories" name="processCategories" typeRef="string" />
       <rule id="DecisionRule_11oajg1">
         <description></description>
         <inputEntry id="UnaryTests_1dhqt25">
@@ -39,9 +38,6 @@
           <text></text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1wwiriu">
-          <text></text>
-        </outputEntry>
-        <outputEntry id="LiteralExpression_184cuay">
           <text></text>
         </outputEntry>
       </rule>
