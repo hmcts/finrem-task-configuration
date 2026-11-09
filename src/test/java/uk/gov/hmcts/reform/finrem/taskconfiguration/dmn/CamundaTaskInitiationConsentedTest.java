@@ -258,7 +258,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"FR_issueApplication", "FR_referToJudgeFromRespondToOrder"})
+    @ValueSource(strings = {
+        "FR_issueApplication",
+        "FR_referToJudgeFromRespondToOrder",
+        "FR_referToJudgeFromAwaitingResponse",
+        "FR_referToJudgeFromOrderMade" })
     void givenTriggerEventIdsAndReferredToJudgeState_whenEvaluated_thenInitiatesReviewApplicationTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
@@ -281,7 +285,11 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"FR_issueApplication", "FR_referToJudgeFromRespondToOrder"})
+    @ValueSource(strings = {
+        "FR_issueApplication",
+        "FR_referToJudgeFromRespondToOrder",
+        "FR_referToJudgeFromAwaitingResponse",
+        "FR_referToJudgeFromOrderMade" })
     void givenTriggerEventIdsAndOtherState_whenEvaluated_thenDoesNotInitiateReviewApplicationTask(String eventId) {
         VariableMap inputVariables = new VariableMapImpl();
         inputVariables.putValue("eventId", eventId);
