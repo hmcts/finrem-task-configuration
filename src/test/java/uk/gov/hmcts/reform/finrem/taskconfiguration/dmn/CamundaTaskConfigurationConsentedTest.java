@@ -717,8 +717,10 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         assertThat(valueOf(results, "roleCategory")).isEqualTo("CTSC");
         assertThat(valueOf(results, "title")).isEqualTo("Review Refused Order");
         assertThat(valueOf(results, "description"))
-            .isEqualTo("[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_listForHearing/FR_listForHearing1)");
+            .isEqualTo("[List For Hearing](/cases/case-details/" +
+                           "${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)" +
+                           "<br>" +
+                           "[Send Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_sendOrder/FR_sendOrder)");
         assertThat(valueOf(results, "caseManagementCategory")).isEqualTo("FR Consented");
         assertThat(valueOf(results, "caseName")).isEqualTo("Parker vs Jane");
         assertThat(valueOf(results, "region")).isEqualTo("2");

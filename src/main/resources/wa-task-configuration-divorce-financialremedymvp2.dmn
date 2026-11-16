@@ -637,7 +637,7 @@
           <text>"description"</text>
         </outputEntry>
         <outputEntry id="Rule_config_rro_3_out2">
-          <text>"[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)"
+          <text>"[List For Hearing](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_listForHearing/FR_listForHearing1)&lt;br&gt;[Send Order](/cases/case-details/${[CASE_REFERENCE]}/trigger/FR_sendOrder/FR_sendOrder)"
           </text>
         </outputEntry>
         <outputEntry id="Rule_config_rro_3_out3">
