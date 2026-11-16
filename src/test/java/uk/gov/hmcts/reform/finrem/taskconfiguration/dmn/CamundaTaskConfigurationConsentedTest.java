@@ -629,14 +629,20 @@ class CamundaTaskConfigurationConsentedTest extends DmnDecisionTableBaseUnitTest
         // BA confirmed all three outcome links are shown so the caseworker can choose
         String description = valueOf(results, "description").toString();
         assertThat(description).contains(
+            "[HWF Accepted & Issue](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_HWFAcceptedAndIssue/FR_HWFAcceptedAndIssue1)");
+        assertThat(description).contains(
+            "[Fee Account Debited & Issue](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_feeAccountDebitedAndIssue/FR_feeAccountDebitedAndIssue1)");
+        assertThat(description).contains(
+            "[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}"
+                + "/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)");
+        assertThat(description).contains(
             "[HWF Application Accepted](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_HWFDecisionMade/FR_HWFDecisionMade1)");
         assertThat(description).contains(
             "[Fee Account Debited](/cases/case-details/${[CASE_REFERENCE]}"
                 + "/trigger/FR_paymentMadeFromHWF/FR_paymentMadeFromHWF1)");
-        assertThat(description).contains(
-            "[Awaiting Payment Response](/cases/case-details/${[CASE_REFERENCE]}"
-                + "/trigger/FR_awaitingPaymentResponseFromHWF/FR_awaitingPaymentResponseFromHWF1)");
     }
 
     @Test

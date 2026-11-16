@@ -389,7 +389,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
             Map.of(
                 "name", "specific-access-approver-legal-ops",
                 "value", "Read,Own,UnclaimAssign,Claim,Manage,Unclaim,UnassignClaim,CompleteOwn",
-                "roleCategory", "LEGAL_OPERATIONS",
+                "roleCategory", "CTSC",
                 "autoAssignable", false
             )
         ));
