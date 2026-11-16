@@ -57,7 +57,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result.get("taskId")).isEqualTo("processScannedDocuments");
         assertThat(result.get("name")).isEqualTo("Process Scanned Documents");
         assertThat(result.get("delayDuration")).isEqualTo(0);
-        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        assertThat(result.get("processCategories")).isEqualTo(null);
 
         // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
@@ -82,7 +82,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result.get("taskId")).isEqualTo("processScannedDocuments");
         assertThat(result.get("name")).isEqualTo("Process Scanned Documents");
         assertThat(result.get("delayDuration")).isEqualTo(0);
-        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        assertThat(result.get("processCategories")).isEqualTo(null);
 
         // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
@@ -140,7 +140,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result.get("taskId")).isEqualTo("processApprovedOrder");
         assertThat(result.get("name")).isEqualTo("Process Approved Order");
         assertThat(result.get("delayDuration")).isEqualTo(0);
-        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        assertThat(result.get("processCategories")).isEqualTo(null);
         // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
@@ -215,7 +215,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result.get("taskId")).isEqualTo("checkHelpWithFees");
         assertThat(result.get("name")).isEqualTo("Check Help With Fees");
         assertThat(result.get("delayDuration")).isEqualTo(0);
-        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        assertThat(result.get("processCategories")).isEqualTo(null);
         // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
@@ -274,8 +274,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
                 Map.of(
                     "taskId", "reviewApplication",
                     "name", "Review Application",
-                    "delayDuration", 0,
-                    "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
+                    "delayDuration", 0
                 )
             ));
     }
@@ -334,7 +333,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result.get("taskId")).isEqualTo("reviewRefusedOrder");
         assertThat(result.get("name")).isEqualTo("Review Refused Order");
         assertThat(result.get("delayDuration")).isEqualTo(0);
-        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        assertThat(result.get("processCategories")).isEqualTo(null);
 
         @SuppressWarnings("unchecked")
         Map<String, Object> delayUntil = (Map<String, Object>) result.get("delayUntil");
@@ -488,8 +487,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
                 Map.of(
                     "taskId", "checkAndIssueApplication",
                     "name", "Check and Issue Application",
-                    "delayDuration", 0,
-                    "processCategories", "CHANGE_LATER_PROCESS_CATEGORIES"
+                    "delayDuration", 0
                 )
             ));
     }
@@ -515,7 +513,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result).containsEntry("taskId", "reviewOrderResponse");
         assertThat(result.get("name")).isEqualTo("Review Order Response");
         assertThat(result.get("delayDuration")).isEqualTo(0);
-        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        assertThat(result.get("processCategories")).isEqualTo(null);
 
         // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")
@@ -550,7 +548,7 @@ class CamundaTaskInitiationConsentedTest extends DmnDecisionTableBaseUnitTest {
         assertThat(result).containsEntry("taskId", "checkResponseReceived");
         assertThat(result.get("name")).isEqualTo("Check Response Received");
         assertThat(result.get("delayDuration")).isEqualTo(0);
-        assertThat(result.get("processCategories")).isEqualTo("CHANGE_LATER_PROCESS_CATEGORIES");
+        assertThat(result.get("processCategories")).isEqualTo(null);
 
         // delayUntil is a json map; its delayUntil value is now() so it is non-deterministic
         @SuppressWarnings("unchecked")

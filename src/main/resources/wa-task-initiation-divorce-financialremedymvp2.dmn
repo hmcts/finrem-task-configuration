@@ -78,7 +78,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_1_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_4">
@@ -117,7 +117,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_4_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_9">
@@ -156,7 +156,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_9_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_10">
@@ -195,7 +195,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_10_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_11">
@@ -234,7 +234,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_11_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_12">
@@ -273,7 +273,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_12_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_13">
@@ -312,7 +312,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_13_5">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="Rule_initiation_14">
@@ -351,7 +351,7 @@
           </text>
         </outputEntry>
         <outputEntry id="OutputEntry_initiation_14_6">
-          <text>"CHANGE_LATER_PROCESS_CATEGORIES"</text>
+          <text></text>
         </outputEntry>
       </rule>
     </decisionTable>
