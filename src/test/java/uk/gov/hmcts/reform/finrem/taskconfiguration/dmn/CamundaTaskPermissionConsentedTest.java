@@ -229,7 +229,7 @@ class CamundaTaskPermissionConsentedTest extends DmnDecisionTableBaseUnitTest {
             ),
             Map.of(
                 "name", "judge",
-                "value", "Read,CancelOwn, CompleteOwn,Claim,Unclaim,Execute",
+                "value", "Read,Cancel, Complete,Claim,Unclaim,Execute",
                 "roleCategory", "JUDICIAL",
                 "authorisations", "410",
                 "assignmentPriority", 1,
