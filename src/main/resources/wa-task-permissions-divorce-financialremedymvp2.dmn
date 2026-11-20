@@ -298,7 +298,7 @@
           <text>"judge"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1n2gc09">
-          <text>"Read,CancelOwn, CompleteOwn,Claim,Unclaim,Execute"</text>
+          <text>"Read,CancelOwn, CompleteOwn,Claim,Own,Unclaim,Execute"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0acykt2">
           <text>"JUDICIAL"</text>
