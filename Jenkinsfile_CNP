@@ -5,8 +5,8 @@
 def type = "java"
 def product = "finrem"
 def component = "task-configuration"
-def s2sServiceName = "finrem_camunda_pipeline_upload"
-def tenantId = "finrem"
+def s2sServiceName = "wa_camunda_pipeline_upload"
+def tenantId = "divorce"
 def branchesToSync = ['demo', 'perftest']
 
 withCamundaOnlyPipeline(type, product, component, s2sServiceName, tenantId) {
